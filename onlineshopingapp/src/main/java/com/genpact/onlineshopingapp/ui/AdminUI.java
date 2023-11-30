@@ -8,6 +8,7 @@ public class AdminUI {
 
 	public static void main(String[] args) {
 		AdminServiceImpl adminServiceImpl = new AdminServiceImpl();
+		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
 		
 		while(true){
