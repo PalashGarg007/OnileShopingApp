@@ -2,7 +2,6 @@ package com.genpact.onlineshopingapp.ui;
 
 import java.util.Scanner;
 
-import com.genpact.onlineshopingapp.exception.OSAException;
 import com.genpact.onlineshopingapp.service.AdminServiceImpl;
 
 public class AdminUI {
@@ -19,7 +18,7 @@ public class AdminUI {
 						"9. Exit.\n");
 				
 				String operation = scanner.next();
-				
+				System.out.println("___________________________________________");
 				switch(operation){
 					case "1":
 						adminServiceImpl.getAllCustomer();
@@ -33,10 +32,11 @@ public class AdminUI {
 						System.out.println("Thank you for your hard work :)");
 				break;
 				}
-			} catch(OSAException e) {
+			} catch(Exception e) {
 				System.out.println(e.getMessage());
 			}
 		}
+		
 
 	}
 

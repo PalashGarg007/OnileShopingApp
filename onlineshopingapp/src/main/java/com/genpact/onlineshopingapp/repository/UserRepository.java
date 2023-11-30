@@ -1,8 +1,6 @@
 package com.genpact.onlineshopingapp.repository;
 
-import java.util.List;
 import java.util.Map;
-
 import com.genpact.onlineshopingapp.entity.*;
 
 public interface UserRepository {
