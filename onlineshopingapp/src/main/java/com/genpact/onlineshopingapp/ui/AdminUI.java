@@ -15,7 +15,9 @@ public class AdminUI {
 			try{
 				System.out.println("Choose an operation:\n"+
 						"1. See the details of all users.\n"+
-						"2. See the details of all Shopkeeper.\n"+
+						"2. See the details of all vendors.\n"+
+						"3. See the history of a user.\n"+
+						"4. See the product repository of a vendor.\n"+
 						"9. Exit.\n");
 				
 				String operation = scanner.next();
@@ -26,6 +28,12 @@ public class AdminUI {
 						continue;
 					case "2":
 						adminServiceImpl.getAllShopkeeper();
+						continue;
+					case "3":
+						adminServiceImpl.getHistoryOfCustomer();
+						continue;
+					case "4":
+						adminServiceImpl.getHistoryOfShopkeeper();
 						continue;
 					default:
 						System.out.println("Wrong Operation");

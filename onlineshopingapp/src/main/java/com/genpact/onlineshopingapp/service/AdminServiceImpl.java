@@ -47,6 +47,8 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public void getHistoryOfCustomer() {
 		AdminRepositoryImpl adminRepositoryImpl = new AdminRepositoryImpl();
+
+		System.out.println("Please give the customer's Id to see his purchase history:\n");
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
 		String customerId = scanner.nextLine();
@@ -66,6 +68,7 @@ public class AdminServiceImpl implements AdminService{
 	@Override
 	public void getHistoryOfShopkeeper() {
 		AdminRepositoryImpl adminRepositoryImpl = new AdminRepositoryImpl();
+		System.out.println("Give the vendor's id to see his warehouse:\n");
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
 		String shopkeeperId = scanner.nextLine();
