@@ -18,6 +18,7 @@ public class AdminRepositoryImpl implements AdminRepository {
 	ReviewRepository reviewRepository = (ReviewRepository)context.getBean("reviewRepository");
 	ShopkeeperRepository shopkeeperRepository = (ShopkeeperRepository)context.getBean("shopkeeperRepository");
 	OrderRepository orderRepository = (OrderRepository)context.getBean("orderRepository");
+	PaymentRepository paymentRepository = (PaymentRepository)context.getBean("paymentRepository");
 	
 	@Override
 	public List<Customer> getAllCustomer() {
@@ -41,6 +42,18 @@ public class AdminRepositoryImpl implements AdminRepository {
 	public List<Product> getHystoryOfShopkeeper(String shopkeeperId) {
 		List<Product> products = productRepository.getProductByShopkeeperId(shopkeeperId);
 		return products;
+	}
+
+	@Override
+	public int addPaymentMethod(String paymentMethod, Double discount) {
+		int result = paymentRepository.addPaymentMethod(paymentMethod,discount);
+		return result;
+	}
+
+	@Override
+	public int changeDiscountOfPayment(String paymentMethod, Double discount) {
+		int result = paymentRepository.modefyDiscount(paymentMethod,discount);
+		return result;
 	}
 	
 	

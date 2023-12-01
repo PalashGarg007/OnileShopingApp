@@ -12,7 +12,7 @@
 		<property name="url" value="jdbc:mysql://localhost:3306/osa" />  
 		<property name="username" value="root" />  
 		<property name="password" value="Shreyash" />  
-	</bean>  
+	</bean>
   
 	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">  
 		<property name="dataSource" ref="ds"></property>  
@@ -20,7 +20,7 @@
 	
 	<bean id="cartRepository" class="com.genpact.onlineshopingapp.repository.CartRepository">  
 		<property name="jdbcTemplate" ref="jdbcTemplate"></property>  
-	</bean>  
+	</bean>
   
 	<bean id="customerRepository" class="com.genpact.onlineshopingapp.repository.CustomerRepository">  
 		<property name="jdbcTemplate" ref="jdbcTemplate"></property>  
@@ -28,11 +28,19 @@
 	
 	<bean id="favoriteRepository" class="com.genpact.onlineshopingapp.repository.FavoriteRepository">  
 		<property name="jdbcTemplate" ref="jdbcTemplate"></property>  
-	</bean>	
+	</bean>
+
+	<bean id="orderRepository" class="com.genpact.onlineshopingapp.repository.OrderRepository">  
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>  
+	</bean>
+
+	<bean id="paymentRepository" class="com.genpact.onlineshopingapp.repository.PaymentRepository">  
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>  
+	</bean>
 	
 	<bean id="productRepository" class="com.genpact.onlineshopingapp.repository.ProductRepository">  
 		<property name="jdbcTemplate" ref="jdbcTemplate"></property>  
-	</bean>	
+	</bean>
 	
 	<bean id="reviewRepository" class="com.genpact.onlineshopingapp.repository.ReviewRepository">  
 		<property name="jdbcTemplate" ref="jdbcTemplate"></property>  
@@ -41,10 +49,5 @@
 	<bean id="shopkeeperRepository" class="com.genpact.onlineshopingapp.repository.ShopkeeperRepository">  
 		<property name="jdbcTemplate" ref="jdbcTemplate"></property>  
 	</bean>
-	
-	<bean id="orderRepository" class="com.genpact.onlineshopingapp.repository.OrderRepository">  
-		<property name="jdbcTemplate" ref="jdbcTemplate"></property>  
-	</bean>
-	
 	
 </beans>

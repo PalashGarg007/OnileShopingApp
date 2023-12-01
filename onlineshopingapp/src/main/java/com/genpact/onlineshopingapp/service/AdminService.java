@@ -13,4 +13,10 @@ public interface AdminService {
 
 	/*Display all the inventory of a Shopkeeper by taking his shopkeeperId. */
 	void getHistoryOfShopkeeper();
+
+	/*Display the status of the Update. */
+	void addPaymentMethod();
+
+	/*Display the status of the Update. */
+	void changeDiscountOfPayment();
 }

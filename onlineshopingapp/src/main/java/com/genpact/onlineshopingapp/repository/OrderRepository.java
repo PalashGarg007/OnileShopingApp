@@ -9,7 +9,7 @@ import com.genpact.onlineshopingapp.entity.Order;
 
 public class OrderRepository {
 	
-private JdbcTemplate jdbcTemplate;
+	private JdbcTemplate jdbcTemplate;
 	
 	public JdbcTemplate getJdbcTemplate() {
 		return jdbcTemplate;

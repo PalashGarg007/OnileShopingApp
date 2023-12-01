@@ -18,7 +18,9 @@ public class AdminUI {
 						"2. See the details of all vendors.\n"+
 						"3. See the history of a user.\n"+
 						"4. See the product repository of a vendor.\n"+
-						"9. Exit.\n");
+						"5. Add a new Payment method.\n"+
+						"6. Change the discount on the existing payment method.\n"+
+						"0. Exit.\n");
 				
 				String operation = scanner.next();
 				System.out.println("___________________________________________");
@@ -35,9 +37,15 @@ public class AdminUI {
 					case "4":
 						adminServiceImpl.getHistoryOfShopkeeper();
 						continue;
+					case "5":
+						adminServiceImpl.addPaymentMethod();
+						continue;
+					case "6":
+						adminServiceImpl.changeDiscountOfPayment();
+						continue;
 					default:
 						System.out.println("Wrong Operation");
-					case "9":
+					case "0":
 						System.out.println("Thank you for your hard work :)");
 				break;
 				}

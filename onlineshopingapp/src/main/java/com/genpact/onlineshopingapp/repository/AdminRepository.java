@@ -1,7 +1,6 @@
 package com.genpact.onlineshopingapp.repository;
 
 import java.util.List;
-
 import com.genpact.onlineshopingapp.entity.Customer;
 import com.genpact.onlineshopingapp.entity.Order;
 import com.genpact.onlineshopingapp.entity.Product;
@@ -18,7 +17,13 @@ public interface AdminRepository {
 	/* Get all the customer order history from Order table. */
 	List<Order> getHistoryOfCustomer(String customerId);
 
-	/* Get all the shopkeeper product history from Product table. */
+	/* Get all the shopkeeper's product history from Product table. */
 	List<Product> getHystoryOfShopkeeper(String shopkeeperId);
+
+	/* Add payment method and discount. */
+	int addPaymentMethod(String paymentMethod, Double discount);
+
+	/* Change the discount associated with a payment method. */
+	int changeDiscountOfPayment(String paymentMethod, Double discount);
 
 }
