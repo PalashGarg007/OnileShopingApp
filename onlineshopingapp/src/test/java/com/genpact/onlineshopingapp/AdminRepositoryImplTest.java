@@ -1,13 +1,13 @@
 package com.genpact.onlineshopingapp;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import com.genpact.onlineshopingapp.repository.AdminRepositoryImpl;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.assertEquals;
+import com.genpact.onlineshopingapp.repository.AdminRepositoryImpl;
 
 public class AdminRepositoryImplTest {
-    private static AdminRepositoryImpl adminRepositoryImpl;
+    private static AdminRepositoryImpl adminRepositoryImpl = null;
 
     @BeforeAll
     static void init(){
