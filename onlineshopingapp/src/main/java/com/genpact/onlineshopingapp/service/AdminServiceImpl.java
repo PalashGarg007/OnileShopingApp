@@ -107,9 +107,9 @@ public class AdminServiceImpl implements AdminService{
 	public void changeDiscountOfPayment() {
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("Give new Payment name:");
+		System.out.println("Give payment method name:");
 		String paymentMethod = scanner.nextLine();
-		System.out.println("Set the discount:");
+		System.out.println("Set the new discount:");
 		Double discount = scanner.nextDouble();
 		int result = adminRepositoryImpl.changeDiscountOfPayment(paymentMethod, discount);
 		System.out.println("-------------------------------------------");

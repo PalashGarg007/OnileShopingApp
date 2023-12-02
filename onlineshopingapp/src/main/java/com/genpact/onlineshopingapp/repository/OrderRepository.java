@@ -20,7 +20,7 @@ public class OrderRepository {
 	}
 
     public List<Orders> getOrderByCustomerId(String customerId) {
-        return jdbcTemplate.query("select * from order where cid='"+customerId+"'",new RowMapper<Orders>(){
+        return jdbcTemplate.query("select * from orders where cid='"+customerId+"'",new RowMapper<Orders>(){
 			public Orders mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Orders order=new Orders();
 		        order.setId(rs.getInt(1));
