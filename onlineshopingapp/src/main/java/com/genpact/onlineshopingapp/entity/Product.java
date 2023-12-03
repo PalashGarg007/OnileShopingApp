@@ -1,32 +1,106 @@
 package com.genpact.onlineshopingapp.entity;
 
 public class Product {
+    private Integer id;
+    private Integer sid;
+    private String name;
+    private String category;
+    private Double cost;
+    private Integer warehouse;
+    private Double rating;
+    private Integer purchased;
 
-    public void setId(int int1) {
+
+    public Product() {
     }
 
-    public void setName(String string) {
+    public Product(Integer id, Integer sid, String name, String category, Double cost, Integer warehouse, Double rating, Integer purchased) {
+        this.id = id;
+        this.sid = sid;
+        this.name = name;
+        this.category = category;
+        this.cost = cost;
+        this.warehouse = warehouse;
+        this.rating = rating;
+        this.purchased = purchased;
     }
 
-    public void setCategory(String string) {
+    public Integer getId() {
+        return this.id;
     }
 
-    public void setCost(float float1) {
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public void setRating(float float1) {
+    public Integer getSid() {
+        return this.sid;
     }
 
-    public void setTotalBuy(String string) {
+    public void setSid(Integer sid) {
+        this.sid = sid;
     }
 
-    public void setSid(int int1) {
+    public String getName() {
+        return this.name;
     }
 
-    public void setWarehouse(int int1) {
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setPurchased(int int1) {
+    public String getCategory() {
+        return this.category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public Double getCost() {
+        return this.cost;
+    }
+
+    public void setCost(Double cost) {
+        this.cost = cost;
+    }
+
+    public Integer getWarehouse() {
+        return this.warehouse;
+    }
+
+    public void setWarehouse(Integer warehouse) {
+        this.warehouse = warehouse;
+    }
+
+    public Double getRating() {
+        return this.rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
+    }
+
+    public Integer getPurchased() {
+        return this.purchased;
+    }
+
+    public void setPurchased(Integer purchased) {
+        this.purchased = purchased;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", sid='" + getSid() + "'" +
+            ", name='" + getName() + "'" +
+            ", category='" + getCategory() + "'" +
+            ", cost='" + getCost() + "'" +
+            ", warehouse='" + getWarehouse() + "'" +
+            ", rating='" + getRating() + "'" +
+            ", purchased='" + getPurchased() + "'" +
+            "}";
     }
 
 }
