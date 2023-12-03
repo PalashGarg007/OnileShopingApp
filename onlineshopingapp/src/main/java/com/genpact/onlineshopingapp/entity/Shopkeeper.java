@@ -20,4 +20,8 @@ public class Shopkeeper {
     public void setPassword(String string) {
     }
 
+    public Integer getId() {
+        return null;
+    }
+
 }

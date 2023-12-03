@@ -20,4 +20,13 @@ public class Product {
     public void setTotalBuy(String string) {
     }
 
+    public void setSid(int int1) {
+    }
+
+    public void setWarehouse(int int1) {
+    }
+
+    public void setPurchased(int int1) {
+    }
+
 }

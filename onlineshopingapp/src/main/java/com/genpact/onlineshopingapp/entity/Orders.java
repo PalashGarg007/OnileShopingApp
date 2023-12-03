@@ -4,6 +4,10 @@ import java.time.LocalDate;
 
 public class Orders {
 
+    public Integer getPid(){
+        return null;
+    };
+
     public void setId(int int1) {
     }
 
@@ -29,6 +33,21 @@ public class Orders {
     }
 
     public void setPayId(int int1) {
+    }
+
+    public Integer getId() {
+        return null;
+    }
+
+    public Boolean getConformation() {
+        return null;
+    }
+
+    public void setConformation(boolean boolean1) {
+    }
+
+    public Integer getQuantity() {
+        return null;
     }
 
 }
