@@ -5,6 +5,9 @@ public class Cart {
     private int pid;
     private int quantity;
 
+    public Cart() {
+    }
+
 
     public Cart(int cid, int pid, int quantity) {
         this.cid = cid;

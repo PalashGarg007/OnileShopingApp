@@ -1,4 +1,4 @@
-<<<<<<< HEAD:onlineshopingapp/src/main/java/com/genpact/onlineshopingapp/entity/Order.java
+
 package com.genpact.onlineshopingapp.entity;
 
 import java.time.LocalDate;
@@ -16,6 +16,9 @@ public class Order {
     private int payid;
     private boolean confirmation;
 
+
+    public Order() {
+    }
 
     public Order(int id, int cid, int sid, int pid, int amount, int quantity, LocalDate orderDate, LocalDate shippingDate, int payid, boolean confirmation) {
         this.id = id;
@@ -132,6 +135,3 @@ public class Order {
 
 
 }
-=======
-
->>>>>>> ca086f3dc94dcec38f73a64ba2ddd51028af0e9f:onlineshopingapp/src/main/java/com/genpact/onlineshopingapp/entity/Orders.java

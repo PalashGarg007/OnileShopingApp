@@ -9,6 +9,9 @@ public class Shopkeeper {
     private String userName;
     private String password;
 
+    public Shopkeeper() {
+    }
+
 
     public Shopkeeper(int id, String name, String contact, String email, String userName, String password) {
         this.id = id;

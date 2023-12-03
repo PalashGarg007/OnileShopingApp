@@ -6,6 +6,9 @@ private Double rating;
 private String review;
 
 
+    public Review() {
+    }
+
     public Review(int id, Double rating, String review) {
         this.id = id;
         this.rating = rating;

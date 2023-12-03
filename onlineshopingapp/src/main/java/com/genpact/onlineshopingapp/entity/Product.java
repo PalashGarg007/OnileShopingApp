@@ -11,6 +11,9 @@ public class Product {
     private int purchased;
 
 
+    public Product() {
+    }
+
     public Product(int id, int sid, String name, String category, Double cost, int warehouse, Double rating, int purchased) {
         this.id = id;
         this.sid = sid;

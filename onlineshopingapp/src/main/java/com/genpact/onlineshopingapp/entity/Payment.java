@@ -6,6 +6,9 @@ public class Payment {
     private Double discount;
 
 
+    public Payment() {
+    }
+
     public Payment(int id, String method, Double discount) {
         this.id = id;
         this.method = method;

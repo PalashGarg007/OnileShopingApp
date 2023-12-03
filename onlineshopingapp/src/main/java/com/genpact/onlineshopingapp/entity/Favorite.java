@@ -4,6 +4,9 @@ public class Favorite {
 private int cid;
 private int pid;
 
+    public Favorite() {
+    }
+
 
     public Favorite(int cid, int pid) {
         this.cid = cid;
