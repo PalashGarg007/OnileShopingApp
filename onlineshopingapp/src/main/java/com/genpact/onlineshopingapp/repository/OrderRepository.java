@@ -2,6 +2,7 @@ package com.genpact.onlineshopingapp.repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -32,10 +33,43 @@ public class OrderRepository {
 				order.setOrderDate(rs.getDate(7).toLocalDate());
 				order.setShipingDate(rs.getDate(8).toLocalDate());
 				order.setPayId(rs.getInt(9));
+				order.setConformation(rs.getBoolean(10));
 
 				return order;
 			}  		    
 		    });
+    }
+
+    public List<Orders> getPendingOrders(Integer shopkeeperId) {
+        return jdbcTemplate.query("select * from orders where sid='"+shopkeeperId+"' and conformation=null",new RowMapper<Orders>(){
+			public Orders mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Orders order=new Orders();
+		        order.setId(rs.getInt(1));
+				order.setCid(rs.getInt(2));
+				order.setSid(rs.getInt(3));
+				order.setPid(rs.getInt(4));
+				order.setAmount(rs.getFloat(5));
+				order.setCount(rs.getInt(6));
+				order.setOrderDate(rs.getDate(7).toLocalDate());
+				order.setShipingDate(rs.getDate(8).toLocalDate());
+				order.setPayId(rs.getInt(9));
+				order.setConformation(rs.getBoolean(10));
+
+				return order;
+			}  		    
+		    });
+    }
+
+    public int setConformation(Orders order) {
+        int result;
+		try{
+			result = jdbcTemplate.update("update orders set conformation="+order.getConformation()+" where id="+order.getId());
+			jdbcTemplate.update("update orders set orderDate='"+LocalDate.now()+"' where id="+order.getId());
+			jdbcTemplate.update("update orders set shipingDate='"+LocalDate.now().plusDays(7)+"' where id="+order.getId());
+		} catch(Exception e){
+			result = 0;
+		}
+        return result;
     }
 	
 }
