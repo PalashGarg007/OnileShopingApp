@@ -82,8 +82,4 @@ public class Shopkeeper {
             "}";
     }
 
-    public Integer getId() {
-        return null;
-    }
-
 }

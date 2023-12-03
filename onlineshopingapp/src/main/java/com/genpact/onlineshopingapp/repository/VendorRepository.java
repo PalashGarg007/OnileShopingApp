@@ -10,5 +10,5 @@ public interface VendorRepository {
     List<Orders> getPendingOrders();
 
     /*Set conformation of orders. */
-    int setConformation(Orders order);
+    int setConfirmation(Orders order);
 }

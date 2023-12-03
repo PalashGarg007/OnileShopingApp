@@ -10,7 +10,7 @@ public class VendorServiceImpl implements VendorService{
     static VendorRepositoryImpl vendorRepositoryImpl = new VendorRepositoryImpl();
 
     @Override
-    public void conformProductList() {
+    public void confirmProductList() {
         List<Orders> pendingList = vendorRepositoryImpl.getPendingOrders();
 
         if(pendingList.size()==0){
@@ -27,8 +27,8 @@ public class VendorServiceImpl implements VendorService{
             System.out.printf("%-20s %-5s\t",vendorRepositoryImpl.getProductName(order.getPid()), order.getQuantity());
             String conformation = scanner.nextLine();
             if(conformation.equals("a")){
-                order.setConformation(true);
-                int availability = vendorRepositoryImpl.setConformation(order);
+                order.setConfirmation(true);
+                int availability = vendorRepositoryImpl.setConfirmation(order);
                 if(availability!=0){
                     System.out.println("Conformed");
                 } else{

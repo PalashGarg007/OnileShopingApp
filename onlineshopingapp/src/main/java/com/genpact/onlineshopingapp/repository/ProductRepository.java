@@ -26,9 +26,9 @@ public class ProductRepository {
 				product.setSid(rs.getInt(2));
 				product.setName(rs.getString(3));
 				product.setCategory(rs.getString(4));
-				product.setCost(rs.getFloat(5));
+				product.setCost(rs.getDouble(5));
 				product.setWarehouse(rs.getInt(6));
-				product.setRating(rs.getFloat(7));
+				product.setRating(rs.getDouble(7));
 				product.setPurchased(rs.getInt(8));
 
 				return product;

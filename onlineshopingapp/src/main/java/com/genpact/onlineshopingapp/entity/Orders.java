@@ -9,7 +9,7 @@ public class Orders {
     private Integer cid;
     private Integer sid;
     private Integer pid;
-    private Integer amount;
+    private Double amount;
     private Integer quantity;
     private LocalDate orderDate;
     private LocalDate shippingDate;
@@ -20,7 +20,7 @@ public class Orders {
     public Orders() {
     }
 
-    public Orders(Integer id, Integer cid, Integer sid, Integer pid, Integer amount, Integer quantity, LocalDate orderDate, LocalDate shippingDate, Integer payid, boolean confirmation) {
+    public Orders(Integer id, Integer cid, Integer sid, Integer pid, Double amount, Integer quantity, LocalDate orderDate, LocalDate shippingDate, Integer payid, boolean confirmation) {
         this.id = id;
         this.cid = cid;
         this.sid = sid;
@@ -65,11 +65,11 @@ public class Orders {
         this.pid = pid;
     }
 
-    public Integer getAmount() {
+    public Double getAmount() {
         return this.amount;
     }
 
-    public void setAmount(Integer amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 
@@ -97,11 +97,11 @@ public class Orders {
         this.shippingDate = shippingDate;
     }
 
-    public Integer getPayid() {
+    public Integer getPayId() {
         return this.payid;
     }
 
-    public void setPayid(Integer payid) {
+    public void setPayId(Integer payid) {
         this.payid = payid;
     }
 
@@ -124,7 +124,7 @@ public class Orders {
             ", quantity='" + getQuantity() + "'" +
             ", orderDate='" + getOrderDate() + "'" +
             ", shippingDate='" + getShippingDate() + "'" +
-            ", payid='" + getPayid() + "'" +
+            ", payid='" + getPayId() + "'" +
             "}";
     }
     

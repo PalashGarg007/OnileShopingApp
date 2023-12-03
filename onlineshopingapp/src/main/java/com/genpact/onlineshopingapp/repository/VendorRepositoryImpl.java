@@ -27,11 +27,11 @@ public class VendorRepositoryImpl implements VendorRepository{
     }
 
     @Override
-    public int setConformation(Orders order) {
+    public int setConfirmation(Orders order) {
         int check = productRepository.getOrderFromWherehouse(order.getPid(), order.getQuantity());
         int conformation=0;
         if(check>0)
-            conformation = orderRepository.setConformation(order);
+            conformation = orderRepository.setConfirmation(order);
         return conformation;
     }
 
