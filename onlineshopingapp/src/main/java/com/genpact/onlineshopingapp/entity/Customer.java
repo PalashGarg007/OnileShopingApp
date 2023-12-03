@@ -4,28 +4,103 @@ import java.time.LocalDate;
 
 public class Customer {
 
-    public void setPassword(String string) {
+    private int id;
+    private String name;
+    private LocalDate dob;
+    private String contact;
+    private String email;
+    private String address;
+    private String userName;
+    private String password;
+
+
+    public Customer(int id, String name, LocalDate dob, String contact, String email, String address, String userName, String password) {
+        this.id = id;
+        this.name = name;
+        this.dob = dob;
+        this.contact = contact;
+        this.email = email;
+        this.address = address;
+        this.userName = userName;
+        this.password = password;
     }
 
-    public void setUserName(String string) {
+    public int getId() {
+        return this.id;
     }
 
-    public void setAddress(String string) {
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setEmail(String string) {
+    public String getName() {
+        return this.name;
     }
 
-    public void setContact(String string) {
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setDob(LocalDate localDate) {
+    public LocalDate getDob() {
+        return this.dob;
     }
 
-    public void setName(String string) {
+    public void setDob(LocalDate dob) {
+        this.dob = dob;
     }
 
-    public void setId(int int1) {
+    public String getContact() {
+        return this.contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAddress() {
+        return this.address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getUserName() {
+        return this.userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getPassword() {
+        return this.password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+            " id='" + getId() + "'" +
+            ", name='" + getName() + "'" +
+            ", dob='" + getDob() + "'" +
+            ", contact='" + getContact() + "'" +
+            ", email='" + getEmail() + "'" +
+            ", address='" + getAddress() + "'" +
+            ", userName='" + getUserName() + "'" +
+            ", password='" + getPassword() + "'" +
+            "}";
     }
 
 }
