@@ -1,31 +1,31 @@
 package com.genpact.onlineshopingapp.entity;
 
 public class Favorite {
-private int cid;
-private int pid;
+private Integer cid;
+private Integer pid;
 
     public Favorite() {
     }
 
 
-    public Favorite(int cid, int pid) {
+    public Favorite(Integer cid, Integer pid) {
         this.cid = cid;
         this.pid = pid;
     }
 
-    public int getCid() {
+    public Integer getCid() {
         return this.cid;
     }
 
-    public void setCid(int cid) {
+    public void setCid(Integer cid) {
         this.cid = cid;
     }
 
-    public int getPid() {
+    public Integer getPid() {
         return this.pid;
     }
 
-    public void setPid(int pid) {
+    public void setPid(Integer pid) {
         this.pid = pid;
     }
 

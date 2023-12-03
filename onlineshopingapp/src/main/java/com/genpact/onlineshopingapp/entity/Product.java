@@ -1,20 +1,20 @@
 package com.genpact.onlineshopingapp.entity;
 
 public class Product {
-    private int id;
-    private int sid;
+    private Integereger id;
+    private Integer sid;
     private String name;
     private String category;
     private Double cost;
-    private int warehouse;
+    private Integer warehouse;
     private Double rating;
-    private int purchased;
+    private Integer purchased;
 
 
     public Product() {
     }
 
-    public Product(int id, int sid, String name, String category, Double cost, int warehouse, Double rating, int purchased) {
+    public Product(Integer id, Integer sid, String name, String category, Double cost, Integer warehouse, Double rating, Integer purchased) {
         this.id = id;
         this.sid = sid;
         this.name = name;
@@ -25,19 +25,19 @@ public class Product {
         this.purchased = purchased;
     }
 
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getSid() {
+    public Integer getSid() {
         return this.sid;
     }
 
-    public void setSid(int sid) {
+    public void setSid(Integer sid) {
         this.sid = sid;
     }
 
@@ -65,11 +65,11 @@ public class Product {
         this.cost = cost;
     }
 
-    public int getWarehouse() {
+    public Integer getWarehouse() {
         return this.warehouse;
     }
 
-    public void setWarehouse(int warehouse) {
+    public void setWarehouse(Integer warehouse) {
         this.warehouse = warehouse;
     }
 
@@ -81,11 +81,11 @@ public class Product {
         this.rating = rating;
     }
 
-    public int getPurchased() {
+    public Integer getPurchased() {
         return this.purchased;
     }
 
-    public void setPurchased(int purchased) {
+    public void setPurchased(Integer purchased) {
         this.purchased = purchased;
     }
 

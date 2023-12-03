@@ -1,7 +1,7 @@
 package com.genpact.onlineshopingapp.entity;
 
 public class Payment {
-    private int id;
+    private Integer id;
     private String method;
     private Double discount;
 
@@ -9,17 +9,17 @@ public class Payment {
     public Payment() {
     }
 
-    public Payment(int id, String method, Double discount) {
+    public Payment(Integer id, String method, Double discount) {
         this.id = id;
         this.method = method;
         this.discount = discount;
     }
 
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

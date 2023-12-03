@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class Customer {
 
-    private int id;
+    private Integer id;
     private String name;
     private LocalDate dob;
     private String contact;
@@ -17,7 +17,7 @@ public class Customer {
     public Customer() {
     }
 
-    public Customer(int id, String name, LocalDate dob, String contact, String email, String address, String userName, String password) {
+    public Customer(Integer id, String name, LocalDate dob, String contact, String email, String address, String userName, String password) {
         this.id = id;
         this.name = name;
         this.dob = dob;
@@ -28,11 +28,11 @@ public class Customer {
         this.password = password;
     }
 
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

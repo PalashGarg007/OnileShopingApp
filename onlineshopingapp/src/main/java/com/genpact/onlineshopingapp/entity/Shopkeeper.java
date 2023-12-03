@@ -2,7 +2,7 @@ package com.genpact.onlineshopingapp.entity;
 
 public class Shopkeeper {
 
-    private int id;
+    private Integer id;
     private String name;
     private String contact;
     private String email;
@@ -13,7 +13,7 @@ public class Shopkeeper {
     }
 
 
-    public Shopkeeper(int id, String name, String contact, String email, String userName, String password) {
+    public Shopkeeper(Integer id, String name, String contact, String email, String userName, String password) {
         this.id = id;
         this.name = name;
         this.contact = contact;
@@ -22,11 +22,11 @@ public class Shopkeeper {
         this.password = password;
     }
 
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -1,15 +1,15 @@
 package com.genpact.onlineshopingapp.entity;
 
 public class Cart {
-	private int cid;
-    private int pid;
-    private int quantity;
+	private Integer cid;
+    private Integer pid;
+    private Integer quantity;
 
     public Cart() {
     }
 
 
-    public Cart(int cid, int pid, int quantity) {
+    public Cart(Integer cid, Integer pid, Integer quantity) {
         this.cid = cid;
         this.pid = pid;
         this.quantity = quantity;
@@ -17,27 +17,27 @@ public class Cart {
 
 
 
-    public int getCid() {
+    public Integer getCid() {
         return this.cid;
     }
 
-    public void setCid(int cid) {
+    public void setCid(Integer cid) {
         this.cid = cid;
     }
 
-    public int getPid() {
+    public Integer getPid() {
         return this.pid;
     }
 
-    public void setPid(int pid) {
+    public void setPid(Integer pid) {
         this.pid = pid;
     }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return this.quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 

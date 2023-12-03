@@ -1,7 +1,7 @@
 package com.genpact.onlineshopingapp.entity;
 
 public class Review {
-private int id;
+private Integer id;
 private Double rating;
 private String review;
 
@@ -9,17 +9,17 @@ private String review;
     public Review() {
     }
 
-    public Review(int id, Double rating, String review) {
+    public Review(Integer id, Double rating, String review) {
         this.id = id;
         this.rating = rating;
         this.review = review;
     }
 
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

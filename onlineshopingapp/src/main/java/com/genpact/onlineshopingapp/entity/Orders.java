@@ -5,22 +5,22 @@ import java.time.LocalDate;
 
 public class Order {
 
-    private int id;
-    private int cid;
-    private int sid;
-    private int pid;
-    private int amount;
-    private int quantity;
+    private Integer id;
+    private Integer cid;
+    private Integer sid;
+    private Integer pid;
+    private Integer amount;
+    private Integer quantity;
     private LocalDate orderDate;
     private LocalDate shippingDate;
-    private int payid;
+    private Integer payid;
     private boolean confirmation;
 
 
     public Order() {
     }
 
-    public Order(int id, int cid, int sid, int pid, int amount, int quantity, LocalDate orderDate, LocalDate shippingDate, int payid, boolean confirmation) {
+    public Order(Integer id, Integer cid, Integer sid, Integer pid, Integer amount, Integer quantity, LocalDate orderDate, LocalDate shippingDate, Integer payid, boolean confirmation) {
         this.id = id;
         this.cid = cid;
         this.sid = sid;
@@ -33,51 +33,51 @@ public class Order {
         this.confirmation = confirmation;
     }
 
-    public int getId() {
+    public Integer getId() {
         return this.id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getCid() {
+    public Integer getCid() {
         return this.cid;
     }
 
-    public void setCid(int cid) {
+    public void setCid(Integer cid) {
         this.cid = cid;
     }
 
-    public int getSid() {
+    public Integer getSid() {
         return this.sid;
     }
 
-    public void setSid(int sid) {
+    public void setSid(Integer sid) {
         this.sid = sid;
     }
 
-    public int getPid() {
+    public Integer getPid() {
         return this.pid;
     }
 
-    public void setPid(int pid) {
+    public void setPid(Integer pid) {
         this.pid = pid;
     }
 
-    public int getAmount() {
+    public Integer getAmount() {
         return this.amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(Integer amount) {
         this.amount = amount;
     }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return this.quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 
@@ -97,11 +97,11 @@ public class Order {
         this.shippingDate = shippingDate;
     }
 
-    public int getPayid() {
+    public Integer getPayid() {
         return this.payid;
     }
 
-    public void setPayid(int payid) {
+    public void setPayid(Integer payid) {
         this.payid = payid;
     }
 
