@@ -3,7 +3,7 @@ package com.genpact.onlineshopingapp.service;
 import java.util.List;
 import java.util.Scanner;
 import com.genpact.onlineshopingapp.entity.Customer;
-import com.genpact.onlineshopingapp.entity.Order;
+import com.genpact.onlineshopingapp.entity.Orders;
 import com.genpact.onlineshopingapp.entity.Product;
 import com.genpact.onlineshopingapp.entity.Shopkeeper;
 import com.genpact.onlineshopingapp.repository.AdminRepositoryImpl;
@@ -50,7 +50,7 @@ public class AdminServiceImpl implements AdminService{
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
 		String customerId = scanner.nextLine();
-		List<Order> orderList = adminRepositoryImpl.getHistoryOfCustomer(customerId);
+		List<Orders> orderList = adminRepositoryImpl.getHistoryOfCustomer(customerId);
 		
 		if(orderList.size()==0)
 			System.out.println("No order made by the customer with ID: "+customerId);
@@ -58,7 +58,7 @@ public class AdminServiceImpl implements AdminService{
 			System.out.println("Total "+orderList.size()+ " recourds found.");
 		
 		System.out.println("-------------------------------------------");
-		for(Order order:orderList){
+		for(Orders order:orderList){
 			System.out.println(order);
 		}
 	}
@@ -107,9 +107,9 @@ public class AdminServiceImpl implements AdminService{
 	public void changeDiscountOfPayment() {
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
-		System.out.println("Give new Payment name:");
+		System.out.println("Give payment method name:");
 		String paymentMethod = scanner.nextLine();
-		System.out.println("Set the discount:");
+		System.out.println("Set the new discount:");
 		Double discount = scanner.nextDouble();
 		int result = adminRepositoryImpl.changeDiscountOfPayment(paymentMethod, discount);
 		System.out.println("-------------------------------------------");

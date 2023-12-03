@@ -13,6 +13,7 @@ public class AdminUI {
 		
 		while(true){
 			try{
+				System.out.println("-------------------------------------------");
 				System.out.println("Choose an operation:\n"+
 						"1. See the details of all users.\n"+
 						"2. See the details of all vendors.\n"+
@@ -47,8 +48,9 @@ public class AdminUI {
 						System.out.println("Wrong Operation");
 					case "0":
 						System.out.println("Thank you for your hard work :)");
-				break;
 				}
+				break;
+				
 			} catch(Exception e) {
 				System.out.println(e.getMessage());
 			}

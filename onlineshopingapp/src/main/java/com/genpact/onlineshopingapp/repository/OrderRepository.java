@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-import com.genpact.onlineshopingapp.entity.Order;
+import com.genpact.onlineshopingapp.entity.Orders;
 
 public class OrderRepository {
 	
@@ -19,10 +19,10 @@ public class OrderRepository {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
-    public List<Order> getOrderByCustomerId(String customerId) {
-        return jdbcTemplate.query("select * from order where cid='"+customerId+"'",new RowMapper<Order>(){
-			public Order mapRow(ResultSet rs, int rowNum) throws SQLException {
-				Order order=new Order();
+    public List<Orders> getOrderByCustomerId(String customerId) {
+        return jdbcTemplate.query("select * from orders where cid='"+customerId+"'",new RowMapper<Orders>(){
+			public Orders mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Orders order=new Orders();
 		        order.setId(rs.getInt(1));
 				order.setCid(rs.getInt(2));
 				order.setSid(rs.getInt(3));

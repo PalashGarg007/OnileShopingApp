@@ -4,7 +4,7 @@ import java.util.List;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.genpact.onlineshopingapp.entity.Customer;
-import com.genpact.onlineshopingapp.entity.Order;
+import com.genpact.onlineshopingapp.entity.Orders;
 import com.genpact.onlineshopingapp.entity.Product;
 import com.genpact.onlineshopingapp.entity.Shopkeeper;
 
@@ -33,8 +33,8 @@ public class AdminRepositoryImpl implements AdminRepository {
 	}
 
 	@Override
-	public List<Order> getHistoryOfCustomer(String customerId) {
-		List<Order> orders = orderRepository.getOrderByCustomerId(customerId);
+	public List<Orders> getHistoryOfCustomer(String customerId) {
+		List<Orders> orders = orderRepository.getOrderByCustomerId(customerId);
 		return orders;		
 	}
 
