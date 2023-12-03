@@ -3,7 +3,7 @@ package com.genpact.onlineshopingapp.ui;
 public class VendorUI {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		// Should be able to accept the sale of a product.
 
 	}
 

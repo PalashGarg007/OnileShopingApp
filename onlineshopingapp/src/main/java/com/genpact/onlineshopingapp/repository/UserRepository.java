@@ -1,5 +1,6 @@
 package com.genpact.onlineshopingapp.repository;
 
+import java.util.List;
 import java.util.Map;
 import com.genpact.onlineshopingapp.entity.*;
 
@@ -28,10 +29,11 @@ public interface UserRepository {
 	 * the database. */
 	public int removeFromCart(String productName, int quantity);
 	
-	/* Select payment method from the list of payment methods and apply
-	 *  discount, return amount to be payed. */
-	public int selectPaymentMethod(String paymentMethod, Cart cart);
-	
-	
+	/*Display all the available payment method. */
+	public List<Payment> getAllPayment();
+
+	/*Should be able to place order from the cart on a selected payment method and 
+	return total amount. */
+	public Double placeOrderByCart(Payment payment);
 	
 }

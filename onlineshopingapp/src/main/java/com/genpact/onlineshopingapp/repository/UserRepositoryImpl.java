@@ -1,11 +1,27 @@
 package com.genpact.onlineshopingapp.repository;
 
+import java.util.List;
 import java.util.Map;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import com.genpact.onlineshopingapp.entity.Cart;
+import com.genpact.onlineshopingapp.entity.Customer;
+import com.genpact.onlineshopingapp.entity.Payment;
 import com.genpact.onlineshopingapp.entity.Product;
 
 public class UserRepositoryImpl implements UserRepository {
+	static Customer customer = null;
+	ApplicationContext context = new ClassPathXmlApplicationContext("config.xml");
+	CartRepository cartRepository = (CartRepository)context.getBean("cartRepository");
+	CustomerRepository customerRepository = (CustomerRepository)context.getBean("customerRepository");
+	FavoriteRepository favoriteRepository = (FavoriteRepository)context.getBean("favoriteRepository");
+	ProductRepository productRepository = (ProductRepository)context.getBean("productRepository");
+	ReviewRepository reviewRepository = (ReviewRepository)context.getBean("reviewRepository");
+	ShopkeeperRepository shopkeeperRepository = (ShopkeeperRepository)context.getBean("shopkeeperRepository");
+	OrderRepository orderRepository = (OrderRepository)context.getBean("orderRepository");
+	PaymentRepository paymentRepository = (PaymentRepository)context.getBean("paymentRepository");
 
 	@Override
 	public int verifyUser(String username, String password) {
@@ -51,9 +67,28 @@ public class UserRepositoryImpl implements UserRepository {
 	}
 
 	@Override
-	public int selectPaymentMethod(String paymentMethod, Cart cart) {
-		// TODO Auto-generated method stub
-		return 0;
+	public List<Payment> getAllPayment() {
+		List<Payment> paymentList = paymentRepository.getAllPayment();
+		return paymentList;
+	}
+
+	@Override
+	public Double placeOrderByCart(Payment payment) {
+		List<Cart> cartList = cartRepository.getAllItemsByCustomerId(customer.getId());
+		if(cartList.size()==0)
+			return 0.0d;
+		
+		double amount = 0.0d;
+		for(Cart cart:cartList){
+			Product product = productRepository.getProductByCart(cart);
+			if(product != null){
+				orderRepository.placeOrder(customer.getId(), product, 
+					cart.getQuantity(), payment.getId());
+				cartRepository.remove(cart);
+				amount+=product.getCost();
+			}
+		}
+		return amount*(1 + payment.getDiscount()/100);
 	}
 
 }

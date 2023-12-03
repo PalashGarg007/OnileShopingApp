@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import com.genpact.onlineshopingapp.entity.Orders;
+import com.genpact.onlineshopingapp.entity.Product;
 
 public class OrderRepository {
 	
@@ -21,7 +22,8 @@ public class OrderRepository {
 	}
 
     public List<Orders> getOrderByCustomerId(String customerId) {
-        return jdbcTemplate.query("select * from orders where cid='"+customerId+"'",new RowMapper<Orders>(){
+        return jdbcTemplate.query("select * from orders where cid='"+customerId+
+			"'",new RowMapper<Orders>(){
 			public Orders mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Orders order=new Orders();
 		        order.setId(rs.getInt(1));
@@ -41,7 +43,8 @@ public class OrderRepository {
     }
 
     public List<Orders> getPendingOrders(Integer shopkeeperId) {
-        return jdbcTemplate.query("select * from orders where sid='"+shopkeeperId+"' and confirmation=null",new RowMapper<Orders>(){
+        return jdbcTemplate.query("select * from orders where sid='"+shopkeeperId+
+			"' and confirmation=null",new RowMapper<Orders>(){
 			public Orders mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Orders order=new Orders();
 		        order.setId(rs.getInt(1));
@@ -63,13 +66,27 @@ public class OrderRepository {
     public int setConfirmation(Orders order) {
         int result;
 		try{
-			result = jdbcTemplate.update("update orders set Confirmation="+order.getConfirmation()+" where id="+order.getId());
-			jdbcTemplate.update("update orders set orderDate='"+LocalDate.now()+"' where id="+order.getId());
-			jdbcTemplate.update("update orders set shippingDate='"+LocalDate.now().plusDays(7)+"' where id="+order.getId());
+			result = jdbcTemplate.update("update orders set Confirmation="+
+				order.getConfirmation()+" where id="+order.getId());
+			jdbcTemplate.update("update orders set shippingDate='"+
+				LocalDate.now().plusDays(6)+"' where id="+order.getId());
 		} catch(Exception e){
 			result = 0;
 		}
         return result;
+    }
+
+    public int placeOrder(Integer cid, Product product, Integer quantity, Integer pay_id) {
+		int result;
+		try{
+			result = jdbcTemplate.update("insert into orders(cid, sid, pid, amount"+
+				", quantity, order_date, pay_id) values("+cid+", "+product.getSid()+
+				", "+product.getId()+", "+product.getCost()+", "+quantity+", '"+
+				LocalDate.now()+"', "+pay_id+")");
+		} catch(Exception e){
+			result = 0;
+		}
+		return result;
     }
 	
 }

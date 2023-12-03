@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+
+import com.genpact.onlineshopingapp.entity.Cart;
 import com.genpact.onlineshopingapp.entity.Product;
 
 public class ProductRepository {
@@ -52,8 +54,50 @@ public class ProductRepository {
 				return rs.getString(1);
 			}  		    
 		    });
-		
 		return productNamelist.get(0);
     }
+
+    public Product getProductByCart(Cart cart) {
+        List<Product> productList = jdbcTemplate.query("select * from product where id="+cart.getPid(), new RowMapper<Product>(){
+			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Product product=new Product();  
+		        product.setId(rs.getInt(1));
+				product.setSid(rs.getInt(2));
+				product.setName(rs.getString(3));
+				product.setCategory(rs.getString(4));
+				product.setCost(rs.getDouble(5));
+				product.setWarehouse(rs.getInt(6));
+				product.setRating(rs.getDouble(7));
+				product.setPurchased(rs.getInt(8));
+
+				return product;
+			}  		    
+		    });
+		Product product = productList.get(0);
+		
+		if(product.getWarehouse()<cart.getQuantity()){
+			List<Product> productList2 = jdbcTemplate.query("select * from product where name='"+product.getName()
+				+"' and category='"+product.getCategory()+"' and warehouse>"+cart.getQuantity()+" order by cost asc", new RowMapper<Product>(){
+			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Product product=new Product();  
+		        product.setId(rs.getInt(1));
+				product.setSid(rs.getInt(2));
+				product.setName(rs.getString(3));
+				product.setCategory(rs.getString(4));
+				product.setCost(rs.getDouble(5));
+				product.setWarehouse(rs.getInt(6));
+				product.setRating(rs.getDouble(7));
+				product.setPurchased(rs.getInt(8));
+
+				return product;
+			}  		    
+		    });
+			if(productList2.size()>0)
+				product = productList2.get(0);
+			else
+				product = null;
+		}
+		return product;
+	}
 	
 }
