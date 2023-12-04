@@ -38,5 +38,8 @@ public interface UserRepository {
 	/*Should be able to place order from the cart on a selected payment method and 
 	return total amount. */
 	public Double placeOrderByCart(Payment payment);
+
+	//should be able to track order
+	public int trackProducts();
 	
 }

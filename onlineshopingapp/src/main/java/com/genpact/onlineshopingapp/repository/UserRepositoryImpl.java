@@ -103,6 +103,23 @@ public class UserRepositoryImpl implements UserRepository {
 		return amount*(1 + payment.getDiscount()/100);
 	}
 
+	@Override
+	public List<String[]> trackProducts(){
+		List<Orders> listOrders =orderRepository.getOrderByCustomerId(customer.getId());
+
+		if(listOrders.size()==0)
+			return null;
+		
+		List<String[]> ans = new ArrayList<String[3]>;
+		for(Orders order:listOrders){
+			Product productDetails = productRepository.getProductById(order.getPid);
+			String diff = Integer.toString(order.getShipingDate.compareTo(LocalDate.now()));
+			String[] productDetail = [productDetails.get(0), productDetails.get(1), order.getQuantity, diff];
+			ans.add(productDetail);
+		}
+
+		return ans;
+	}
 	
 
 }

@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService{
 			System.out.println(payment);
 			@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
-		System.out.print("Plese select a Payment Method :");
+		System.out.print("Please select a Payment Method :");
 		Integer payId = scanner.nextInt();
 		if(payId > 0 & payId<=paymentList.size()){
 			System.out.println("Please Enter an valid input: ");
@@ -52,4 +52,20 @@ public class UserServiceImpl implements UserService{
 			System.out.printf("Order Placed With the total amount ₹%.2d", cost);
 	}
 
+	@Override
+	public void trackProducts(){
+		List<String[]> productList=userRepositoryImpl.trackProducts();
+		if(productList.size()>0){
+			System.out.println(productList.size()+" records found")
+			System.out.printf("%-10s %-10s %-5s %-5s","Name","Category","Quantity","Days Remaining")
+			for(int i=0;i<productList.size();i++){
+				System.out.printf("%-10s %-10s %-5s %-5s",productList.get(i)[0],productList.get(i)[1],
+				productList.get(i)[2],productList.get(i)[3])
+				System.out.println();
+			}
+		}else{
+			System.out.println("No record found");
+		}
+
+	}
 }
