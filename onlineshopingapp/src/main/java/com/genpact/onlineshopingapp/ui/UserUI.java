@@ -14,6 +14,8 @@ public class UserUI {
 		 * userServiceImpl.buyProductsFromCart()
 		*/
 
+		/* Log in with user name and password. */
+
 		System.out.println("Please choose an option:\n"+
 			"\t1. Log in.\n"+
 			"\t2. Create an account.\n");

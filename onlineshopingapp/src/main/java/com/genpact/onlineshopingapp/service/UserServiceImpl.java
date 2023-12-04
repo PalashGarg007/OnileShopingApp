@@ -10,8 +10,18 @@ public class UserServiceImpl implements UserService{
 	static UserRepositoryImpl userRepositoryImpl = new UserRepositoryImpl();
 
 	@Override
-	public void verifyUser() {
-		// TODO Auto-generated method stub
+	public void userLogin() {
+		@SuppressWarnings("resource")
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Please enter your username: ");
+        String username = scanner.next();
+        System.out.print("Please enter your password: ");
+        String password = scanner.next();
+        int valid = userRepositoryImpl.userLogin(username, password);
+        if(valid==1)
+            System.out.println("Login Successful");
+        else
+            System.out.println("Login Failed");
 		
 	}
 

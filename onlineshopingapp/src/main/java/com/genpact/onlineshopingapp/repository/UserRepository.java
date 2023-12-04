@@ -7,8 +7,11 @@ import com.genpact.onlineshopingapp.entity.*;
 public interface UserRepository {
 	/* verify user by the given user-name and password. if successful 
 	 * load user's cart. */
-	public int verifyUser(String username, String password);
+	public int userLogin(String username, String password);
 	
+	/* checking inventory of cart automatically. */
+	public String init(Customer customer);
+
 	/* create a new user object and add his details in the database. */
 	public int createUser(String fullName, String dob, String contact, 
 			String email, String address, String username, String password);

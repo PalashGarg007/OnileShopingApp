@@ -24,9 +24,21 @@ public class UserRepositoryImpl implements UserRepository {
 	PaymentRepository paymentRepository = (PaymentRepository)context.getBean("paymentRepository");
 
 	@Override
-	public int verifyUser(String username, String password) {
+	public String init(Customer customer) {
 		// TODO Auto-generated method stub
-		return 0;
+        return null;
+	}
+
+	@Override
+	public int userLogin(String username, String password) {
+		Customer c = customerRepository.userLogin(username, password);
+		int valid = 0;
+		if(c!=null){
+			customer = c;
+			init(customer);
+			valid = 1;
+		}
+		return valid;
 	}
 
 	@Override
@@ -90,5 +102,7 @@ public class UserRepositoryImpl implements UserRepository {
 		}
 		return amount*(1 + payment.getDiscount()/100);
 	}
+
+	
 
 }
