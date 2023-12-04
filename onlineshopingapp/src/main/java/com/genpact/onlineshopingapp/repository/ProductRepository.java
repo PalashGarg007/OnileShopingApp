@@ -35,6 +35,28 @@ public class ProductRepository {
 			}  		    
 		    });
     }
+
+	public void addProduct(sid,name,category,cost,warehouse){
+		int result=0;
+		try{
+			result = jdbcTemplate.update("insert into product(sid,name,category,cost,warehouse) values("+
+				sid+",'"+name+"','"+category+"',"+cost+","+warehouse+")");
+		} catch(Exception e){
+			result = 0;
+		}
+		return result;
+	}
+
+	public void removeProduct(name,category,warehouse){
+		int result=0;
+		try{
+			result = jdbcTemplate.update("update product set warehouse=warehouse-"+
+				warehouse+" where name='"+name+"' and category='"+category+"')";
+		} catch(Exception e){
+			result = 0;
+		}
+		return result;
+	}
 	
 	
 }
