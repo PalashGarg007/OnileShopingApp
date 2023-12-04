@@ -10,7 +10,7 @@ public class UserServiceImpl implements UserService{
 	static UserRepositoryImpl userRepositoryImpl = new UserRepositoryImpl();
 
 	@Override
-	public void userLogin() {
+	public int userLogin() {
 		@SuppressWarnings("resource")
         Scanner scanner = new Scanner(System.in);
         System.out.print("Please enter your username: ");
@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService{
             System.out.println("Login Successful");
         else
             System.out.println("Login Failed");
-		
+		return valid;
 	}
 
 	@Override

@@ -23,7 +23,7 @@ public class UserUI {
 
 		int result = 0;
 		if(first==1){
-			//result = userServiceImpl. //take username and password. and create an object.
+			result = userServiceImpl.userLogin();
 		} else{
 			//result = userServiceImpl. //take user details and create a customer object.
 		}
