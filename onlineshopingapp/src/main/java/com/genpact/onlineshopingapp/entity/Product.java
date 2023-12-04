@@ -1,7 +1,7 @@
 package com.genpact.onlineshopingapp.entity;
 
 public class Product {
-    private Integereger id;
+    private Integer id;
     private Integer sid;
     private String name;
     private String category;
@@ -102,6 +102,5 @@ public class Product {
             ", purchased='" + getPurchased() + "'" +
             "}";
     }
-
 
 }

@@ -11,11 +11,11 @@ import com.genpact.onlineshopingapp.entity.Shopkeeper;
 public class AdminRepositoryImpl implements AdminRepository {
 	
 	ApplicationContext context = new ClassPathXmlApplicationContext("config.xml");
-	CartRepository cartRepository = (CartRepository)context.getBean("cartRepository");
+//	CartRepository cartRepository = (CartRepository)context.getBean("cartRepository");
 	CustomerRepository customerRepository = (CustomerRepository)context.getBean("customerRepository");
-	FavoriteRepository favoriteRepository = (FavoriteRepository)context.getBean("favoriteRepository");
+//	FavoriteRepository favoriteRepository = (FavoriteRepository)context.getBean("favoriteRepository");
 	ProductRepository productRepository = (ProductRepository)context.getBean("productRepository");
-	ReviewRepository reviewRepository = (ReviewRepository)context.getBean("reviewRepository");
+//	ReviewRepository reviewRepository = (ReviewRepository)context.getBean("reviewRepository");
 	ShopkeeperRepository shopkeeperRepository = (ShopkeeperRepository)context.getBean("shopkeeperRepository");
 	OrderRepository orderRepository = (OrderRepository)context.getBean("orderRepository");
 	PaymentRepository paymentRepository = (PaymentRepository)context.getBean("paymentRepository");

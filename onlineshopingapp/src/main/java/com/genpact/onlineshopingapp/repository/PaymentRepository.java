@@ -6,6 +6,8 @@ import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
+import com.genpact.onlineshopingapp.entity.Payment;
+
 public class PaymentRepository {
     
     private JdbcTemplate jdbcTemplate;
@@ -45,6 +47,18 @@ public class PaymentRepository {
 			result = 0;
 		}
         return result;
+    }
+
+    public List<Payment> getAllPayment() {
+        return jdbcTemplate.query("select * from payment",new RowMapper<Payment>(){
+			public Payment mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Payment payment = new Payment();
+				payment.setId(rs.getInt(1));
+				payment.setMethod(rs.getString(2));
+				payment.setDiscount(rs.getDouble(3));
+				
+				return payment;
+			}});
     }
     
 }

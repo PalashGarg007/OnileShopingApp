@@ -3,13 +3,13 @@ package com.genpact.onlineshopingapp.entity;
 
 import java.time.LocalDate;
 
-public class Order {
+public class Orders {
 
     private Integer id;
     private Integer cid;
     private Integer sid;
     private Integer pid;
-    private Integer amount;
+    private Double amount;
     private Integer quantity;
     private LocalDate orderDate;
     private LocalDate shippingDate;
@@ -17,10 +17,10 @@ public class Order {
     private boolean confirmation;
 
 
-    public Order() {
+    public Orders() {
     }
 
-    public Order(Integer id, Integer cid, Integer sid, Integer pid, Integer amount, Integer quantity, LocalDate orderDate, LocalDate shippingDate, Integer payid, boolean confirmation) {
+    public Orders(Integer id, Integer cid, Integer sid, Integer pid, Double amount, Integer quantity, LocalDate orderDate, LocalDate shippingDate, Integer payid, boolean confirmation) {
         this.id = id;
         this.cid = cid;
         this.sid = sid;
@@ -65,11 +65,11 @@ public class Order {
         this.pid = pid;
     }
 
-    public Integer getAmount() {
+    public Double getAmount() {
         return this.amount;
     }
 
-    public void setAmount(Integer amount) {
+    public void setAmount(Double amount) {
         this.amount = amount;
     }
 
@@ -97,16 +97,12 @@ public class Order {
         this.shippingDate = shippingDate;
     }
 
-    public Integer getPayid() {
+    public Integer getPayId() {
         return this.payid;
     }
 
-    public void setPayid(Integer payid) {
+    public void setPayId(Integer payid) {
         this.payid = payid;
-    }
-
-    public boolean isConfirmation() {
-        return this.confirmation;
     }
 
     public boolean getConfirmation() {
@@ -128,10 +124,8 @@ public class Order {
             ", quantity='" + getQuantity() + "'" +
             ", orderDate='" + getOrderDate() + "'" +
             ", shippingDate='" + getShippingDate() + "'" +
-            ", payid='" + getPayid() + "'" +
-            ", confirmation='" + isConfirmation() + "'" +
+            ", payid='" + getPayId() + "'" +
             "}";
     }
-
-
+    
 }
