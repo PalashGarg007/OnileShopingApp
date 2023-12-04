@@ -19,9 +19,9 @@ public class PaymentRepository {
 	}
 
     public int addPaymentMethod(String paymentMethod, Double discount) {
-		List<String> existingPaymentMethod = jdbcTemplate.query("select * from payment where method='"+paymentMethod+"'",new RowMapper<String>(){
+		List<String> existingPaymentMethod = jdbcTemplate.query("select method from payment",new RowMapper<String>(){
 			public String mapRow(ResultSet rs, int rowNum) throws SQLException {
-				return rs.getString(2);
+				return rs.getString(1);
 			}});
 		
 		int result;
