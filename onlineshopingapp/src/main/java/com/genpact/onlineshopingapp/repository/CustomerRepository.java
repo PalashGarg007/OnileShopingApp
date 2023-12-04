@@ -2,6 +2,7 @@ package com.genpact.onlineshopingapp.repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -61,5 +62,22 @@ public class CustomerRepository {
 		}
 		return customer;
     }
+
+	public Customer createCustomer(String fullName, String dob, String contact, String email, String address,
+			String username, String password) {
+			int result = jdbcTemplate.update("insert into customers (name, dob, contact, email, address, userName, _password)"
+			+"values('"+fullName+"', '"+dob+"', '"+contact+"', '"+email+"', '"+address+"', '"+username+"', '"+password+"')");
+			
+			Customer customer = new Customer();
+			customer.setName(fullName);
+			customer.setDob(LocalDate.parse(dob));
+			customer.setContact(contact);
+			customer.setEmail(email);
+			customer.setAddress(address);
+			customer.setUserName(username);
+			customer.setPassword(password); 
+		
+		return customer;
+	}
 	
 }

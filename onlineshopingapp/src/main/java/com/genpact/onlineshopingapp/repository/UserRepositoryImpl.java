@@ -1,5 +1,6 @@
 package com.genpact.onlineshopingapp.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -44,8 +45,13 @@ public class UserRepositoryImpl implements UserRepository {
 	@Override
 	public int createUser(String fullName, String dob, String contact, String email, String address, String username,
 			String password) {
-		// TODO Auto-generated method stub
-		return 0;
+		Customer c = customerRepository.createCustomer(fullName, dob, contact, email, address, username, password);
+		int valid = 0;
+		if(c!=null){
+			customer = c;
+            valid = 1;
+		}
+		return valid;
 	}
 
 	@Override
