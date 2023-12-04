@@ -59,5 +59,20 @@ public class ShopkeeperRepository {
 		return shopkeeper;
     }
 
+    public Shopkeeper createShopkeeper(String fullName, String contact, String email, String userName,
+            String password) {
+        int result = jdbcTemplate.update("insert into shopkeeper (name, contact, email, userName, _password)"+
+		"values('"+fullName+"', '"+contact+"', '"+email+"', '"+userName+"', '"+password+"')");
+
+		Shopkeeper shopkeeper = new Shopkeeper();
+        shopkeeper.setName(fullName);
+        shopkeeper.setContact(contact);
+        shopkeeper.setEmail(email);
+        shopkeeper.setUserName(userName);
+        shopkeeper.setPassword(password); 
+        
+        return shopkeeper;
+    }
+
 	
 }

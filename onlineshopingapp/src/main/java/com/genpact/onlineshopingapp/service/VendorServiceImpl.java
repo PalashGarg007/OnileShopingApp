@@ -124,5 +124,30 @@ public class VendorServiceImpl implements VendorService{
         }
 	}
 
-  
+    @Override
+    public int createVendor() {
+        Scanner scanner = new Scanner("System.in");
+        System.out.print("Please enter your full name: ");
+        String fullName = scanner.nextLine();
+        System.out.print("Please enter your contact: ");
+        String contact = scanner.nextLine();
+        System.out.print("Please enter your email: ");
+        String email = scanner.nextLine();
+        System.out.print("Please enter your username: ");
+        String userName = scanner.nextLine();
+        System.out.print("Please enter your password: ");
+        String password = scanner.nextLine();
+        int valid = vendorRepositoryImpl.createVendor(fullName, contact, email, userName, password);
+        if(valid==1){
+            System.out.println("Vendor created successfully");
+        }
+        else{
+            System.out.println("Vendor creation failed.\n"+
+			"Please check:\n"+
+			"\t1. This contact has already been used"+
+			"\t2. This email has already been used"+
+			"\t3. This username has already been used");
+        }
+        return valid;  
+    }
 }

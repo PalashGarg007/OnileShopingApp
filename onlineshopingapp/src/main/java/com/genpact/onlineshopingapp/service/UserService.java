@@ -6,7 +6,6 @@ public interface UserService {
 	public int userLogin();
 
 	/*User will be able to create new account */
-
 	public int createUser();
 	
 	/*User will be able to buy produduct from cart.*/

@@ -82,5 +82,17 @@ public class VendorRepositoryImpl implements VendorRepository{
 		return 0;
 	}
 
+
+	@Override
+	public int createVendor(String fullName, String contact, String email, String userName, String password) {
+		Shopkeeper s= shopkeeperRepository.createShopkeeper(fullName, contact, email, userName, password);
+		int valid = 0;
+		if(s!=null){
+			shopkeeper = s;
+            valid = 1;
+		}
+		return valid;
+	}
+
 	
 }

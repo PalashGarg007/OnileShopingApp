@@ -12,7 +12,7 @@ public interface UserRepository {
 	/* checking inventory of cart automatically. */
 	public String init(Customer customer);
 
-	/* create a new user object and add his details in the database. */
+	/* create a new user and add his details in the database. */
 	public int createUser(String fullName, String dob, String contact, 
 			String email, String address, String username, String password);
 	
