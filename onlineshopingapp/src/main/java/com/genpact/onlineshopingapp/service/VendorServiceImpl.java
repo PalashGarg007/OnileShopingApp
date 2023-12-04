@@ -10,6 +10,22 @@ public class VendorServiceImpl implements VendorService{
     static VendorRepositoryImpl vendorRepositoryImpl = new VendorRepositoryImpl();
 
     @Override
+    public int vendorLogin() {
+        @SuppressWarnings("resource")
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Please enter your username: ");
+        String username = scanner.next();
+        System.out.print("Please enter your password: ");
+        String password = scanner.next();
+        int valid = vendorRepositoryImpl.vendorLogin(username, password);
+        if(valid==1)
+            System.out.println("Login Successful");
+        else
+            System.out.println("Login Failed");
+		return valid;
+    }
+
+    @Override
     public void confirmProductList() {
         List<Orders> pendingList = vendorRepositoryImpl.getPendingOrders();
 
@@ -107,4 +123,6 @@ public class VendorServiceImpl implements VendorService{
             System.out.println("products got added.");
         }
 	}
+
+  
 }

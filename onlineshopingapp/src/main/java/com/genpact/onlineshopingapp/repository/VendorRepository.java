@@ -3,9 +3,13 @@ package com.genpact.onlineshopingapp.repository;
 import java.util.List;
 import com.genpact.onlineshopingapp.entity.Orders;
 
-// Persistence layer implementation
-public interface VendorRepository {
+  // Persistence layer implementation
+  public interface VendorRepository {
 
+  /* Vendor login using username and password */
+  public int vendorLogin(String username, String password);
+  
+  
     /*Give the list of all orders which the vendor has not conformed. */
     List<Orders> getPendingOrders();
 

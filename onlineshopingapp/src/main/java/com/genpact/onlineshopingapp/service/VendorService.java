@@ -2,7 +2,10 @@ package com.genpact.onlineshopingapp.service;
 
 public interface VendorService {
 
-    /*Conform the pending product approval list. */
+    /* Vendor will be able to login */
+    public int vendorLogin();
+
+    /*Confirm the pending product approval list. */
     void confirmProductList();
 
     //add or remove product
