@@ -38,7 +38,7 @@ public class ProductRepository {
 		    });
     }
 
-	public void addProduct(sid,name,category,cost,warehouse){
+	public int addProduct(Integer sid, String name, String category, Double cost, Integer warehouse){
 		int result=0;
 		try{
 			result = jdbcTemplate.update("insert into product(sid,name,category,cost,warehouse) values("+
@@ -49,11 +49,11 @@ public class ProductRepository {
 		return result;
 	}
 
-	public void removeProduct(name,category,warehouse){
+	public int removeProduct(Integer sid, String name, String category, Integer warehouse){
 		int result=0;
 		try{
 			result = jdbcTemplate.update("update product set warehouse=warehouse-"+
-				warehouse+" where name='"+name+"' and category='"+category+"')";
+				warehouse+" where name='"+name+"' and category='"+category+"' sid="+sid);
 		} catch(Exception e){
 			result = 0;
 		}
@@ -123,11 +123,11 @@ public class ProductRepository {
 		return product;
 	}
 	
-	public void restock(name,category,warehouse){
+	public int restock(Integer sid, String name, String category, Integer warehouse){
 		int result=0;
 		try{
 			result = jdbcTemplate.update("update product set warehouse=warehouse+"+
-				warehouse+" where name='"+name+"' and category='"+category+"')";
+				warehouse+" where name='"+name+"' and category='"+category+"' and sid="+sid);
 		} catch(Exception e){
 			result = 0;
 		}

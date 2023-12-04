@@ -42,17 +42,17 @@ public class VendorServiceImpl implements VendorService{
 
     @Override
 	public void addProduct() {
-		
+		@SuppressWarnings("resource")
 		Scanner sc=new Scanner(System.in);
         System.out.println("Enter name of the product: ");
         String name=sc.nextLine();
         System.out.println("Enter Category of the product: ");
         String category=sc.nextLine();
         System.out.println("Enter cost of the product: ");
-        String cost=sc.nextDouble();
+        Double cost=sc.nextDouble();
         sc.nextLine();
         System.out.println("Enter quantity of product in the Warehouse : ");
-        String warehouse=sc.nextInteger();
+        Integer warehouse=sc.nextInt();
         sc.nextLine();
 
         int result=vendorRepositoryImpl.addProduct(name,category,cost,warehouse);
@@ -66,14 +66,14 @@ public class VendorServiceImpl implements VendorService{
 
     @Override
 	public void removeProduct() {
-		
+		@SuppressWarnings("resource")
 		Scanner sc=new Scanner(System.in);
         System.out.println("Enter name of the product: ");
         String name=sc.nextLine();
         System.out.println("Enter Category of the product: ");
         String category=sc.nextLine();
         System.out.println("Enter quantity of products you want to remove in the Warehouse : ");
-        String warehouse=sc.nextInteger();
+        Integer warehouse=sc.nextInt();
         sc.nextLine();
 
         int result=vendorRepositoryImpl.removeProduct(name,category,warehouse);
@@ -88,14 +88,14 @@ public class VendorServiceImpl implements VendorService{
 
     @Override
 	public void restock() {
-		
+		@SuppressWarnings("resource")
 		Scanner sc=new Scanner(System.in);
         System.out.println("Enter name of the product: ");
         String name=sc.nextLine();
         System.out.println("Enter Category of the product: ");
         String category=sc.nextLine();
         System.out.println("Enter quantity of products you want to add in the Warehouse : ");
-        String warehouse=sc.nextInteger();
+        Integer warehouse=sc.nextInt();
         sc.nextLine();
 
         int result=vendorRepositoryImpl.restock(name,category,warehouse);

@@ -1,5 +1,7 @@
 package com.genpact.onlineshopingapp.ui;
 
+import com.genpact.onlineshopingapp.service.VendorServiceImpl;
+
 public class VendorUI {
 
 	public static void main(String[] args) {

@@ -51,20 +51,20 @@ public class VendorRepositoryImpl implements VendorRepository{
 	}
 
 	@Override
-	public int removeProduct(String name,String category,Integer warehouse) {
+	public int removeProduct(String name, String category, Integer warehouse) {
 		int sid = shopkeeper.getId();
 		int result = 0;
-		result = productRepository.removeProduct(name,category,warehouse);
+		result = productRepository.removeProduct(sid, name, category, warehouse);
 		if(result>0)
 			return 1;
 		return 0;
 	}
 
 	@Override
-	public int restock(String name,String category,Integer warehouse) {
+	public int restock(String name, String category, Integer warehouse) {
 		int sid = shopkeeper.getId();
 		int result = 0;
-		result = productRepository.restock(name,category,warehouse);
+		result = productRepository.restock(sid, name, category, warehouse);
 		if(result>0)
 			return 1;
 		return 0;
