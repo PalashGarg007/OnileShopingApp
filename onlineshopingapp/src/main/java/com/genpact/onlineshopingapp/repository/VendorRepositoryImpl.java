@@ -59,4 +59,14 @@ public class VendorRepositoryImpl implements VendorRepository{
 			return 1;
 		return 0;
 	}
+
+	@Override
+	public int restock(String name,String category,Integer warehouse) {
+		int sid = shopkeeper.getId();
+		int result = 0;
+		result = productRepository.restock(name,category,warehouse);
+		if(result>0)
+			return 1;
+		return 0;
+	}
 }

@@ -85,4 +85,26 @@ public class VendorServiceImpl implements VendorService{
             System.out.println("product got removed.");
         }
 	}
+
+    @Override
+	public void restock() {
+		
+		Scanner sc=new Scanner(System.in);
+        System.out.println("Enter name of the product: ");
+        String name=sc.nextLine();
+        System.out.println("Enter Category of the product: ");
+        String category=sc.nextLine();
+        System.out.println("Enter quantity of products you want to add in the Warehouse : ");
+        String warehouse=sc.nextInteger();
+        sc.nextLine();
+
+        int result=vendorRepositoryImpl.restock(name,category,warehouse);
+
+        if(result==0){
+            System.out.println("Sorry, products not added\n"+
+                "\t1. product does not exist");
+        }else{
+            System.out.println("products got added.");
+        }
+	}
 }

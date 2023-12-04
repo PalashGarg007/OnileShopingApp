@@ -123,4 +123,14 @@ public class ProductRepository {
 		return product;
 	}
 	
+	public void restock(name,category,warehouse){
+		int result=0;
+		try{
+			result = jdbcTemplate.update("update product set warehouse=warehouse+"+
+				warehouse+" where name='"+name+"' and category='"+category+"')";
+		} catch(Exception e){
+			result = 0;
+		}
+		return result;
+	}
 }

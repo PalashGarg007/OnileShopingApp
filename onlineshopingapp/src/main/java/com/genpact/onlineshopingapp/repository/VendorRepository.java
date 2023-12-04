@@ -11,6 +11,11 @@ public interface VendorRepository {
 
     /*Set conformation of orders. */
     int setConfirmation(Orders order);
+
+    /*add and remove products */
 	int addProduct(String name, String category, Double cost, Integer warehouse);
 	int removeProduct(String name, String category, Integer warehouse);
+
+    /*restock the amount of product */
+    int restock(String name, String category, Integer warehouse);
 }
