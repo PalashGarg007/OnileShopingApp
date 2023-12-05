@@ -41,5 +41,8 @@ public interface UserRepository {
 
 	//should be able to track order
 	public int trackProducts();
+
+	//show all products
+	public int showAllProducts();
 	
 }

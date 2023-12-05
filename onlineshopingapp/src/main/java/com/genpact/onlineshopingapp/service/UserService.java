@@ -9,5 +9,8 @@ public interface UserService {
 
 	//track products
 	void trackProducts();
+
+	//show all projects
+	void showAllProducts();
 	
 }

@@ -68,4 +68,16 @@ public class UserServiceImpl implements UserService{
 		}
 
 	}
+
+	@Override
+	public void showAllProducts(){
+		List<Product> productList=userRepositoryImpl.showAllProducts();
+		if(productList.size()==0){
+			System.out.println("No product found");
+		} else{
+			for(int i=0;i<productList.size();i++){
+				System.out.println(productList.get(i));
+			}
+		}
+	}
 }

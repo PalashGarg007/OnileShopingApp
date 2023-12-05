@@ -157,4 +157,21 @@ public class ProductRepository {
 		}
 		return result;
 	}
-}
+
+	public List<product> showAllProducts(){
+		//(Palash Add Query)String sql = "select * from product p1 where cost=(select min(cost) from product p2 where p1.id=p2.id) "
+		return  jdbcTemplate.query("select * from product ", new RowMapper<Product>(){
+			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Product product=new Product();  
+		        product.setId(rs.getInt(1));
+				product.setSid(rs.getInt(2));
+				product.setName(rs.getString(3));
+				product.setCategory(rs.getString(4));
+				product.setCost(rs.getDouble(5));
+				product.setWarehouse(rs.getInt(6));
+				product.setRating(rs.getDouble(7));
+				product.setPurchased(rs.getInt(8));
+
+				return product;
+			}});
+	}}

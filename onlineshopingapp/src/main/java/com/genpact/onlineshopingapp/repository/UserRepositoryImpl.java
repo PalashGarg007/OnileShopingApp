@@ -120,6 +120,11 @@ public class UserRepositoryImpl implements UserRepository {
 
 		return ans;
 	}
+
+	@Override
+	public List<Product> showAllProducts(){
+		return ProductRepository.showAllProducts();
+	}
 	
 
 }
