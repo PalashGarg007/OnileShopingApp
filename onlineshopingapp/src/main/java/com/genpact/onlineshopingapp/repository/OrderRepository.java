@@ -21,7 +21,7 @@ public class OrderRepository {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
-    public List<Orders> getOrderByCustomerId(String customerId) {
+    public List<Orders> getOrderByCustomerId(Integer customerId) {
         return jdbcTemplate.query("select * from orders where cid="+customerId
 			,new RowMapper<Orders>(){
 			public Orders mapRow(ResultSet rs, int rowNum) throws SQLException {

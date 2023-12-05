@@ -18,17 +18,15 @@ public class UserServiceImpl implements UserService{
         String username = scanner.next();
         System.out.print("Please enter your password: ");
         String password = scanner.next();
+		System.out.println("------------------------------------------");
         int valid = userRepositoryImpl.userLogin(username, password);
-        if(valid==1)
-            System.out.println("Login Successful");
-        else
-            System.out.println("Login Failed");
+        System.out.println((valid==1)?"Login Successful" : "Login Failed");
 		return valid;
 	}
 
 	@Override
 	public void buyProductsFromCart() {
-		System.out.println("-------------------------------");
+		System.out.println("------------------------------------------");
 		List<Payment> paymentList = userRepositoryImpl.getAllPayment();
 		for(Payment payment: paymentList)
 			System.out.println(payment);
@@ -37,7 +35,7 @@ public class UserServiceImpl implements UserService{
 		System.out.print("Please select a Payment Method :");
 		Integer payId = scanner.nextInt();
 		if(payId > 0 & payId<=paymentList.size()){
-			System.out.println("Please Enter an valid input: ");
+			System.out.print("Please Enter an valid input: ");
 			payId = scanner.nextInt();
 		}
 		Double cost = 0.0d;
@@ -47,22 +45,21 @@ public class UserServiceImpl implements UserService{
 				break;
 			}
 		}
-		if(cost==0.0d)
-			System.out.println("Please add some products to the cart");
-		else
-			System.out.printf("Order Placed With the total amount ₹%.2d", cost);
+		System.out.println((cost==0.0d)?"Please add some products to the cart" :
+			String.format("Order Placed With the total amount ₹%.2d", cost));
 	}
 
 	@Override
 	public void trackProducts(){
-		List<String[]> productList=userRepositoryImpl.trackProducts();
-		if(productList.size()>0){
-			System.out.println(productList.size()+" records found")
-			System.out.printf("%-10s %-10s %-5s %-5s","Name","Category","Quantity","Days Remaining")
-			for(int i=0;i<productList.size();i++){
-				System.out.printf("%-10s %-10s %-5s %-5s",productList.get(i)[0],productList.get(i)[1],
-				productList.get(i)[2],productList.get(i)[3])
-				System.out.println();
+		String[][] productList=userRepositoryImpl.trackProducts();
+		if(productList.length>0){
+			System.out.println(productList.length+" records found.");
+			System.out.printf("%-20s %-20s %-5s %-5s\n","Name", "Category",
+				"Quantity", "Days Remaining");
+			System.out.println("-------------------------------------------------");
+			for(int i=0; i<productList.length; i++){
+				System.out.printf("%-10s %-10s %-5s %-5s\n", productList[i][0],productList[i][1],
+					productList[i][2], productList[i][3]);
 			}
 		}else
 			System.out.println("No record found");
@@ -70,22 +67,22 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public void showAllProducts(){
-		List<Product> productList=userRepositoryImpl.showAllProducts();
+		List<Product> productList = userRepositoryImpl.showAllProducts();
 		if(productList.size()==0){
 			System.out.println("No product found");
 		} else{
-			for(int i=0;i<productList.size();i++){
+			for(int i=0;i<productList.size();i++)
 				System.out.println(productList.get(i));
-			}
 		}
 	}
 
 	@Override
 	public void showProductsByCategory(){
-		Scanner sc=new Scanner(System.in);
-		System.out.println("Enter the category of product:");
-		String category=sc.nextLine();
-		List<Product> productList=userRepositoryImpl.showProductsByCategory(category);
+		@SuppressWarnings("resource")
+		Scanner sc = new Scanner(System.in);
+		System.out.print("Enter the category of product: ");
+		String category = sc.nextLine();
+		List<Product> productList = userRepositoryImpl.showProductsByCategory(category);
 		if(productList.size()==0){
 			System.out.println("No product found");
 		} else{
@@ -96,11 +93,12 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void showProductsByName(String name){
+	public void showProductsByName(){
+		@SuppressWarnings("resource")
 		Scanner sc=new Scanner(System.in);
-		System.out.println("Enter the name of product:");
-		String name=sc.nextLine();
-		List<Product> productList=userRepositoryImpl.showProductsByCategory(name);
+		System.out.print("Enter the name of product: ");
+		String name = sc.nextLine();
+		List<Product> productList = userRepositoryImpl.showProductsByCategory(name);
 		if(productList.size()==0){
 			System.out.println("No product found");
 		} else{
@@ -129,16 +127,15 @@ public class UserServiceImpl implements UserService{
 		System.out.print("Please enter your password: ");
 		String password = scanner.next();
 		int valid = userRepositoryImpl.createUser(fullName, dob, contact, email, address, username, password);
-		if(valid == 1) {
+		
+		if(valid == 1)
 			System.out.println("User created successfully");
-		}
-		else{
+		else
 			System.out.println("User creation failed.\n"+
 			"Please check:\n"+
 			"\t1. This contact has already been used"+
 			"\t2. This email has already been used"+
 			"\t3. This username has already been used");
-		}
 		return valid;
 	}
 
@@ -146,10 +143,9 @@ public class UserServiceImpl implements UserService{
 	public void addReview() {
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
-		/*For getting unrated products */
 		List<Product> productList = userRepositoryImpl.getAllUnratedProducts();
         for(int i=0; i<productList.size(); i++)
-            System.out.printf("%d\t%-15s%-15s", i+1, productList.get(i).getName(), productList.get(i).getCategory());
+            System.out.printf("%d\t%-20s%-20s", i+1, productList.get(i).getName(), productList.get(i).getCategory());
 		System.out.println("---------------------------------------");
 		System.out.print("Please select the product to give rating and review: ");
 		int productIndex = scanner.nextInt();
@@ -157,9 +153,8 @@ public class UserServiceImpl implements UserService{
 			System.out.print("Please Enter an valid input: ");
             productIndex = scanner.nextInt();
         }
-		Double rate=0.0;
 		System.out.print("Please enter your rating on a scale of 0 to 5: ");
-		rate = scanner.nextDouble();
+		Double rate = scanner.nextDouble();
 		while(rate < 0.0 || rate>5.0){
 			System.out.print("Please enter a valid rating: ");
 			rate = scanner.nextDouble();
@@ -170,9 +165,8 @@ public class UserServiceImpl implements UserService{
 			System.out.print("Please enter your review: ");
 			review = scanner.next();
 		}
-		if(userRepositoryImpl.addReview(productIndex, rate, review)>0)
-			System.out.println("Changes added successfully");
-		else
-			System.out.println("Changes not added");
+		System.out.println((userRepositoryImpl.addReview(productIndex, rate, review)>0)?
+			"Changes added successfully" : "Changes not added");
 	}
+
 }

@@ -22,9 +22,9 @@ public interface UserService {
 	void showAllProducts();
 
 	//show products by category
-	void showProductsByCategory(String category);
+	void showProductsByCategory();
 
 	//show products by category
-	void showProductsByName(String name);
+	void showProductsByName();
 	
 }

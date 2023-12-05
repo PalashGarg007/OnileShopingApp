@@ -49,7 +49,7 @@ public class AdminServiceImpl implements AdminService{
 		System.out.println("Please give the customer's Id to see his purchase history:\n");
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
-		String customerId = scanner.nextLine();
+		Integer customerId = scanner.nextInt();
 		List<Orders> orderList = adminRepositoryImpl.getHistoryOfCustomer(customerId);
 		
 		if(orderList.size()==0)

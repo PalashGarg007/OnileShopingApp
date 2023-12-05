@@ -143,9 +143,9 @@ public class ProductRepository {
 				return product;
 			}
 		});
-		
+		Product product = null;
 		if(productList.size()==0){
-			return null;
+			return product;
 		} else{
 			return productList.get(0);
 		}
