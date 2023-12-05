@@ -5,8 +5,6 @@ import java.sql.SQLException;
 import java.util.List;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
-
-import com.genpact.onlineshopingapp.entity.Customer;
 import com.genpact.onlineshopingapp.entity.Shopkeeper;
 
 public class ShopkeeperRepository {
@@ -33,7 +31,7 @@ public class ShopkeeperRepository {
 
 				return shopkeeper;
 			}  		    
-		    });
+		});
     }
 
     public Shopkeeper vendorLogin(String username, String password) {
@@ -51,7 +49,6 @@ public class ShopkeeperRepository {
 					return shopkeeper;
             	}
 		});
-        
 		Shopkeeper shopkeeper = null;
 		if(shopkeepers.size()>0){
 			shopkeeper = shopkeepers.get(0);
@@ -59,13 +56,13 @@ public class ShopkeeperRepository {
 		return shopkeeper;
     }
 
-    public Shopkeeper createShopkeeper(String fullName, String contact, String email, String userName,
+    public Shopkeeper createShopkeeper(String name, String contact, String email, String userName,
             String password) {
         int result = jdbcTemplate.update("insert into shopkeeper (name, contact, email, userName, _password)"+
-		"values('"+fullName+"', '"+contact+"', '"+email+"', '"+userName+"', '"+password+"')");
+		"values('"+name+"', '"+contact+"', '"+email+"', '"+userName+"', '"+password+"')");
 
 		Shopkeeper shopkeeper = new Shopkeeper();
-        shopkeeper.setName(fullName);
+        shopkeeper.setName(name);
         shopkeeper.setContact(contact);
         shopkeeper.setEmail(email);
         shopkeeper.setUserName(userName);

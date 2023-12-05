@@ -179,13 +179,13 @@ public class ProductRepository {
 		return result;
 	}
 
-    public List<Product> getAllUnratedProductsByCid(int id) {
+    public List<Product> getAllUnratedProductsByCid(int cid) {
 		String sql = "select p.* from product p "+
 			"left join "+
 			"orders o by o.pid = p.id "+
 			"left join "+
 			"review r on r.id = o.id "+
-			"where r.review='null'";
+			"where r.review='null' o.cid="+cid;
         return  jdbcTemplate.query(sql, new RowMapper<Product>(){
 			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
 					Product product=new Product();  
