@@ -43,6 +43,12 @@ public interface UserRepository {
 	public int trackProducts();
 
 	//show all products
-	public int showAllProducts();
+	public List<Product> showAllProducts();
+
+	//show products by category
+	public List<Product> showProductsByCategory(String category);
+
+	//show products by category
+	public List<Product> showProductsByName(String name);
 	
 }

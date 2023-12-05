@@ -123,8 +123,16 @@ public class UserRepositoryImpl implements UserRepository {
 
 	@Override
 	public List<Product> showAllProducts(){
-		return ProductRepository.showAllProducts();
+		return productRepository.showAllProducts();
 	}
 	
+	@Override
+	public List<Product> showProductsByCategory(String category){
+		return productRepository.showProductsByCategory(category);
+	}
 
+	@Override
+	public List<Product> showProductsByName(String name){
+		return productRepository.showProductsByName(name);
+	}
 }

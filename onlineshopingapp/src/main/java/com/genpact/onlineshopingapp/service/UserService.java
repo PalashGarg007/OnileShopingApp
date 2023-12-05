@@ -12,5 +12,11 @@ public interface UserService {
 
 	//show all projects
 	void showAllProducts();
+
+	//show products by category
+	void showProductsByCategory(String category);
+
+	//show products by category
+	void showProductsByName(String name);
 	
 }

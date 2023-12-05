@@ -80,4 +80,34 @@ public class UserServiceImpl implements UserService{
 			}
 		}
 	}
+
+	@Override
+	public void showProductsByCategory(){
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter the category of product:");
+		String category=sc.nextLine();
+		List<Product> productList=userRepositoryImpl.showProductsByCategory(category);
+		if(productList.size()==0){
+			System.out.println("No product found");
+		} else{
+			for(int i=0;i<productList.size();i++){
+				System.out.println(productList.get(i));
+			}
+		}
+	}
+
+	@Override
+	public void showProductsByName(String name){
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter the name of product:");
+		String name=sc.nextLine();
+		List<Product> productList=userRepositoryImpl.showProductsByCategory(name);
+		if(productList.size()==0){
+			System.out.println("No product found");
+		} else{
+			for(int i=0;i<productList.size();i++){
+				System.out.println(productList.get(i));
+			}
+		}
+	}
 }
