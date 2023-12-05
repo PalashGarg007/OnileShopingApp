@@ -92,7 +92,8 @@ public class ProductRepository {
 		return result;
 	}
 
-	public int removeProduct(Integer sid, String name, String category, Integer warehouse){
+	public int removeProduct(Integer sid, String name, String category, 
+		Integer warehouse){
 		int result=0;
 		try{
 			result = jdbcTemplate.update("update product set warehouse=warehouse-"+
@@ -106,7 +107,8 @@ public class ProductRepository {
     public int getOrderFromWherehouse(Integer pid, Integer quantity) {
         int result;
 		try{
-			result = jdbcTemplate.update("update product set wharehouse=warehouse-"+quantity+" where id="+pid);
+			result = jdbcTemplate.update("update product set wharehouse=warehouse-"+
+				quantity+" where id="+pid);
 			jdbcTemplate.update("update product set purchased=purchased+1 where id="+pid);
 		} catch(Exception e){
 			result = 0;
@@ -115,8 +117,8 @@ public class ProductRepository {
     }
 
     public String getProductName(Integer pid) {
-        List<String> productNamelist = jdbcTemplate.query("select name from product where id="+pid, 
-			new RowMapper<String>(){
+        List<String> productNamelist = jdbcTemplate.query("select name from product where id="+
+			pid, new RowMapper<String>(){
 			public String mapRow(ResultSet rs, int rowNum) throws SQLException {
 				return rs.getString(1);
 			}  		    
@@ -125,7 +127,8 @@ public class ProductRepository {
     }
 
 	public Product getProductById(Integer pid){
-		List<Product> productList = jdbcTemplate.query("select * from product where id="+pid, new RowMapper<Product>(){
+		List<Product> productList = jdbcTemplate.query("select * from product where id="+pid, 
+			new RowMapper<Product>(){
 			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Product product=new Product();  
 		        product.setId(rs.getInt(1));
@@ -138,7 +141,8 @@ public class ProductRepository {
 				product.setPurchased(rs.getInt(8));
 
 				return product;
-			}});
+			}
+		});
 		
 		if(productList.size()==0){
 			return null;
@@ -226,11 +230,15 @@ public class ProductRepository {
 				}  		    
 		    });
     }
-	}
 
 	public List<Product> showAllProducts(){
-		//(Palash Add Query)String sql = "select * from product p1 where cost=(select min(cost) from product p2 where p1.id=p2.id) "
-		return  jdbcTemplate.query("select * from product ", new RowMapper<Product>(){
+		String sql = "SELECT t1.* FROM product t1 "+
+			"JOIN ( " +
+			"	SELECT category, name, MIN(cost) AS min_cost "+
+			"	FROM product "+
+			"	GROUP BY category, name\r\n"+
+			") t2 ON t1.category = t2.category AND t1.name = t2.name AND t1.cost = t2.min_cost;";
+		return  jdbcTemplate.query(sql, new RowMapper<Product>(){
 			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Product product=new Product();  
 		        product.setId(rs.getInt(1));
@@ -243,40 +251,45 @@ public class ProductRepository {
 				product.setPurchased(rs.getInt(8));
 
 				return product;
-			}});}
+			}
+		});
+	}
 
-			public List<Product> showProductsByCategory(String category){
-				return  jdbcTemplate.query("select * from product where category="+category+"", new RowMapper<Product>(){
-					public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
-						Product product=new Product();  
-						product.setId(rs.getInt(1));
-						product.setSid(rs.getInt(2));
-						product.setName(rs.getString(3));
-						product.setCategory(rs.getString(4));
-						product.setCost(rs.getDouble(5));
-						product.setWarehouse(rs.getInt(6));
-						product.setRating(rs.getDouble(7));
-						product.setPurchased(rs.getInt(8));
-		
-						return product;
-					}
-				});}
+	public List<Product> showProductsByCategory(String category){
+		return  jdbcTemplate.query("select * from product where category="+category+"", 
+			new RowMapper<Product>(){
+			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Product product=new Product();  
+				product.setId(rs.getInt(1));
+				product.setSid(rs.getInt(2));
+				product.setName(rs.getString(3));
+				product.setCategory(rs.getString(4));
+				product.setCost(rs.getDouble(5));
+				product.setWarehouse(rs.getInt(6));
+				product.setRating(rs.getDouble(7));
+				product.setPurchased(rs.getInt(8));
 
-				public List<Product> showProductsByName(String name){
-					return  jdbcTemplate.query("select * from product where category="+name+"", new RowMapper<Product>(){
-						public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
-							Product product=new Product();  
-							product.setId(rs.getInt(1));
-							product.setSid(rs.getInt(2));
-							product.setName(rs.getString(3));
-							product.setCategory(rs.getString(4));
-							product.setCost(rs.getDouble(5));
-							product.setWarehouse(rs.getInt(6));
-							product.setRating(rs.getDouble(7));
-							product.setPurchased(rs.getInt(8));
-			
-							return product;
-						}
-					});}
+				return product;
+			}
+		});
+	}
+
+	public List<Product> showProductsByName(String name){
+		return  jdbcTemplate.query("select * from product where category="+name+"", new RowMapper<Product>(){
+			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Product product=new Product();  
+				product.setId(rs.getInt(1));
+				product.setSid(rs.getInt(2));
+				product.setName(rs.getString(3));
+				product.setCategory(rs.getString(4));
+				product.setCost(rs.getDouble(5));
+				product.setWarehouse(rs.getInt(6));
+				product.setRating(rs.getDouble(7));
+				product.setPurchased(rs.getInt(8));
+
+				return product;
+			}
+		});
+	}
 
 }

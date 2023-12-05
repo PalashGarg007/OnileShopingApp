@@ -19,7 +19,7 @@ public class ShopkeeperRepository {
 	}
 
     public List<Shopkeeper> getAll() {
-        return jdbcTemplate.query("select * from customer",new RowMapper<Shopkeeper>(){
+        return jdbcTemplate.query("select * from customer", new RowMapper<Shopkeeper>(){
 			public Shopkeeper mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Shopkeeper shopkeeper=new Shopkeeper();  
 		        shopkeeper.setId(rs.getInt(1));
@@ -30,7 +30,7 @@ public class ShopkeeperRepository {
 				shopkeeper.setPassword(rs.getString(6));
 
 				return shopkeeper;
-			}  		    
+			}
 		});
     }
 
@@ -56,20 +56,31 @@ public class ShopkeeperRepository {
 		return shopkeeper;
     }
 
-    public Shopkeeper createShopkeeper(String name, String contact, String email, String userName,
-            String password) {
-        int result = jdbcTemplate.update("insert into shopkeeper (name, contact, email, userName, _password)"+
-		"values('"+name+"', '"+contact+"', '"+email+"', '"+userName+"', '"+password+"')");
+    public Shopkeeper createShopkeeper(String name, String contact, 
+		String email, String userName, String password) {
+        int result = jdbcTemplate.update("insert into shopkeeper (name,"+
+			" contact, email, userName, _password) values('"+name+"', '"+
+			contact+"', '"+email+"', '"+userName+"', '"+password+"')");
+		
+		Shopkeeper shopkeeper = null;
+		if(result==0)
+			return shopkeeper;
+		List<Shopkeeper> shopkeepers = jdbcTemplate.query("select * from shopkeeper where username='"+
+			userName+"' _password='"+password+"'", new RowMapper<Shopkeeper>(){
+				public Shopkeeper mapRow(ResultSet rs, int rowNum) throws SQLException {
+                	Shopkeeper shopkeeper=new Shopkeeper();  
+					shopkeeper.setId(rs.getInt(1));
+					shopkeeper.setName(rs.getString(2));
+					shopkeeper.setContact(rs.getString(3));
+					shopkeeper.setEmail(rs.getString(4));
+					shopkeeper.setUserName(rs.getString(5));
+					shopkeeper.setPassword(rs.getString(6));
 
-		Shopkeeper shopkeeper = new Shopkeeper();
-        shopkeeper.setName(name);
-        shopkeeper.setContact(contact);
-        shopkeeper.setEmail(email);
-        shopkeeper.setUserName(userName);
-        shopkeeper.setPassword(password); 
-        
-        return shopkeeper;
+					return shopkeeper;
+            	}
+		});
+		
+        return shopkeepers.get(0);
     }
-
 	
 }
