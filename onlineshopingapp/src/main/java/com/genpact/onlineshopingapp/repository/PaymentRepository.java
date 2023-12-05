@@ -21,20 +21,12 @@ public class PaymentRepository {
 	}
 
     public int addPaymentMethod(String paymentMethod, Double discount) {
-		List<String> existingPaymentMethod = jdbcTemplate.query("select method from payment",new RowMapper<String>(){
-			public String mapRow(ResultSet rs, int rowNum) throws SQLException {
-				return rs.getString(1);
-			}});
-		
-		int result;
-		if(existingPaymentMethod.contains(paymentMethod))
+		int result = 0;
+		try{
+			result = jdbcTemplate.update("insert into payment(method, discount) values('"
+				+paymentMethod+"', "+discount+")");
+		} catch(Exception e){
 			result = 0;
-		else{
-			try{
-				result = jdbcTemplate.update("insert into payment values('"+existingPaymentMethod.size()+1+"','"+paymentMethod+"', "+discount+")");
-			} catch(Exception e){
-				result = 0;
-			}
 		}
         return result;
     }
@@ -42,7 +34,8 @@ public class PaymentRepository {
     public int modefyDiscount(String paymentMethod, Double discount) {
 		int result;
 		try{
-			result = jdbcTemplate.update("update payment set discount="+discount+" where method='"+paymentMethod+"'");
+			result = jdbcTemplate.update("update payment set discount="+
+				discount+" where method='"+paymentMethod+"'");
 		} catch(Exception e){
 			result = 0;
 		}
@@ -58,7 +51,8 @@ public class PaymentRepository {
 				payment.setDiscount(rs.getDouble(3));
 				
 				return payment;
-			}});
+			}
+		});
     }
     
 }

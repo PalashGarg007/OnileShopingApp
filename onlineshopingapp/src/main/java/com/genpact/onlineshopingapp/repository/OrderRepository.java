@@ -22,8 +22,8 @@ public class OrderRepository {
 	}
 
     public List<Orders> getOrderByCustomerId(String customerId) {
-        return jdbcTemplate.query("select * from orders where cid='"+customerId+
-			"'",new RowMapper<Orders>(){
+        return jdbcTemplate.query("select * from orders where cid="+customerId
+			,new RowMapper<Orders>(){
 			public Orders mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Orders order=new Orders();
 		        order.setId(rs.getInt(1));
@@ -39,12 +39,12 @@ public class OrderRepository {
 
 				return order;
 			}  		    
-		    });
+		});
     }
 
     public List<Orders> getPendingOrders(Integer shopkeeperId) {
-        return jdbcTemplate.query("select * from orders where sid='"+shopkeeperId+
-			"' and confirmation=null",new RowMapper<Orders>(){
+        return jdbcTemplate.query("select * from orders where sid="+shopkeeperId+
+			" and confirmation=null",new RowMapper<Orders>(){
 			public Orders mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Orders order=new Orders();
 		        order.setId(rs.getInt(1));
@@ -66,8 +66,8 @@ public class OrderRepository {
     public int setConfirmation(Orders order) {
         int result;
 		try{
-			result = jdbcTemplate.update("update orders set Confirmation="+
-				order.getConfirmation()+" where id="+order.getId());
+			result = jdbcTemplate.update("update table orders set Confirmation='"+
+				order.getConfirmation()+"' where id="+order.getId());
 			jdbcTemplate.update("update orders set shippingDate='"+
 				LocalDate.now().plusDays(6)+"' where id="+order.getId());
 		} catch(Exception e){
