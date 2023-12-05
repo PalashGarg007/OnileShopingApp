@@ -21,7 +21,8 @@ public class ProductRepository {
 	}
 
     public List<Product> getProductByShopkeeperId(String shopkeeperId) {
-        return jdbcTemplate.query("select * from product where sid='"+shopkeeperId+"'",new RowMapper<Product>(){
+        return jdbcTemplate.query("select * from product where sid="+shopkeeperId, 
+			new RowMapper<Product>(){
 			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Product product=new Product();  
 		        product.setId(rs.getInt(1));
@@ -35,16 +36,58 @@ public class ProductRepository {
 
 				return product;
 			}  		    
-		    });
+		});
     }
 
-	public int addProduct(Integer sid, String name, String category, Double cost, Integer warehouse){
+	public int addProduct(Integer sid, String name, String category, Double cost, 
+		Integer warehouse){
 		int result=0;
-		try{
-			result = jdbcTemplate.update("insert into product(sid,name,category,cost,warehouse) values("+
-				sid+",'"+name+"','"+category+"',"+cost+","+warehouse+")");
-		} catch(Exception e){
-			result = 0;
+		List<Product> products = jdbcTemplate.query("select * from product where sid="+sid+
+		" and name='"+name+"' and category='"+category+"'", new RowMapper<Product>(){
+			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Product product=new Product();  
+		        product.setId(rs.getInt(1));
+				product.setSid(rs.getInt(2));
+				product.setName(rs.getString(3));
+				product.setCategory(rs.getString(4));
+				product.setCost(rs.getDouble(5));
+				product.setWarehouse(rs.getInt(6));
+				product.setRating(rs.getDouble(7));
+				product.setPurchased(rs.getInt(8));
+
+				return product;
+			} 
+		});
+		if(products.isEmpty()){
+			try{
+				result = jdbcTemplate.update("insert into product(sid, name, category,"+
+					" cost, warehouse, rating, purchased) values("+ sid+",'"+name+
+					"','"+category+"',"+ cost+","+warehouse+", 0.0, 0)");
+				List<Product> products2 = jdbcTemplate.query("select * from product where sid!="+sid+
+					" and name='"+name+"' and category='"+category+"'", new RowMapper<Product>(){
+					public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
+						Product product=new Product();  
+						product.setId(rs.getInt(1));
+						product.setSid(rs.getInt(2));
+						product.setName(rs.getString(3));
+						product.setCategory(rs.getString(4));
+						product.setCost(rs.getDouble(5));
+						product.setWarehouse(rs.getInt(6));
+						product.setRating(rs.getDouble(7));
+						product.setPurchased(rs.getInt(8));
+
+						return product;
+					} 
+				});
+				if(!products2.isEmpty()){
+					Double rating = products2.get(0).getRating();
+					Integer purchased = products2.get(0).getPurchased();
+					jdbcTemplate.update("update products set rating="+rating+", purchased="+purchased
+						+" where sid="+sid+" and name='"+name+"' and category='"+category+"'");
+				}
+			} catch(Exception e){
+				result = 0;
+			}
 		}
 		return result;
 	}
@@ -60,11 +103,11 @@ public class ProductRepository {
 		return result;
 	}
 	
-
     public int getOrderFromWherehouse(Integer pid, Integer quantity) {
         int result;
 		try{
 			result = jdbcTemplate.update("update product set wharehouse=warehouse-"+quantity+" where id="+pid);
+			jdbcTemplate.update("update product set purchased=purchased+1 where id="+pid);
 		} catch(Exception e){
 			result = 0;
 		}
@@ -72,7 +115,8 @@ public class ProductRepository {
     }
 
     public String getProductName(Integer pid) {
-        List<String> productNamelist = jdbcTemplate.query("select name from product where id="+pid,new RowMapper<String>(){
+        List<String> productNamelist = jdbcTemplate.query("select name from product where id="+pid, 
+			new RowMapper<String>(){
 			public String mapRow(ResultSet rs, int rowNum) throws SQLException {
 				return rs.getString(1);
 			}  		    
@@ -81,7 +125,8 @@ public class ProductRepository {
     }
 
     public Product getProductByCart(Cart cart) {
-        List<Product> productList = jdbcTemplate.query("select * from product where id="+cart.getPid(), new RowMapper<Product>(){
+        List<Product> productList = jdbcTemplate.query("select * from product where id="+cart.getPid(), 
+			new RowMapper<Product>(){
 			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Product product=new Product();  
 		        product.setId(rs.getInt(1));
