@@ -14,4 +14,17 @@ public interface UserService {
 
 	/*User will be able to add review to product*/
 	public void addReview();
+
+	//track products
+	void trackProducts();
+
+	//show all projects
+	void showAllProducts();
+
+	//show products by category
+	void showProductsByCategory(String category);
+
+	//show products by category
+	void showProductsByName(String name);
+	
 }

@@ -107,6 +107,39 @@ public class UserRepositoryImpl implements UserRepository {
 	}
 
 	@Override
+	public List<String[]> trackProducts(){
+		List<Orders> listOrders =orderRepository.getOrderByCustomerId(customer.getId());
+
+		if(listOrders.size()==0)
+			return null;
+		
+		List<String[]> ans = new ArrayList<String[3]>;
+		for(Orders order:listOrders){
+			Product productDetails = productRepository.getProductById(order.getPid);
+			String diff = Integer.toString(order.getShipingDate.compareTo(LocalDate.now()));
+			String[] productDetail = [productDetails.get(0), productDetails.get(1), order.getQuantity, diff];
+			ans.add(productDetail);
+		}
+
+		return ans;
+	}
+
+	@Override
+	public List<Product> showAllProducts(){
+		return productRepository.showAllProducts();
+	}
+	
+	@Override
+	public List<Product> showProductsByCategory(String category){
+		return productRepository.showProductsByCategory(category);
+	}
+
+	@Override
+	public List<Product> showProductsByName(String name){
+		return productRepository.showProductsByName(name);
+	}
+	
+	@Override
 	public List<Product> getAllUnratedProducts() {
 		int id=customer.getId();
 		List<Product> productIds = productRepository.getAllUnratedProductsByCid(id);
@@ -117,5 +150,5 @@ public class UserRepositoryImpl implements UserRepository {
 	public int addReview(Integer n, Double rating, String review) {
 		Product product = getAllUnratedProducts().get(n-1);
 		return reviewRepository.addReview(product.getId(), rating, review);
-	}	
+	}
 }

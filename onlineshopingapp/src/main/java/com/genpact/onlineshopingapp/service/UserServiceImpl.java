@@ -34,7 +34,7 @@ public class UserServiceImpl implements UserService{
 			System.out.println(payment);
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
-		System.out.print("Plese select a Payment Method :");
+		System.out.print("Please select a Payment Method :");
 		Integer payId = scanner.nextInt();
 		if(payId > 0 & payId<=paymentList.size()){
 			System.out.println("Please Enter an valid input: ");
@@ -51,6 +51,63 @@ public class UserServiceImpl implements UserService{
 			System.out.println("Please add some products to the cart");
 		else
 			System.out.printf("Order Placed With the total amount ₹%.2d", cost);
+	}
+
+	@Override
+	public void trackProducts(){
+		List<String[]> productList=userRepositoryImpl.trackProducts();
+		if(productList.size()>0){
+			System.out.println(productList.size()+" records found")
+			System.out.printf("%-10s %-10s %-5s %-5s","Name","Category","Quantity","Days Remaining")
+			for(int i=0;i<productList.size();i++){
+				System.out.printf("%-10s %-10s %-5s %-5s",productList.get(i)[0],productList.get(i)[1],
+				productList.get(i)[2],productList.get(i)[3])
+				System.out.println();
+			}
+		}else
+			System.out.println("No record found");
+	}
+
+	@Override
+	public void showAllProducts(){
+		List<Product> productList=userRepositoryImpl.showAllProducts();
+		if(productList.size()==0){
+			System.out.println("No product found");
+		} else{
+			for(int i=0;i<productList.size();i++){
+				System.out.println(productList.get(i));
+			}
+		}
+	}
+
+	@Override
+	public void showProductsByCategory(){
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter the category of product:");
+		String category=sc.nextLine();
+		List<Product> productList=userRepositoryImpl.showProductsByCategory(category);
+		if(productList.size()==0){
+			System.out.println("No product found");
+		} else{
+			for(int i=0;i<productList.size();i++){
+				System.out.println(productList.get(i));
+			}
+		}
+	}
+
+	@Override
+	public void showProductsByName(String name){
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter the name of product:");
+		String name=sc.nextLine();
+		List<Product> productList=userRepositoryImpl.showProductsByCategory(name);
+		if(productList.size()==0){
+			System.out.println("No product found");
+		} else{
+			for(int i=0;i<productList.size();i++){
+				System.out.println(productList.get(i));
+			}
+		}
 	}
 
 	@Override
@@ -81,11 +138,9 @@ public class UserServiceImpl implements UserService{
 			"\t1. This contact has already been used"+
 			"\t2. This email has already been used"+
 			"\t3. This username has already been used");
-
 		}
 		return valid;
 	}
-
 
 	@Override
 	public void addReview() {
