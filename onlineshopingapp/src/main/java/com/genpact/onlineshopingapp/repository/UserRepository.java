@@ -38,5 +38,12 @@ public interface UserRepository {
 	/*Should be able to place order from the cart on a selected payment method and 
 	return total amount. */
 	public Double placeOrderByCart(Payment payment);
+
+	 
+	/*To get list of all unrated products */
+	public List<Product> getAllUnratedProducts();
+
+	/*To add reviews */
+	public int addReview(Integer n, Double rating, String review);
 	
 }

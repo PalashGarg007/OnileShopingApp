@@ -133,4 +133,28 @@ public class ProductRepository {
 		}
 		return result;
 	}
+
+    public List<Product> getAllUnratedProductsByCid(int id) {
+		String sql = "select p.* from product p "+
+			"left join "+
+			"orders o by o.pid = p.id "+
+			"left join "+
+			"review r on r.id = o.id "+
+			"where r.review='null'";
+        return  jdbcTemplate.query(sql, new RowMapper<Product>(){
+			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
+					Product product=new Product();  
+					product.setId(rs.getInt(1));
+					product.setSid(rs.getInt(2));
+					product.setName(rs.getString(3));
+					product.setCategory(rs.getString(4));
+					product.setCost(rs.getDouble(5));
+					product.setWarehouse(rs.getInt(6));
+					product.setRating(rs.getDouble(7));
+					product.setPurchased(rs.getInt(8));
+
+					return product;
+				}  		    
+		    });
+    }
 }

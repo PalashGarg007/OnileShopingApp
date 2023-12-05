@@ -126,6 +126,7 @@ public class VendorServiceImpl implements VendorService{
 
     @Override
     public int createVendor() {
+        @SuppressWarnings("resource")
         Scanner scanner = new Scanner("System.in");
         System.out.print("Please enter your full name: ");
         String fullName = scanner.nextLine();

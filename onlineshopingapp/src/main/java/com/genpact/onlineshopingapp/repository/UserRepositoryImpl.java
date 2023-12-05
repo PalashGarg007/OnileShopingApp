@@ -1,12 +1,9 @@
 package com.genpact.onlineshopingapp.repository;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import com.genpact.onlineshopingapp.entity.Cart;
 import com.genpact.onlineshopingapp.entity.Customer;
 import com.genpact.onlineshopingapp.entity.Payment;
@@ -109,6 +106,16 @@ public class UserRepositoryImpl implements UserRepository {
 		return amount*(1 + payment.getDiscount()/100);
 	}
 
-	
+	@Override
+	public List<Product> getAllUnratedProducts() {
+		int id=customer.getId();
+		List<Product> productIds = productRepository.getAllUnratedProductsByCid(id);
+		return productIds;
+	}
 
+	@Override
+	public int addReview(Integer n, Double rating, String review) {
+		Product product = getAllUnratedProducts().get(n-1);
+		return reviewRepository.addReview(product.getId(), rating, review);
+	}	
 }
