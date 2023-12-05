@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.genpact.onlineshopingapp.entity.Payment;
+import com.genpact.onlineshopingapp.entity.Product;
 import com.genpact.onlineshopingapp.repository.UserRepositoryImpl;
 
 public class UserServiceImpl implements UserService{
@@ -31,7 +32,7 @@ public class UserServiceImpl implements UserService{
 		List<Payment> paymentList = userRepositoryImpl.getAllPayment();
 		for(Payment payment: paymentList)
 			System.out.println(payment);
-			@SuppressWarnings("resource")
+		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
 		System.out.print("Please select a Payment Method :");
 		Integer payId = scanner.nextInt();
@@ -63,10 +64,8 @@ public class UserServiceImpl implements UserService{
 				productList.get(i)[2],productList.get(i)[3])
 				System.out.println();
 			}
-		}else{
+		}else
 			System.out.println("No record found");
-		}
-
 	}
 
 	@Override
@@ -109,5 +108,71 @@ public class UserServiceImpl implements UserService{
 				System.out.println(productList.get(i));
 			}
 		}
+	}
+
+	@Override
+	public int createUser() {
+		@SuppressWarnings("resource")
+		Scanner scanner = new Scanner("System.in");
+		System.out.print("Please enter your full name: ");
+		String fullName = scanner.next();
+		System.out.print("Please enter your date of birth: ");
+		String dob = scanner.next();
+		System.out.print("Please enter your contact number: ");
+		String contact = scanner.next();
+		System.out.print("Please enter your email: ");	
+		String email = scanner.next();
+		System.out.print("Please enter your address: ");
+		String address = scanner.next();
+		System.out.print("Please enter your username: ");
+		String username = scanner.next();
+		System.out.print("Please enter your password: ");
+		String password = scanner.next();
+		int valid = userRepositoryImpl.createUser(fullName, dob, contact, email, address, username, password);
+		if(valid == 1) {
+			System.out.println("User created successfully");
+		}
+		else{
+			System.out.println("User creation failed.\n"+
+			"Please check:\n"+
+			"\t1. This contact has already been used"+
+			"\t2. This email has already been used"+
+			"\t3. This username has already been used");
+		}
+		return valid;
+	}
+
+	@Override
+	public void addReview() {
+		@SuppressWarnings("resource")
+		Scanner scanner = new Scanner(System.in);
+		/*For getting unrated products */
+		List<Product> productList = userRepositoryImpl.getAllUnratedProducts();
+        for(int i=0; i<productList.size(); i++)
+            System.out.printf("%d\t%-15s%-15s", i+1, productList.get(i).getName(), productList.get(i).getCategory());
+		System.out.println("---------------------------------------");
+		System.out.print("Please select the product to give rating and review: ");
+		int productIndex = scanner.nextInt();
+		while(productIndex < 0 || productIndex>=productList.size()){
+			System.out.print("Please Enter an valid input: ");
+            productIndex = scanner.nextInt();
+        }
+		Double rate=0.0;
+		System.out.print("Please enter your rating on a scale of 0 to 5: ");
+		rate = scanner.nextDouble();
+		while(rate < 0.0 || rate>5.0){
+			System.out.print("Please enter a valid rating: ");
+			rate = scanner.nextDouble();
+		}
+		System.out.print("Please enter your review: ");
+		String review = scanner.next();
+		while (review.equals("")) {
+			System.out.print("Please enter your review: ");
+			review = scanner.next();
+		}
+		if(userRepositoryImpl.addReview(productIndex, rate, review)>0)
+			System.out.println("Changes added successfully");
+		else
+			System.out.println("Changes not added");
 	}
 }

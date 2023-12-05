@@ -10,6 +10,22 @@ public class VendorServiceImpl implements VendorService{
     static VendorRepositoryImpl vendorRepositoryImpl = new VendorRepositoryImpl();
 
     @Override
+    public int vendorLogin() {
+        @SuppressWarnings("resource")
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Please enter your username: ");
+        String username = scanner.next();
+        System.out.print("Please enter your password: ");
+        String password = scanner.next();
+        int valid = vendorRepositoryImpl.vendorLogin(username, password);
+        if(valid==1)
+            System.out.println("Login Successful");
+        else
+            System.out.println("Login Failed");
+		return valid;
+    }
+
+    @Override
     public void confirmProductList() {
         List<Orders> pendingList = vendorRepositoryImpl.getPendingOrders();
 
@@ -107,4 +123,32 @@ public class VendorServiceImpl implements VendorService{
             System.out.println("products got added.");
         }
 	}
+
+    @Override
+    public int createVendor() {
+        @SuppressWarnings("resource")
+        Scanner scanner = new Scanner("System.in");
+        System.out.print("Please enter your full name: ");
+        String fullName = scanner.nextLine();
+        System.out.print("Please enter your contact: ");
+        String contact = scanner.nextLine();
+        System.out.print("Please enter your email: ");
+        String email = scanner.nextLine();
+        System.out.print("Please enter your username: ");
+        String userName = scanner.nextLine();
+        System.out.print("Please enter your password: ");
+        String password = scanner.nextLine();
+        int valid = vendorRepositoryImpl.createVendor(fullName, contact, email, userName, password);
+        if(valid==1){
+            System.out.println("Vendor created successfully");
+        }
+        else{
+            System.out.println("Vendor creation failed.\n"+
+			"Please check:\n"+
+			"\t1. This contact has already been used"+
+			"\t2. This email has already been used"+
+			"\t3. This username has already been used");
+        }
+        return valid;  
+    }
 }

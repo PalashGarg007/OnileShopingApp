@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import com.genpact.onlineshopingapp.entity.Orders;
 import com.genpact.onlineshopingapp.entity.Shopkeeper;
 
@@ -19,6 +18,17 @@ public class VendorRepositoryImpl implements VendorRepository{
 	ShopkeeperRepository shopkeeperRepository = (ShopkeeperRepository)context.getBean("shopkeeperRepository");
 	OrderRepository orderRepository = (OrderRepository)context.getBean("orderRepository");
 	PaymentRepository paymentRepository = (PaymentRepository)context.getBean("paymentRepository");
+
+	@Override
+	public int vendorLogin(String username, String password) {
+		Shopkeeper shopkeeper = shopkeeperRepository.vendorLogin(username, password);
+		int valid = 0;
+		if(shopkeeper!=null){
+			valid = 1;
+		}
+		return valid;	
+	}
+
 
     @Override
     public List<Orders> getPendingOrders() {
@@ -69,4 +79,18 @@ public class VendorRepositoryImpl implements VendorRepository{
 			return 1;
 		return 0;
 	}
+
+
+	@Override
+	public int createVendor(String fullName, String contact, String email, String userName, String password) {
+		Shopkeeper s= shopkeeperRepository.createShopkeeper(fullName, contact, email, userName, password);
+		int valid = 0;
+		if(s!=null){
+			shopkeeper = s;
+            valid = 1;
+		}
+		return valid;
+	}
+
+	
 }

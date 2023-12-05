@@ -12,7 +12,7 @@ public interface UserRepository {
 	/* checking inventory of cart automatically. */
 	public String init(Customer customer);
 
-	/* create a new user object and add his details in the database. */
+	/* create a new user and add his details in the database. */
 	public int createUser(String fullName, String dob, String contact, 
 			String email, String address, String username, String password);
 	
@@ -38,6 +38,14 @@ public interface UserRepository {
 	/*Should be able to place order from the cart on a selected payment method and 
 	return total amount. */
 	public Double placeOrderByCart(Payment payment);
+
+	 
+	/*To get list of all unrated products */
+	public List<Product> getAllUnratedProducts();
+
+	/*To add reviews */
+	public int addReview(Integer n, Double rating, String review);
+	
 
 	//should be able to track order
 	public int trackProducts();

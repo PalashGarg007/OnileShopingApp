@@ -2,10 +2,8 @@ package com.genpact.onlineshopingapp.repository;
 
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
 import com.genpact.onlineshopingapp.entity.Cart;
 import com.genpact.onlineshopingapp.entity.Customer;
 import com.genpact.onlineshopingapp.entity.Payment;
@@ -44,8 +42,13 @@ public class UserRepositoryImpl implements UserRepository {
 	@Override
 	public int createUser(String fullName, String dob, String contact, String email, String address, String username,
 			String password) {
-		// TODO Auto-generated method stub
-		return 0;
+		Customer c = customerRepository.createCustomer(fullName, dob, contact, email, address, username, password);
+		int valid = 0;
+		if(c!=null){
+			customer = c;
+            valid = 1;
+		}
+		return valid;
 	}
 
 	@Override
@@ -134,5 +137,18 @@ public class UserRepositoryImpl implements UserRepository {
 	@Override
 	public List<Product> showProductsByName(String name){
 		return productRepository.showProductsByName(name);
+	}
+	
+	@Override
+	public List<Product> getAllUnratedProducts() {
+		int id=customer.getId();
+		List<Product> productIds = productRepository.getAllUnratedProductsByCid(id);
+		return productIds;
+	}
+
+	@Override
+	public int addReview(Integer n, Double rating, String review) {
+		Product product = getAllUnratedProducts().get(n-1);
+		return reviewRepository.addReview(product.getId(), rating, review);
 	}
 }
