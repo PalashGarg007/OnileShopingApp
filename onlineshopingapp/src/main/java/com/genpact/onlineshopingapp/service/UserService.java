@@ -1,5 +1,6 @@
 package com.genpact.onlineshopingapp.service;
 
+import com.genpact.onlineshopingapp.entity.Product;
 
 public interface UserService {
 	
@@ -27,4 +28,17 @@ public interface UserService {
 	//show products by category
 	void showProductsByName();
 	
+	//add to cart
+	void addToCart(Product product);
+
+	//remove from cart
+	void removeFromCart(Product product);
+
+	void account();
+
+	void shoping();
+
+	void cart();
+
+	void favorite();
 }

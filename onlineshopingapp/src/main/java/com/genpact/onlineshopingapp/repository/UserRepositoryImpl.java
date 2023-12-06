@@ -66,15 +66,17 @@ public class UserRepositoryImpl implements UserRepository {
 	}
 
 	@Override
-	public int addToCart(String productName, int quantity) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int addToCart(Product product, int quantity) {
+		int cid = customer.getId();
+		int pid = product.getId();
+		return cartRepository.addToCart(cid, pid, quantity);
 	}
 
 	@Override
-	public int removeFromCart(String productName, int quantity) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int removeFromCart(Product product, int quantity) {
+		int cid = customer.getId();
+		int pid = product.getId();
+		return cartRepository.removeFromCart(cid, pid, quantity);
 	}
 
 	@Override

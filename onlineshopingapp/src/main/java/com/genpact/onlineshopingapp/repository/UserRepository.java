@@ -22,11 +22,11 @@ public interface UserRepository {
 	public int modifyPassword(String currentPassword, String newPassword);
 	
 	/* Add selected product to the list of cart and add it to the database. */
-	public int addToCart(String productName, int quantity);
+	public int addToCart(Product product, int quantity);
 	
 	/* Remove selected product from the list of cart and remove it from 
 	 * the database. */
-	public int removeFromCart(String productName, int quantity);
+	public int removeFromCart(Product product, int quantity);
 	
 	/*Display all the available payment method. */
 	public List<Payment> getAllPayment();

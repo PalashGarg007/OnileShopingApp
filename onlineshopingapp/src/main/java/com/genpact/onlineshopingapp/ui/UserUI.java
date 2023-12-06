@@ -31,10 +31,11 @@ public class UserUI {
 		while(result>0){
 			System.out.println("-----------------------------------");
 			System.out.println("Please choose an option:\n"+
-				"\t 1. "+
-				"\t 2. "+
-				"\t 3. "+
-				"\t 4. ");
+				"\t 1. Account."+ //1.seeDetails 2.cahngeDetails 3.changePassword 0.goBack
+				"\t 2. Shoping."+ //1.seeAll(10atATime) 2.searchByName,category 3.addToCart 0.goBack
+				"\t 3. Cart."+//default.seeAll(10AtATime) 1.remove 2.buy 0.goBack
+				"\t 4. Favorite."+//default.seeAll(10AtATime) 1.remove 0.goBack
+				"\t 0. Exit.");
 			String option = scanner.nextLine();
 
 			switch(option){
@@ -55,5 +56,5 @@ public class UserUI {
 			}
 		}
 	}
-
+	
 }

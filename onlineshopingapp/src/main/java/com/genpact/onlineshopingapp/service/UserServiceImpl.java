@@ -2,7 +2,6 @@ package com.genpact.onlineshopingapp.service;
 
 import java.util.List;
 import java.util.Scanner;
-
 import com.genpact.onlineshopingapp.entity.Payment;
 import com.genpact.onlineshopingapp.entity.Product;
 import com.genpact.onlineshopingapp.repository.UserRepositoryImpl;
@@ -168,5 +167,60 @@ public class UserServiceImpl implements UserService{
 		System.out.println((userRepositoryImpl.addReview(productIndex, rate, review)>0)?
 			"Changes added successfully" : "Changes not added");
 	}
+
+	@Override
+	public void addToCart(Product product) {
+		@SuppressWarnings("resource")
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("Amount to be added: ");
+		int quantity = scanner.nextInt();
+		while(quantity > 0){
+			System.out.print("Please input an valid input: ");
+			quantity = scanner.nextInt();
+		}
+		int result = userRepositoryImpl.addToCart(product, quantity);
+		System.out.println((result>0)?"Successfully added to cart.":
+			"Something went wrong.");
+	}
+
+	@Override
+	public void removeFromCart(Product product) {
+		@SuppressWarnings("resource")
+		Scanner scanner = new Scanner(System.in);
+		System.out.print("Amount to be removed: ");
+		int quantity = scanner.nextInt();
+		while(quantity > 0){
+			System.out.print("Please input an valid input: ");
+			quantity = scanner.nextInt();
+		}
+		int result = userRepositoryImpl.addToCart(product, quantity);
+		System.out.println((result>0)?"Successfully removed from cart.":
+			"Enter an corret number of quantity.");
+	}
+
+	@Override
+	public void account() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'account'");
+	}
+
+	@Override
+	public void shoping() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'shoping'");
+	}
+
+	@Override
+	public void cart() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'cart'");
+	}
+
+	@Override
+	public void favorite() {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'favorite'");
+	}
+
 
 }
