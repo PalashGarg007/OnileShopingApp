@@ -1,7 +1,6 @@
 package com.genpact.onlineshopingapp.ui;
 
 import java.util.Scanner;
-
 import com.genpact.onlineshopingapp.service.UserServiceImpl;
 
 public class UserUI {
@@ -10,12 +9,6 @@ public class UserUI {
 		UserServiceImpl userServiceImpl = new UserServiceImpl();
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
-		/*Should be able to buy products of the cart. 
-		 * userServiceImpl.buyProductsFromCart()
-		*/
-
-		/* Log in with user name and password. */
-
 		System.out.println("Please choose an option:\n"+
 			"\t1. Log in.\n"+
 			"\t2. Create an account.\n");
@@ -25,7 +18,7 @@ public class UserUI {
 		if(first==1){
 			result = userServiceImpl.userLogin();
 		} else{
-			//result = userServiceImpl. //take user details and create a customer object.
+			result = userServiceImpl.createUser(); //take user details and create a customer object.
 		}
 
 		while(result>0){
@@ -40,12 +33,16 @@ public class UserUI {
 
 			switch(option){
 				case "1":
+					userServiceImpl.account();
 					continue;
 				case "2":
+					userServiceImpl.shoping();
 					continue;
 				case "3":
+					userServiceImpl.cart();
 					continue;
 				case "4":
+					userServiceImpl.favorite();
 					continue;
 				default:
 					System.out.println("Please input an correct option...");

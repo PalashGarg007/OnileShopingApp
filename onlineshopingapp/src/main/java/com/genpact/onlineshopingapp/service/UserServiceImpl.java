@@ -200,26 +200,22 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public void account() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'account'");
+		//1.seeDetails 2.cahngeDetails 3.changePassword 0.goBack
 	}
 
 	@Override
 	public void shoping() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'shoping'");
+		//1.seeAll(10atATime) 2.searchByName,category 3.addToCart 0.goBack
 	}
 
 	@Override
 	public void cart() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'cart'");
+		//default.seeAll(10AtATime) 1.remove 2.buy 0.goBack
 	}
 
 	@Override
 	public void favorite() {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'favorite'");
+		//default.seeAll(10AtATime) 1.remove 0.goBack
 	}
 
 
