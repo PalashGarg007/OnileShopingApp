@@ -175,4 +175,24 @@ public class UserServiceImpl implements UserService{
 		else
 			System.out.println("Changes not added");
 	}
+
+	public void checkAndUpdateUser(){
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter Your Old Password:");
+		String password=sc.nextLine();
+		int finals=0;
+		int res=userRepositoryImpl.checkPassword(password);
+		if(res==1){
+			System.out.println("Enter New Password");
+			String pass=sc.nextLine();
+			finals=userRepositoryImpl.updateUserPassword(pass);
+			if(finals==0){
+				System.out.println("No Password Change");
+			}
+			else{
+				System.out.println("Password Successfully");
+			}
+		}
+
+	}
 }

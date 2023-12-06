@@ -151,4 +151,24 @@ public class VendorServiceImpl implements VendorService{
         }
         return valid;  
     }
+
+    @Override
+    public void checkAndUpdateVendor(){
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter Your Old Password:");
+		String password=sc.nextLine();
+		int finals=0;
+		int res=vendorRepositoryImpl.checkVendorPassword(password);
+		if(res==1){
+			System.out.println("Enter New Password");
+			String pass=sc.nextLine();
+			finals=vendorRepositoryImpl.updateVendorPassword(pass);
+			if(finals==0){
+				System.out.println("No Password Change");
+			}
+			else{
+				System.out.println("Password Changed Successfully");
+			}
+		}
+
 }

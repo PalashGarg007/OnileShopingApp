@@ -1,11 +1,16 @@
 package com.genpact.onlineshopingapp.repository;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import com.genpact.onlineshopingapp.entity.Cart;
 import com.genpact.onlineshopingapp.entity.Customer;
+import com.genpact.onlineshopingapp.entity.Orders;
 import com.genpact.onlineshopingapp.entity.Payment;
 import com.genpact.onlineshopingapp.entity.Product;
 
@@ -113,11 +118,11 @@ public class UserRepositoryImpl implements UserRepository {
 		if(listOrders.size()==0)
 			return null;
 		
-		List<String[]> ans = new ArrayList<String[3]>;
+		List<String[]> ans = new ArrayList<>();
 		for(Orders order:listOrders){
-			Product productDetails = productRepository.getProductById(order.getPid);
-			String diff = Integer.toString(order.getShipingDate.compareTo(LocalDate.now()));
-			String[] productDetail = [productDetails.get(0), productDetails.get(1), order.getQuantity, diff];
+			Product productDetails = productRepository.getProductById(order.getPid());
+			String diff = Integer.toString(order.getShippingDate().compareTo(LocalDate.now()));
+			String[] productDetail = {productDetails.get(0), productDetails.get(1), order.getQuantity(), diff};
 			ans.add(productDetail);
 		}
 
@@ -150,5 +155,32 @@ public class UserRepositoryImpl implements UserRepository {
 	public int addReview(Integer n, Double rating, String review) {
 		Product product = getAllUnratedProducts().get(n-1);
 		return reviewRepository.addReview(product.getId(), rating, review);
+	}
+	
+	@Override
+	public int checkPassword(String password){
+		  int customers = jdbcTemplate.query("select * from customer where  _password='"+password+"', id="+customer.getId()+""){
+			{
+				if(customers==0){
+					return 0;
+				}
+				else{
+					return 1;
+				}
+			}  
+		    };
+    }
+
+	public int updateUserPassword(String password){
+		 int update = jdbcTemplate.query("Update customer set _password='"+password+"' where id="+customer.getId()+""){
+			if(update==0){
+				return 0;
+			}
+			else{
+				return 1;
+			}
+
+	}
+
 	}
 }

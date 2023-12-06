@@ -2,7 +2,10 @@ package com.genpact.onlineshopingapp.repository;
 
 import java.util.List;
 import java.util.Map;
-import com.genpact.onlineshopingapp.entity.*;
+
+import com.genpact.onlineshopingapp.entity.Customer;
+import com.genpact.onlineshopingapp.entity.Payment;
+import com.genpact.onlineshopingapp.entity.Product;
 
 public interface UserRepository {
 	/* verify user by the given user-name and password. if successful 
@@ -58,5 +61,10 @@ public interface UserRepository {
 
 	//show products by category
 	public List<Product> showProductsByName(String name);
+    
+	//Check user password
+	public int checkPassword(String password);
 	
+	//Update user password
+	public int updateUserPassword(String password);
 }

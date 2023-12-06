@@ -4,8 +4,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+
 import com.genpact.onlineshopingapp.entity.Orders;
 import com.genpact.onlineshopingapp.entity.Product;
 
@@ -21,7 +23,7 @@ public class OrderRepository {
 		this.jdbcTemplate = jdbcTemplate;
 	}
 
-    public List<Orders> getOrderByCustomerId(String customerId) {
+    public List<Orders> getOrderByCustomerId(Integer customerId) {
         return jdbcTemplate.query("select * from orders where cid="+customerId
 			,new RowMapper<Orders>(){
 			public Orders mapRow(ResultSet rs, int rowNum) throws SQLException {
