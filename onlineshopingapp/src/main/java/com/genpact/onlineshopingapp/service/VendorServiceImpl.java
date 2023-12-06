@@ -130,5 +130,15 @@ public class VendorServiceImpl implements VendorService{
 			"\t3. This username has already been used");
         return valid;
     }
+
+    @Override
+    public void inventory() {
+        //1.addNewProduct 2.add 3.remove 4.addByFile(Palash-TODo) 0.goBack
+    }
+
+    @Override
+    public void acceptOrders() {
+        //default.seeAll(10atATime) 0.goBack
+    }
     
 }
