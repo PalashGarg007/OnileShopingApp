@@ -44,9 +44,9 @@ public class Cart {
     @Override
     public String toString() {
         return "{\n" +
-            "\tcid = " + getCid() + "\n" +
-            ",\tpid = " + getPid() + "\n" +
-            ",\tquantity = " + getQuantity() + "\n" +
+            "\tCustomer ID = " + getCid() + "\n" +
+            ",\tProduct ID = " + getPid() + "\n" +
+            ",\tQuantity = " + getQuantity() + "\n" +
             "}";
     }
 }
