@@ -159,6 +159,40 @@ public class VendorServiceImpl implements VendorService{
     @Override
     public void inventory() {
         //1.addNewProduct 2.add 3.remove 4.addByFile(Palash-TODo) 0.goBack
+        Scanner scanner=new Scanner(System.in);
+		try {
+			do {
+				System.out.println("1. Add new product: "
+						+ "\n2. To refill the inventory: "
+						+ "\n3. Remove products from inventory: "
+                        + "\n4. Add products from file: "
+						+ "\n0. Back");
+				String operation=scanner.nextLine();
+				
+				switch(operation) {
+					case "1":
+                        addProduct();
+                        continue;
+					case "2":
+						restock();
+						continue;
+					case "3":
+						removeProduct();
+						continue;
+                    case "4":
+                    //    addByFile();
+                    //    continue;
+					default:
+						System.out.println("Please input an correct option...");
+						continue;
+					case "0":
+						System.exit(0);
+				}
+				break;
+			}while(true);
+		} catch (Exception e) {
+				System.out.println(e);
+		}
         
 
     }
