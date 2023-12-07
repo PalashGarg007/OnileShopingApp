@@ -169,6 +169,7 @@ public class VendorServiceImpl implements VendorService{
 				System.out.println("Password Changed Successfully");
 			}
 		}
+    }
 
 
     @Override
