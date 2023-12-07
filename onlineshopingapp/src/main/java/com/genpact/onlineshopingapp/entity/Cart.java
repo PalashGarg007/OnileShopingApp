@@ -43,10 +43,10 @@ public class Cart {
 
     @Override
     public String toString() {
-        return "{" +
-            " cid='" + getCid() + "'" +
-            ", pid='" + getPid() + "'" +
-            ", quantity='" + getQuantity() + "'" +
+        return "{\n" +
+            "\tcid = " + getCid() + "\n" +
+            ",\tpid = " + getPid() + "\n" +
+            ",\tquantity = " + getQuantity() + "\n" +
             "}";
     }
 }
