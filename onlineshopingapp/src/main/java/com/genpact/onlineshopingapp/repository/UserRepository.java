@@ -61,7 +61,7 @@ public interface UserRepository {
 	//show products by category
 	public List<Product> showProductsByCategory(String category);
 
-	//show products by category
+	//show products by Name
 	public List<Product> showProductsByName(String name);
     
 	//Check user password
