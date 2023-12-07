@@ -3,6 +3,7 @@ package com.genpact.onlineshopingapp.repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -66,7 +67,7 @@ public class ProductRepository {
 				List<Product> products2 = jdbcTemplate.query("select * from product where sid!="+sid+
 					" and name='"+name+"' and category='"+category+"'", new RowMapper<Product>(){
 					public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
-						Product product=new Product();  
+						Product product=new Product();
 						product.setId(rs.getInt(1));
 						product.setSid(rs.getInt(2));
 						product.setName(rs.getString(3));
@@ -77,7 +78,7 @@ public class ProductRepository {
 						product.setPurchased(rs.getInt(8));
 
 						return product;
-					} 
+					}
 				});
 				if(!products2.isEmpty()){
 					Double rating = products2.get(0).getRating();
@@ -121,7 +122,7 @@ public class ProductRepository {
 			pid, new RowMapper<String>(){
 			public String mapRow(ResultSet rs, int rowNum) throws SQLException {
 				return rs.getString(1);
-			}  		    
+			}
 		    });
 		return productNamelist.get(0);
     }
@@ -130,7 +131,7 @@ public class ProductRepository {
 		List<Product> productList = jdbcTemplate.query("select * from product where id="+pid, 
 			new RowMapper<Product>(){
 			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
-				Product product=new Product();  
+				Product product=new Product();
 		        product.setId(rs.getInt(1));
 				product.setSid(rs.getInt(2));
 				product.setName(rs.getString(3));
@@ -156,7 +157,7 @@ public class ProductRepository {
         List<Product> productList = jdbcTemplate.query("select * from product where id="+cart.getPid(), 
 			new RowMapper<Product>(){
 			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
-				Product product=new Product();  
+				Product product=new Product();
 		        product.setId(rs.getInt(1));
 				product.setSid(rs.getInt(2));
 				product.setName(rs.getString(3));
@@ -167,7 +168,7 @@ public class ProductRepository {
 				product.setPurchased(rs.getInt(8));
 
 				return product;
-			}  		    
+			}
 		    });
 		Product product = productList.get(0);
 		
@@ -175,7 +176,7 @@ public class ProductRepository {
 			List<Product> productList2 = jdbcTemplate.query("select * from product where name='"+product.getName()
 				+"' and category='"+product.getCategory()+"' and warehouse>"+cart.getQuantity()+" order by cost asc", new RowMapper<Product>(){
 			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
-				Product product=new Product();  
+				Product product=new Product();
 		        product.setId(rs.getInt(1));
 				product.setSid(rs.getInt(2));
 				product.setName(rs.getString(3));
@@ -186,7 +187,7 @@ public class ProductRepository {
 				product.setPurchased(rs.getInt(8));
 
 				return product;
-			}  		    
+			}
 		    });
 			if(productList2.size()>0)
 				product = productList2.get(0);
@@ -216,7 +217,7 @@ public class ProductRepository {
 			"where r.review='null' o.cid="+cid;
         return  jdbcTemplate.query(sql, new RowMapper<Product>(){
 			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
-					Product product=new Product();  
+					Product product=new Product();
 					product.setId(rs.getInt(1));
 					product.setSid(rs.getInt(2));
 					product.setName(rs.getString(3));
@@ -227,7 +228,7 @@ public class ProductRepository {
 					product.setPurchased(rs.getInt(8));
 
 					return product;
-				}  		    
+				}
 		    });
     }
 
@@ -240,7 +241,7 @@ public class ProductRepository {
 			") t2 ON t1.category = t2.category AND t1.name = t2.name AND t1.cost = t2.min_cost;";
 		return  jdbcTemplate.query(sql, new RowMapper<Product>(){
 			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
-				Product product=new Product();  
+				Product product=new Product();
 		        product.setId(rs.getInt(1));
 				product.setSid(rs.getInt(2));
 				product.setName(rs.getString(3));

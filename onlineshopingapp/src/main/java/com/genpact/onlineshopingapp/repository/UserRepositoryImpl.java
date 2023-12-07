@@ -2,8 +2,10 @@ package com.genpact.onlineshopingapp.repository;
 
 import java.time.LocalDate;
 import java.util.List;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import com.genpact.onlineshopingapp.entity.Cart;
 import com.genpact.onlineshopingapp.entity.Customer;
 import com.genpact.onlineshopingapp.entity.Orders;
@@ -151,4 +153,33 @@ public class UserRepositoryImpl implements UserRepository {
 		Product product = getAllUnratedProducts().get(n-1);
 		return reviewRepository.addReview(product.getId(), rating, review);
 	}
+	
+	@Override
+	public int checkPassword(String password){
+		  int customers = jdbcTemplate.query("select * from customer where  _password='"+password+"', id="+customer.getId()+""){
+			{
+				if(customers==0){
+					return 0;
+				}
+				else{
+					return 1;
+				}
+			}
+		    };
+    }
+
+	public int updateUserPassword(String password){
+		 int update = jdbcTemplate.query("Update customer set _password='"+password+"' where id="+customer.getId()+""){
+			if(update==0){
+				return 0;
+			}
+			else{
+				return 1;
+			}
+
+	}
+
+	}
+	
+
 }

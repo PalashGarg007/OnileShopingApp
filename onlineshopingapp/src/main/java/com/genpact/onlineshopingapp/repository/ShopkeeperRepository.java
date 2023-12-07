@@ -3,8 +3,10 @@ package com.genpact.onlineshopingapp.repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+
 import com.genpact.onlineshopingapp.entity.Shopkeeper;
 
 public class ShopkeeperRepository {
@@ -83,4 +85,36 @@ public class ShopkeeperRepository {
         return shopkeepers.get(0);
     }
 	
+	public int checkVendorPassword(String password){
+
+		List<Shopkeeper> shopkeepers = jdbcTemplate.query("select * from shopkeeper where Id="+
+			shopkeepers.getId()+" _password='"+password+"'", new RowMapper<Shopkeeper>(){
+				public Shopkeeper mapRow(ResultSet rs, int rowNum) throws SQLException {
+                	Shopkeeper shopkeeper=new Shopkeeper();
+					shopkeeper.setId(rs.getInt(1));
+					shopkeeper.setPassword(rs.getString(2));
+
+					return shopkeeper;
+            	}
+		}
+
+		if(shopkeepers.size()>0){
+			return 1;
+		}
+		else{
+			return 0;
+		}
+	}
+
+	@Override
+	public int updateVendorPassword(String password){
+		int update = jdbcTemplate.query("Update shopkeeper set _password='"+password+"' where id="+shopkeeper.getId()+"")
+			if(update==0){
+				return 0;
+			}
+			else{
+				return 1;
+			}
+	
+	}
 }

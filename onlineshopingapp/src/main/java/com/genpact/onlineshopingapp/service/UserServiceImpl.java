@@ -2,6 +2,7 @@ package com.genpact.onlineshopingapp.service;
 
 import java.util.List;
 import java.util.Scanner;
+
 import com.genpact.onlineshopingapp.entity.Payment;
 import com.genpact.onlineshopingapp.entity.Product;
 import com.genpact.onlineshopingapp.repository.UserRepositoryImpl;
@@ -196,6 +197,26 @@ public class UserServiceImpl implements UserService{
 		int result = userRepositoryImpl.addToCart(product, quantity);
 		System.out.println((result>0)?"Successfully removed from cart.":
 			"Enter an corret number of quantity.");
+	}
+
+	public void checkAndUpdateUser(){
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter Your Old Password:");
+		String password=sc.nextLine();
+		int finals=0;
+		int res=userRepositoryImpl.checkUserPassword(password);
+		if(res==1){
+			System.out.println("Enter New Password");
+			String pass=sc.nextLine();
+			finals=userRepositoryImpl.updateUserPassword(pass);
+			if(finals==0){
+				System.out.println("No Password Change");
+			}
+			else{
+				System.out.println("Password Successfully");
+			}
+		}
+
 	}
 
 	@Override

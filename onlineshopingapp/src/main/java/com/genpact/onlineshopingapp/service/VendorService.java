@@ -20,4 +20,7 @@ public interface VendorService {
     void inventory();
 
     void acceptOrders();
+    //Update user password
+    public void checkAndUpdateVendor();
+
 }

@@ -95,4 +95,24 @@ public class CustomerRepository {
 		
 	}
 	
+
+	@Override
+	public int checkUserPassword(String password){
+		List<Customer> customers = jdbcTemplate.query("select * from customer where id='"+
+				customer.getId()+"'and _password="+password+"'", new RowMapper<Customer>(){
+				public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
+					Customer customer=new Customer();
+					customer.setId(rs.getInt(1));
+					customer.setPassword(rs.getString(2));
+					return customer;
+				}
+
+				if(customers.size()>0){
+					return 1;
+				}
+				else{
+					return 0;
+				}
+    };
+
 }

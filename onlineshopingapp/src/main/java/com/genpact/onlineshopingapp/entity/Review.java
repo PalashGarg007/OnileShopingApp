@@ -41,10 +41,10 @@ private String review;
 
     @Override
     public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", rating='" + getRating() + "'" +
-            ", review='" + getReview() + "'" +
+        return "{\n" +
+            "\tOrder ID = " + getId() + "\n" +
+            "\tRating = " + getRating() + "\n" +
+            "\tReview = " + getReview() + "\n" +
             "}";
     }
 
