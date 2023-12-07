@@ -224,6 +224,11 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
+	public void viewDetails(){
+		
+	}
+
+	@Override
 	public void account() {
 		//1.seeDetails 2.cahngeDetails 3.changePassword 0.goBack
 
@@ -234,31 +239,30 @@ public class UserServiceImpl implements UserService{
 				System.out.println("1. See your details"
 						+ "\n2. Change your details"
 						+ "\n3. Change Password: "
-						+ "\n4. Exit");
+						+ "\n0. Back");
 				String operation=scanner.nextLine();
 				
 				switch(operation) {
 					case "1":
 				//		userServiceImpl.viewDetails();
-						break;
+						continue;
 					case "2":
 				//		userServiceImpl.modifyUser();
-						break;
+						continue;
 					case "3":
 				//		userServiceImpl.modifyPassword();
-						break;
+						continue;
 					default:
 						System.out.println("Please input an correct option...");
-						break;
-					case "4":
-						System.out.println("Bye :)");
+						continue;
+					case "0":
 						System.exit(0);
 				}
+				break;
 			}while(true);
 		} catch (Exception e) {
 				System.out.println(e);
 		}
-		scanner.close();
 	}
 
 	@Override
