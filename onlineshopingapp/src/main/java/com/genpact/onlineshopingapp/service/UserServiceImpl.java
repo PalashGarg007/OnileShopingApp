@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService{
 		String[][] productList=userRepositoryImpl.trackProducts();
 		if(productList.length>0){
 			System.out.println(productList.length+" records found.");
-			System.out.printf("%-20s %-20s %-5s %-5s\n","Name", "Category",
+			System.out.printf("%-25s %-25s %-10s %-10s\n","Name", "Category",
 				"Quantity", "Days Remaining");
 			System.out.println("-------------------------------------------------");
 			for(int i=0; i<productList.length; i++){
@@ -75,7 +75,7 @@ public class UserServiceImpl implements UserService{
 		List<Product> productList){
 		for(int i = start-1; i<stop && i<productList.size(); i++){
 			Product product = productList.get(i);
-			System.out.printf("%d) %-15s\n%-20s\t%5.2f %3.1f\n", 
+			System.out.printf("%-5d %-20s\n     %-25s %10.2f %5.1f\n", 
 				i+1, product.getName(), product.getCategory(), 
 				product.getAmount(), product.getRating());
 			System.out.println("________________________________");
@@ -159,7 +159,8 @@ public class UserServiceImpl implements UserService{
 		Scanner scanner = new Scanner(System.in);
 		List<Product> productList = userRepositoryImpl.getAllUnratedProducts();
         for(int i=0; i<productList.size(); i++)
-            System.out.printf("%d\t%-20s%-20s", i+1, productList.get(i).getName(), productList.get(i).getCategory());
+            System.out.printf("%-5d%-25s%-20s", i+1, 
+				productList.get(i).getName(), productList.get(i).getCategory());
 		System.out.println("---------------------------------------");
 		System.out.print("Please select the product to give rating and review: ");
 		int productIndex = scanner.nextInt();
@@ -188,9 +189,9 @@ public class UserServiceImpl implements UserService{
 	public int checkInput(int n){
 		@SuppressWarnings("resource")
 		Scanner scanner=new Scanner(System.in);
-		System.out.print("Product Serial Number: ")
+		System.out.print("Enter Serial Number: ")
 		int result = scanner.nextInt();
-		while(result<0 && result>n){
+		while(result<1 && result>n){
 			System.out.print("Please enter a valid Serial Number: ");
 			result = scanner.nextInt();
 		}
@@ -220,11 +221,11 @@ public class UserServiceImpl implements UserService{
 		Scanner scanner = new Scanner(System.in);
 		System.out.print("Amount to be removed: ");
 		int quantity = scanner.nextInt();
-		while(quantity > 0){
+		while(quantity < 0){
 			System.out.print("Please input an valid input: ");
 			quantity = scanner.nextInt();
 		}
-		int result = userRepositoryImpl.addToCart(product, quantity);
+		int result = userRepositoryImpl.removeFromCart(product, quantity);
 		System.out.println((result>0)?"Successfully removed from cart.":
 			"Enter an corret number of quantity.");
 	}
@@ -303,12 +304,13 @@ public class UserServiceImpl implements UserService{
 						System.out.println("Please input an correct option...");
 						continue;
 					case "0":
-						System.exit(0);
+						break;
 				}
 				break;
 			}while(true);
 		} catch (Exception e) {
 				System.out.println(e);
+				System.out.println("Something went wrong\n\tplease try again later...");
 		}
 	}
 
@@ -376,25 +378,85 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public void cart() {
-		//default.seeAll(10AtATime) 1.remove 2.buy 0.goBack
+		//default.seeAll 1.remove 2.buy 0.goBack
 
 		Scanner scanner=new Scanner(System.in);
 		try {
-			int seeAtATime = 10;
-			int n = 1;
-			Map<Product, Integer> cartMap = userRepositoryImpl.viewCart();
-			if(cartMap==null){
-				System.out.println("Your cart is empty.\n"+
-					"please add something in it.")
-				return;
-			}
+			do{
+				HashMap<Product, Integer> cartMap = userRepositoryImpl.viewCart();
+				if(cartMap==null){
+					System.out.println("Your cart is empty.\n"+
+						"please add something in it.")
+					return;
+				}
+				int seeAtATime = 10;
+				Double totalAmount = 0d;
+				Integer totalQuantity = 0;
+				//iterator for map
+				for(int i=1; i<cartMap.size(); i++){
+				Product product; //=key(i)
+				int quantity; //=value(i)
+				System.out.printf("%d) %-25s %10d %6.2d",
+					i+1, product.getName(), quantity,
+					product.getAmount()*quantity);
+				totalAmount += product.getAmount()*quantity;
+				totalQuantity += quantity;
+				}
+				System.out.printf("--------------------------------------------\n"+
+					"%39d 6.2d\n--------------------------------------------\n",
+					totalQuantity, totalAmount);
 
-				
+				System.out.println("Please choose an option:\n"+
+					"1. Remove something from cart.\n"+
+					"2. Buy\n"+
+					"0. Back");
+				String operation=scanner.nextLine();
+
+				switch(operation){
+					case "1": //remove from cart
+						int serialNo = checkInput(cartMap.size());
+						int inCart;// = cartMap.get(serialNo-1).value();
+						System.out.print("Amount to be removed: ");
+						int quantityRemove = scanner.nextInt();
+						while(quantityRemove < 0 && quantityRemove>inCart){
+							System.out.print("Please input an valid input: ");
+							quantity = scanner.nextInt();
+						}
+						int result = userRepositoryImpl.removeFromCart(product, quantity);
+						System.out.println((result>0)?"Successfully removed from cart.":
+							"Enter an corret number of quantity.");
+						continue;
+					case "2": //buy
+						buyProductsFromCart();
+						break;
+					case default:
+						System.out.println("Please input an correct option...");
+						continue;
+					case "0":
+						break;
+				}
+				break;
+			}while(true);
+		} catch (Exception e) {
+			System.out.println(e);
+			System.out.println("Something went wrong\n\tplease try again later...");
+		}
+	
 	}
 
 	@Override
 	public void favorite() {
 		//default.seeAll(10AtATime) 1.remove 0.goBack
+
+		Scanner scanner=new Scanner(System.in);
+		try {
+			do {
+				
+			} while(true);
+		} catch(Exception e){
+			System.out.println(e);
+			System.out.println("Something went wrong\n\tplease try again later...");
+		}
 	}
 
 

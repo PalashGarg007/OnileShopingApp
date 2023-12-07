@@ -91,11 +91,11 @@ public class UserRepositoryImpl implements UserRepository {
 
 	//list of all the Products in the cart
 	@Override
-	public Map<Product, Integer> viewCart(){
+	public HashMap<Product, Integer> viewCart(){
 		List<Cart> cartList = cartRepository.getAllItemsByCustomerId(customer.getId());
 		if(cartList.size()==0)
 			return null;
-		Map<Product, Integer> cartMap = new Map<Product, Integer>();
+		HashMap<Product, Integer> cartMap = new HashMap<Product, Integer>();
 		for(Cart cart:cartList){
 			int quantity = cart.getQuantity();
 			Product product = productRepository.getProductById(cart.getPid());
