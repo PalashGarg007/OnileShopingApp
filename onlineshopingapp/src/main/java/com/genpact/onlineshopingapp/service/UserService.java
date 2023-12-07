@@ -34,6 +34,9 @@ public interface UserService {
 	//remove from cart
 	void removeFromCart(Product product);
 
+	//customers should be able to view his/her details
+	void viewDetails();
+
 	void account();
 
 	void shoping();

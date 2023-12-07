@@ -223,14 +223,26 @@ public class UserServiceImpl implements UserService{
 
 	}
 
+	//customers should be able to view his/her details
 	@Override
 	public void viewDetails(){
-		
+		Customer customer=userRepositoryImpl.viewDetails();
+		if(customer==null){
+			System.out.println("No Details found");
+		}else{
+			System.out.println("{\n" +
+            "\tName = " + getName() + "\n" +
+            "\tDOB = " + getDob() + "\n" +
+            "\tContact = " + getContact() + "\n" +
+            "\tEmail = " + getEmail() + "\n" +
+            "\tAddress = " + getAddress() + "\n" +
+            "}")
+		}
 	}
 
 	@Override
 	public void account() {
-		//1.seeDetails 2.cahngeDetails 3.changePassword 0.goBack
+		//1.seeDetails 2.changeDetails 3.changePassword 0.goBack
 
 		UserServiceImpl userServiceImpl = new UserServiceImpl();
 		Scanner scanner=new Scanner(System.in);

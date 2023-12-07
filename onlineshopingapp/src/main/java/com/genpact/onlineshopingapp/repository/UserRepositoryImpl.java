@@ -145,6 +145,12 @@ public class UserRepositoryImpl implements UserRepository {
 		return productRepository.showProductsByName(name);
 	}
 	
+	//customers should be able to view his/her details
+	@Override
+	public Customer viewDetails(){
+		return customerRepository.viewDetails(customer.getId());
+	}
+
 	@Override
 	public List<Product> getAllUnratedProducts() {
 		int id=customer.getId();

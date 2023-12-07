@@ -64,6 +64,9 @@ public interface UserRepository {
 	//show products by Name
 	public List<Product> showProductsByName(String name);
     
+	//customers should be able to view his/her details
+	public Customer viewDetails();
+
 	//Check user password
 	public int checkUserPassword(String password);
 	
