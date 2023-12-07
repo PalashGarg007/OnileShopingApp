@@ -14,7 +14,7 @@ public class ReviewRepository {
 	}
 	
 	public int addReview(Integer oid, Double rating, String review){
-		String sql = "update review set rating=? , review=? where id=?";
+		String sql = "update review set rating=? , review='?' where id=?";
 		int result = 0;
 		try{
         	result = jdbcTemplate.update(sql, rating, review, oid);

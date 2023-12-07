@@ -22,14 +22,14 @@ public class VendorRepositoryImpl implements VendorRepository{
 
 	@Override
 	public int vendorLogin(String username, String password) {
-		Shopkeeper shopkeeper = shopkeeperRepository.vendorLogin(username, password);
+		Shopkeeper s = shopkeeperRepository.vendorLogin(username, password);
 		int valid = 0;
-		if(shopkeeper!=null){
+		if(s!=null){
+			shopkeeper = s;
 			valid = 1;
 		}
 		return valid;	
 	}
-
 
     @Override
     public List<Orders> getPendingOrders() {
@@ -81,10 +81,10 @@ public class VendorRepositoryImpl implements VendorRepository{
 		return 0;
 	}
 
-
 	@Override
-	public int createVendor(String fullName, String contact, String email, String userName, String password) {
-		Shopkeeper s= shopkeeperRepository.createShopkeeper(fullName, contact, email, userName, password);
+	public int createVendor(String fullName, String contact, String email,
+		String userName, String password) {
+		Shopkeeper s = shopkeeperRepository.createShopkeeper(fullName, contact, email, userName, password);
 		int valid = 0;
 		if(s!=null){
 			shopkeeper = s;

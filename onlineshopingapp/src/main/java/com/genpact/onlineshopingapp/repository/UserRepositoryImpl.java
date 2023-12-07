@@ -1,9 +1,7 @@
 package com.genpact.onlineshopingapp.repository;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -45,9 +43,10 @@ public class UserRepositoryImpl implements UserRepository {
 	}
 
 	@Override
-	public int createUser(String fullName, String dob, String contact, String email, String address, String username,
-			String password) {
-		Customer c = customerRepository.createCustomer(fullName, dob, contact, email, address, username, password);
+	public int createUser(String fullName, String dob, String contact, 
+		String email, String address, String username, String password) {
+		Customer c = customerRepository.createCustomer(fullName, dob, contact, 
+			email, address, username, password);
 		int valid = 0;
 		if(c!=null){
 			customer = c;
@@ -69,21 +68,17 @@ public class UserRepositoryImpl implements UserRepository {
 	}
 
 	@Override
-	public Map<Product, Integer> searchProductByName(String productName) {
-		// TODO Auto-generated method stub
-		return null;
+	public int addToCart(Product product, int quantity) {
+		int cid = customer.getId();
+		int pid = product.getId();
+		return cartRepository.addToCart(cid, pid, quantity);
 	}
 
 	@Override
-	public int addToCart(String productName, int quantity) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int removeFromCart(String productName, int quantity) {
-		// TODO Auto-generated method stub
-		return 0;
+	public int removeFromCart(Product product, int quantity) {
+		int cid = customer.getId();
+		int pid = product.getId();
+		return cartRepository.removeFromCart(cid, pid, quantity);
 	}
 
 	@Override
@@ -112,20 +107,22 @@ public class UserRepositoryImpl implements UserRepository {
 	}
 
 	@Override
-	public List<String[]> trackProducts(){
+	public String[][] trackProducts(){
 		List<Orders> listOrders =orderRepository.getOrderByCustomerId(customer.getId());
 
 		if(listOrders.size()==0)
 			return null;
 		
-		List<String[]> ans = new ArrayList<>();
-		for(Orders order:listOrders){
+		String[][] ans = new String[listOrders.size()][4];
+		for(int i=0; i<listOrders.size(); i++){
+			Orders order = listOrders.get(i);
 			Product productDetails = productRepository.getProductById(order.getPid());
 			String diff = Integer.toString(order.getShippingDate().compareTo(LocalDate.now()));
-			String[] productDetail = {productDetails.get(0), productDetails.get(1), order.getQuantity(), diff};
-			ans.add(productDetail);
+			ans[i][0] = productDetails.getName(); 
+			ans[i][1] = productDetails.getCategory();
+			ans[i][2] = String.valueOf(order.getQuantity());
+			ans[i][3] = diff;
 		}
-
 		return ans;
 	}
 

@@ -1,7 +1,6 @@
 package com.genpact.onlineshopingapp.repository;
 
 import java.util.List;
-import java.util.Map;
 
 import com.genpact.onlineshopingapp.entity.Customer;
 import com.genpact.onlineshopingapp.entity.Payment;
@@ -25,15 +24,12 @@ public interface UserRepository {
 	/* modify password by re-checking the current password. */
 	public int modifyPassword(String currentPassword, String newPassword);
 	
-	/* display the distinct name of the products with their rating. */
-	public Map<Product, Integer> searchProductByName(String productName);
-	
 	/* Add selected product to the list of cart and add it to the database. */
-	public int addToCart(String productName, int quantity);
+	public int addToCart(Product product, int quantity);
 	
 	/* Remove selected product from the list of cart and remove it from 
 	 * the database. */
-	public int removeFromCart(String productName, int quantity);
+	public int removeFromCart(Product product, int quantity);
 	
 	/*Display all the available payment method. */
 	public List<Payment> getAllPayment();
@@ -57,7 +53,7 @@ public interface UserRepository {
 	
 
 	//should be able to track order
-	public int trackProducts();
+	public String[][] trackProducts();
 
 	//show all products
 	public List<Product> showAllProducts();

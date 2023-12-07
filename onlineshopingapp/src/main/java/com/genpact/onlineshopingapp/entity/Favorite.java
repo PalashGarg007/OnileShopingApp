@@ -31,9 +31,9 @@ private Integer pid;
 
     @Override
     public String toString() {
-        return "{" +
-            " cid='" + getCid() + "'" +
-            ", pid='" + getPid() + "'" +
+        return "{\n" +
+            "\tCustomer ID = " + getCid() + "\n" +
+            "\tProduct ID = " + getPid() + "\n" +
             "}";
     }
 

@@ -45,14 +45,10 @@ public class VendorServiceImpl implements VendorService{
             if(conformation.equals("a")){
                 order.setConfirmation(true);
                 int availability = vendorRepositoryImpl.setConfirmation(order);
-                if(availability!=0){
-                    System.out.println("Conformed");
-                } else{
-                    System.out.println("You don't have enough inventory to accept this order.");
-                }
-            } else{
+                System.out.println((availability!=0) ? "Conformed" : 
+                    "You don't have enough inventory to accept this order.");
+            } else
                 System.out.println("Not Conformed");
-            }
         }
     }
 
@@ -73,55 +69,43 @@ public class VendorServiceImpl implements VendorService{
 
         int result=vendorRepositoryImpl.addProduct(name,category,cost,warehouse);
 
-        if(result==0){
-            System.out.println("Sorry, product not added");
-        }else{
-            System.out.println("product got added");
-        }
+        System.out.println((result==0) ? "Sorry, product not added" : 
+            "product got added");
 	}
 
     @Override
 	public void removeProduct() {
 		@SuppressWarnings("resource")
 		Scanner sc=new Scanner(System.in);
-        System.out.println("Enter name of the product: ");
+        System.out.print("Enter name of the product: ");
         String name=sc.nextLine();
-        System.out.println("Enter Category of the product: ");
+        System.out.print("Enter Category of the product: ");
         String category=sc.nextLine();
-        System.out.println("Enter quantity of products you want to remove in the Warehouse : ");
+        System.out.print("Enter quantity of products you want to remove in the Warehouse : ");
         Integer warehouse=sc.nextInt();
         sc.nextLine();
 
         int result=vendorRepositoryImpl.removeProduct(name,category,warehouse);
 
-        if(result==0){
-            System.out.println("Sorry, product not removed\n"+
-                "\t1. quantity overflow");
-        }else{
-            System.out.println("product got removed.");
-        }
+        System.out.println((result==0) ? "Sorry, product not removed\n"+
+            "\t1. quantity overflow" : "product got removed.");
 	}
 
     @Override
 	public void restock() {
 		@SuppressWarnings("resource")
 		Scanner sc=new Scanner(System.in);
-        System.out.println("Enter name of the product: ");
+        System.out.print("Enter name of the product: ");
         String name=sc.nextLine();
-        System.out.println("Enter Category of the product: ");
+        System.out.print("Enter Category of the product: ");
         String category=sc.nextLine();
-        System.out.println("Enter quantity of products you want to add in the Warehouse : ");
+        System.out.print("Enter quantity of products you want to add in the Warehouse: ");
         Integer warehouse=sc.nextInt();
         sc.nextLine();
 
         int result=vendorRepositoryImpl.restock(name,category,warehouse);
-
-        if(result==0){
-            System.out.println("Sorry, products not added\n"+
-                "\t1. product does not exist");
-        }else{
-            System.out.println("products got added.");
-        }
+        System.out.println((result==0) ? "Sorry, products not added\n"+
+            "\t1. product does not exist" : "products got added.");
 	}
 
     @Override
@@ -139,17 +123,13 @@ public class VendorServiceImpl implements VendorService{
         System.out.print("Please enter your password: ");
         String password = scanner.nextLine();
         int valid = vendorRepositoryImpl.createVendor(fullName, contact, email, userName, password);
-        if(valid==1){
-            System.out.println("Vendor created successfully");
-        }
-        else{
-            System.out.println("Vendor creation failed.\n"+
+        System.out.println((valid==1) ? "Vendor created successfully" :
+            "Vendor creation failed.\n"+
 			"Please check:\n"+
 			"\t1. This contact has already been used"+
 			"\t2. This email has already been used"+
 			"\t3. This username has already been used");
-        }
-        return valid;  
+        return valid;
     }
 
     @Override
@@ -171,4 +151,15 @@ public class VendorServiceImpl implements VendorService{
 			}
 		}
 
+
+    @Override
+    public void inventory() {
+        //1.addNewProduct 2.add 3.remove 4.addByFile(Palash-TODo) 0.goBack
+    }
+
+    @Override
+    public void acceptOrders() {
+        //default.seeAll(10atATime) 0.goBack
+    }
+    
 }

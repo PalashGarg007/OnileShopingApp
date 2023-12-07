@@ -115,16 +115,16 @@ public class Orders {
 
     @Override
     public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", cid='" + getCid() + "'" +
-            ", sid='" + getSid() + "'" +
-            ", pid='" + getPid() + "'" +
-            ", amount='" + getAmount() + "'" +
-            ", quantity='" + getQuantity() + "'" +
-            ", orderDate='" + getOrderDate() + "'" +
-            ", shippingDate='" + getShippingDate() + "'" +
-            ", payid='" + getPayId() + "'" +
+        return "{\n" +
+            "\tOrder ID = " + getId() + "\n" +
+            "\tCustomer ID = " + getCid() + "\n" +
+            "\tShopkeeper ID = " + getSid() + "\n" +
+            "\tProduct ID = " + getPid() + "\n" +
+            "\tAmount = " + getAmount() + "\n" +
+            "\tQuantity = " + getQuantity() + "\n" +
+            "\tOrder Date = " + getOrderDate() + "\n" +
+            "\tShipping Date = " + getShippingDate() + "\n" +
+            "\tPayment ID = " + getPayId() + "\n" +
             "}";
     }
     

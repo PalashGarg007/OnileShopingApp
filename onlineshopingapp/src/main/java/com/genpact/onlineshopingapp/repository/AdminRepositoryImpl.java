@@ -33,7 +33,7 @@ public class AdminRepositoryImpl implements AdminRepository {
 	}
 
 	@Override
-	public List<Orders> getHistoryOfCustomer(String customerId) {
+	public List<Orders> getHistoryOfCustomer(Integer customerId) {
 		List<Orders> orders = orderRepository.getOrderByCustomerId(customerId);
 		return orders;		
 	}

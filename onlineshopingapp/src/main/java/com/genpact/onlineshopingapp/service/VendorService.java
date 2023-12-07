@@ -17,6 +17,9 @@ public interface VendorService {
     //restock product
     void restock();
 
+    void inventory();
+
+    void acceptOrders();
     //Update user password
     public void checkAndUpdateVendor();
 

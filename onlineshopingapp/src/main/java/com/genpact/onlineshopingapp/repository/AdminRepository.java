@@ -15,7 +15,7 @@ public interface AdminRepository {
 	List<Shopkeeper> getAllShopkeeper();
 	
 	/* Get all the customer order history from Order table. */
-	List<Orders> getHistoryOfCustomer(String customerId);
+	List<Orders> getHistoryOfCustomer(Integer customerId);
 
 	/* Get all the shopkeeper's product history from Product table. */
 	List<Product> getHystoryOfShopkeeper(String shopkeeperId);
