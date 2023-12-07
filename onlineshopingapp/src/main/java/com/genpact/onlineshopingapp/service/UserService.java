@@ -19,20 +19,31 @@ public interface UserService {
 	//should be able to track order
 	void trackProducts();
 
-	//show all projects
-	void showAllProducts();
+	//show the details of all the products from start to 
+	//stop in product list.
+	void showAProduct(Integer start, Integer stop, 
+		List<Product> productList);
 
 	//show products by category
-	void showProductsByCategory();
+	void showProductsByCategory(String category);
+
+	//show the last 3 reviews by customers.
+	public void showLastThreeReview();
 
 	//show products by Name
-	void showProductsByName();
+	void showProductsByName(String name);
 	
+	// Take input between 1 to n
+	int checkInput(int n);
+
 	//add to cart
 	void addToCart(Product product);
 
 	//remove from cart
 	void removeFromCart(Product product);
+
+	//ckeck old password and then change password.
+	void checkAndUpdateUser();
 
 	//customers should be able to view his/her details
 	void viewDetails();

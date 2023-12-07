@@ -10,7 +10,7 @@ import com.genpact.onlineshopingapp.repository.UserRepositoryImpl;
 public class UserServiceImpl implements UserService{
 	static UserRepositoryImpl userRepositoryImpl = new UserRepositoryImpl();
 
-/*For user login. */
+	/*For user login. */
 	@Override
 	public int userLogin() {
 		@SuppressWarnings("resource")
@@ -25,6 +25,7 @@ public class UserServiceImpl implements UserService{
 		return valid;
 	}
 
+	/*User will be able to buy produduct from cart.*/
 	@Override
 	public void buyProductsFromCart() {
 		System.out.println("------------------------------------------");
@@ -67,8 +68,11 @@ public class UserServiceImpl implements UserService{
 			System.out.println("No record found");
 	}
 
+	//show the details of all the products from start to 
+	//stop in product list.
 	@Override
-	public void showProduct(Integer start, Integer stop, List<Product> productList){
+	public void showProduct(Integer start, Integer stop, 
+		List<Product> productList){
 		for(int i = start-1; i<stop && i<productList.size(); i++){
 			Product product = productList.get(i);
 			System.out.printf("%d) %-15s\n%-20s\t%5.2f %3.1f\n", 
@@ -81,12 +85,12 @@ public class UserServiceImpl implements UserService{
 
 	//show products by category
 	@Override
-	public void showProductsByCategory(){
-		@SuppressWarnings("resource")
-		Scanner sc = new Scanner(System.in);
-		System.out.println("---------------------------------------")
-		System.out.print("Enter the category of product: ");
-		String category = sc.nextLine();
+	public void showProductsByCategory(String category){
+		// @SuppressWarnings("resource")
+		// Scanner sc = new Scanner(System.in);
+		// System.out.println("---------------------------------------")
+		// System.out.print("Enter the category of product: ");
+		// String category = sc.nextLine();
 		List<Product> productList = userRepositoryImpl.showProductsByCategory(category);
 		if(productList.size()==0)
 			System.out.println("No product found");
@@ -95,6 +99,7 @@ public class UserServiceImpl implements UserService{
 		}
 	}
 
+	//show the last 3 reviews by customers.
 	@Override
 	public void showLastThreeReview(){
 		//TO Do
@@ -102,12 +107,12 @@ public class UserServiceImpl implements UserService{
 
 	//show products by Name
 	@Override
-	public void showProductsByName(){
-		@SuppressWarnings("resource")
-		Scanner sc=new Scanner(System.in);
-		System.out.println("---------------------------------------")
-		System.out.print("Enter the name of product: ");
-		String name = sc.nextLine();
+	public void showProductsByName(String name){
+		// @SuppressWarnings("resource")
+		// Scanner sc=new Scanner(System.in);
+		// System.out.println("---------------------------------------")
+		// System.out.print("Enter the name of product: ");
+		// String name = sc.nextLine();
 		List<Product> productList = userRepositoryImpl.showProductsByCategory(name);
 		if(productList.size()==0)
 			System.out.println("No product found.");
@@ -115,6 +120,7 @@ public class UserServiceImpl implements UserService{
 			showProduct(1, productList.size(), productList);
 	}
 
+	/*User will be able to create new account */
 	@Override
 	public int createUser() {
 		@SuppressWarnings("resource")
@@ -146,7 +152,7 @@ public class UserServiceImpl implements UserService{
 		return valid;
 	}
 
-/*For user to give rating and review to unrated products */
+	/*For user to give rating and review to unrated products */
 	@Override
 	public void addReview() {
 		@SuppressWarnings("resource")
@@ -178,7 +184,8 @@ public class UserServiceImpl implements UserService{
 	}
 
 	// Take input between 1 to n
-	@Override int checkInput(int n){
+	@Override 
+	public int checkInput(int n){
 		@SuppressWarnings("resource")
 		Scanner scanner=new Scanner(System.in);
 		System.out.print("Product Serial Number: ")
@@ -190,6 +197,7 @@ public class UserServiceImpl implements UserService{
 		return result;
 	}
 
+	//add to cart, product
 	@Override
 	public void addToCart(Product product) {
 		@SuppressWarnings("resource")
@@ -205,6 +213,7 @@ public class UserServiceImpl implements UserService{
 			"Something went wrong.");
 	}
 
+	//remove from cart, product
 	@Override
 	public void removeFromCart(Product product) {
 		@SuppressWarnings("resource")
@@ -220,6 +229,8 @@ public class UserServiceImpl implements UserService{
 			"Enter an corret number of quantity.");
 	}
 
+	//ckeck old password and then change password.
+	@Override
 	public void checkAndUpdateUser(){
 		Scanner sc=new Scanner(System.in);
 		System.out.print("Enter Your Old Password: ");
@@ -335,14 +346,18 @@ public class UserServiceImpl implements UserService{
 						addToCart(productList.get(sno-1));
 						continue;
 					case "2": //Search Product by Name
+						System.out.print("Enter the name of product: ");
+						String name = sc.nextLine();
 						next = false;
 						productList = userRepositoryImpl.showProductsByName(name);
 						n = productList.size();
 						showProductsByName();
 						continue;
 					case "3": //Search Product by Category
+						System.out.print("Enter the category of product: ");
+						String category = sc.nextLine();
 						next = false;
-						productList = userRepositoryImpl.showProductsByCategory(name);
+						productList = userRepositoryImpl.showProductsByCategory(category);
 						n = productList.size();
 						showProductsByName();
 						continue;
@@ -362,6 +377,12 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void cart() {
 		//default.seeAll(10AtATime) 1.remove 2.buy 0.goBack
+
+		Scanner scanner=new Scanner(System.in);
+		try {
+			int seeAtATime = 10;
+			int n = 1;
+			List<Product> productList = 
 	}
 
 	@Override
