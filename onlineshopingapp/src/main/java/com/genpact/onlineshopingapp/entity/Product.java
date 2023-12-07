@@ -91,15 +91,15 @@ public class Product {
 
     @Override
     public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", sid='" + getSid() + "'" +
-            ", name='" + getName() + "'" +
-            ", category='" + getCategory() + "'" +
-            ", cost='" + getCost() + "'" +
-            ", warehouse='" + getWarehouse() + "'" +
-            ", rating='" + getRating() + "'" +
-            ", purchased='" + getPurchased() + "'" +
+        return "{\n" +
+            "\tProduct ID = " + getId() + "\n" +
+            "\tShopkeeper ID = " + getSid() + "\n" +
+            "\tName = " + getName() + "\n" +
+            "\tCategory = " + getCategory() + "\n" +
+            "\tCost = " + getCost() + "\n" +
+            "\tWarehouse = " + getWarehouse() + "\n" +
+            "\tRating = " + getRating() + "\n" +
+            "\tPurchased = " + getPurchased() + "\n" +
             "}";
     }
 
