@@ -181,7 +181,7 @@ public class UserServiceImpl implements UserService{
 		System.out.println("Enter Your Old Password:");
 		String password=sc.nextLine();
 		int finals=0;
-		int res=userRepositoryImpl.checkPassword(password);
+		int res=userRepositoryImpl.checkUserPassword(password);
 		if(res==1){
 			System.out.println("Enter New Password");
 			String pass=sc.nextLine();

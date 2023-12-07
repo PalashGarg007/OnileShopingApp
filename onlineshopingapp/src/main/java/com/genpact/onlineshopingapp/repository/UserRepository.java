@@ -42,6 +42,12 @@ public interface UserRepository {
 	return total amount. */
 	public Double placeOrderByCart(Payment payment);
 
+	/* Get user password as input */
+	
+	public int checkPassword(String password );
+	
+	/*Change user password */
+	public int updateUserPassword(String password);
 	 
 	/*To get list of all unrated products */
 	public List<Product> getAllUnratedProducts();
@@ -63,7 +69,7 @@ public interface UserRepository {
 	public List<Product> showProductsByName(String name);
     
 	//Check user password
-	public int checkPassword(String password);
+	public int checkUserPassword(String password);
 	
 	//Update user password
 	public int updateUserPassword(String password);

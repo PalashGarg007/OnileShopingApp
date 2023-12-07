@@ -31,8 +31,5 @@ import com.genpact.onlineshopingapp.entity.Orders;
     public int checkVendorPassword(String password);
 	
 	  //Update user password
-   	public int updateVendorPassword(String password);
-}
-  
-  
+    public int updateVendorPassword(String password);
 }

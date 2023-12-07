@@ -93,31 +93,30 @@ public class VendorRepositoryImpl implements VendorRepository{
 		return valid;
 	}
 
-	@Override
-	public int checkVendorPassword(String password){
-		  int customers = jdbcTemplate.query("select * from shopkeeper where  _password='"+password+"', id="+shopkeeper.getId()+""){
-			{
-				if(customers==0){
-					return 0;
-				}
-				else{
-					return 1;
-				}
-			}  
-		    };
-    }
+	// @Override
+	// public int checkVendorPassword(String password){
+	// 	  int customers = jdbcTemplate.query("select * from shopkeeper where  _password='"+password+"', id="+shopkeeper.getId()+""){
+	// 		{
+	// 			if(customers==0){
+	// 				return 0;
+	// 			}
+	// 			else{
+	// 				return 1;
+	// 			}
+	// 		}
+	// 	    };
+    // }
 
-	@Override
-	public int updateVendorPassword(String password){
-		 int update = jdbcTemplate.query("Update shopkeeper set _password='"+password+"' where id="+shopkeeper.getId()+""){
-			if(update==0){
-				return 0;
-			}
-			else{
-				return 1;
-			}
+	// @Override
+	// public int updateVendorPassword(String password){
+	// 	 int update = jdbcTemplate.query("Update shopkeeper set _password='"+password+"' where id="+shopkeeper.getId()+""){
+	// 		if(update==0){
+	// 			return 0;
+	// 		}
+	// 		else{
+	// 			return 1;
+	// 		}
 
-	}
-
-	
+	// 	}
+	// }
 }
