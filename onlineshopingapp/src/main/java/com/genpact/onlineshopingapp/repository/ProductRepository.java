@@ -210,6 +210,7 @@ public class ProductRepository {
 		return result;
 	}
 
+	/*To get all unrated products by customer id */
     public List<Product> getAllUnratedProductsByCid(int cid) {
 		String sql = "select p.* from product p "+
 			"left join "+

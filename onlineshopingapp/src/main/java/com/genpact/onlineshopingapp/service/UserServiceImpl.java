@@ -10,6 +10,7 @@ import com.genpact.onlineshopingapp.repository.UserRepositoryImpl;
 public class UserServiceImpl implements UserService{
 	static UserRepositoryImpl userRepositoryImpl = new UserRepositoryImpl();
 
+	/*For user login. */
 	@Override
 	public int userLogin() {
 		@SuppressWarnings("resource")
@@ -87,7 +88,7 @@ public class UserServiceImpl implements UserService{
 		String category = sc.nextLine();
 		List<Product> productList = userRepositoryImpl.showProductsByCategory(category);
 		if(productList.size()==0){
-			System.out.println("No product found");
+			System.out.println("No product found.");
 		} else{
 			for(int i=0;i<productList.size();i++){
 				System.out.println(productList.get(i));
@@ -104,7 +105,7 @@ public class UserServiceImpl implements UserService{
 		String name = sc.nextLine();
 		List<Product> productList = userRepositoryImpl.showProductsByCategory(name);
 		if(productList.size()==0){
-			System.out.println("No product found");
+			System.out.println("No product found.");
 		} else{
 			for(int i=0;i<productList.size();i++){
 				System.out.println(productList.get(i));
@@ -112,10 +113,11 @@ public class UserServiceImpl implements UserService{
 		}
 	}
 
+	/*For user creation. */
 	@Override
 	public int createUser() {
 		@SuppressWarnings("resource")
-		Scanner scanner = new Scanner("System.in");
+		Scanner scanner = new Scanner(System.in);
 		System.out.print("Please enter your full name: ");
 		String fullName = scanner.next();
 		System.out.print("Please enter your date of birth: ");
@@ -133,16 +135,17 @@ public class UserServiceImpl implements UserService{
 		int valid = userRepositoryImpl.createUser(fullName, dob, contact, email, address, username, password);
 		
 		if(valid == 1)
-			System.out.println("User created successfully");
+			System.out.println("User created successfully.");
 		else
 			System.out.println("User creation failed.\n"+
 			"Please check:\n"+
-			"\t1. This contact has already been used"+
-			"\t2. This email has already been used"+
-			"\t3. This username has already been used");
+			"\t1. This contact has already been used."+
+			"\t2. This email has already been used."+
+			"\t3. This username has already been used.");
 		return valid;
 	}
 
+	/*For user to give rating and review to unrated products */
 	@Override
 	public void addReview() {
 		@SuppressWarnings("resource")
@@ -217,7 +220,7 @@ public class UserServiceImpl implements UserService{
 				System.out.println("No Password Change");
 			}
 			else{
-				System.out.println("Password Successfully");
+				System.out.println("Password Changed Successfully");
 			}
 		}
 
@@ -244,7 +247,6 @@ public class UserServiceImpl implements UserService{
 	public void account() {
 		//1.seeDetails 2.changeDetails 3.changePassword 0.goBack
 
-		UserServiceImpl userServiceImpl = new UserServiceImpl();
 		Scanner scanner=new Scanner(System.in);
 		try {
 			do {
@@ -256,13 +258,13 @@ public class UserServiceImpl implements UserService{
 				
 				switch(operation) {
 					case "1":
-						userServiceImpl.viewDetails();
+						viewDetails();
 						continue;
 					case "2":
-				//		userServiceImpl.modifyUser();
+				//		modifyUser();
 						continue;
 					case "3":
-				//		userServiceImpl.modifyPassword();
+				//		modifyPassword();
 						continue;
 					default:
 						System.out.println("Please input an correct option...");
@@ -280,6 +282,37 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void shoping() {
 		//1.seeAll(10atATime) 2.searchByName,category 3.addToCart 0.goBack
+
+		Scanner scanner=new Scanner(System.in);
+		try {
+			do {
+				System.out.println("1. See your details"
+						+ "\n2. Change your details"
+						+ "\n3. Change Password: "
+						+ "\n0. Back");
+				String operation=scanner.nextLine();
+				
+				switch(operation) {
+					case "1":
+				//		viewDetails();
+						continue;
+					case "2":
+				//		modifyUser();
+						continue;
+					case "3":
+				//		modifyPassword();
+						continue;
+					default:
+						System.out.println("Please input an correct option...");
+						continue;
+					case "0":
+						System.exit(0);
+				}
+				break;
+			}while(true);
+		} catch (Exception e) {
+				System.out.println(e);
+		}
 	}
 
 	@Override

@@ -25,7 +25,7 @@ public class UserUI {
 			System.out.println("-----------------------------------");
 			System.out.println("Please choose an option:\n"+
 				"\t 1. Account."+ //1.seeDetails 2.cahngeDetails 3.changePassword 0.goBack
-				"\t 2. Shoping."+ //1.seeAll(10atATime) 2.searchByName,category 3.addToCart 0.goBack
+				"\t 2. Shopping."+ //1.seeAll(10atATime) 2.searchByName,category 3.addToCart 0.goBack
 				"\t 3. Cart."+//default.seeAll(10AtATime) 1.remove 2.buy 0.goBack
 				"\t 4. Favorite."+//default.seeAll(10AtATime) 1.remove 0.goBack
 				"\t 0. Exit.");
@@ -48,7 +48,7 @@ public class UserUI {
 					System.out.println("Please input an correct option...");
 					continue;
 				case "0":
-					System.out.println("Thank you shoping with us :)");
+					System.out.println("Thank you shopping with us :)");
 					break;
 			}
 		}

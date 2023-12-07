@@ -20,6 +20,7 @@ public class VendorRepositoryImpl implements VendorRepository{
 	OrderRepository orderRepository = (OrderRepository)context.getBean("orderRepository");
 	PaymentRepository paymentRepository = (PaymentRepository)context.getBean("paymentRepository");
 
+	/*For vendor to login to his account */
 	@Override
 	public int vendorLogin(String username, String password) {
 		Shopkeeper s = shopkeeperRepository.vendorLogin(username, password);
@@ -89,6 +90,7 @@ public class VendorRepositoryImpl implements VendorRepository{
 		return 0;
 	}
 
+	/*To create a new vendor account */
 	@Override
 	public int createVendor(String fullName, String contact, String email,
 		String userName, String password) {
