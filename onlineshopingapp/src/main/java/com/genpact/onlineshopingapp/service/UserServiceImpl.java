@@ -244,7 +244,6 @@ public class UserServiceImpl implements UserService{
 	public void account() {
 		//1.seeDetails 2.changeDetails 3.changePassword 0.goBack
 
-		UserServiceImpl userServiceImpl = new UserServiceImpl();
 		Scanner scanner=new Scanner(System.in);
 		try {
 			do {
@@ -256,13 +255,13 @@ public class UserServiceImpl implements UserService{
 				
 				switch(operation) {
 					case "1":
-				//		userServiceImpl.viewDetails();
+				//		viewDetails();
 						continue;
 					case "2":
-				//		userServiceImpl.modifyUser();
+				//		modifyUser();
 						continue;
 					case "3":
-				//		userServiceImpl.modifyPassword();
+				//		modifyPassword();
 						continue;
 					default:
 						System.out.println("Please input an correct option...");
@@ -280,6 +279,37 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void shoping() {
 		//1.seeAll(10atATime) 2.searchByName,category 3.addToCart 0.goBack
+
+		Scanner scanner=new Scanner(System.in);
+		try {
+			do {
+				System.out.println("1. See your details"
+						+ "\n2. Change your details"
+						+ "\n3. Change Password: "
+						+ "\n0. Back");
+				String operation=scanner.nextLine();
+				
+				switch(operation) {
+					case "1":
+				//		viewDetails();
+						continue;
+					case "2":
+				//		modifyUser();
+						continue;
+					case "3":
+				//		modifyPassword();
+						continue;
+					default:
+						System.out.println("Please input an correct option...");
+						continue;
+					case "0":
+						System.exit(0);
+				}
+				break;
+			}while(true);
+		} catch (Exception e) {
+				System.out.println(e);
+		}
 	}
 
 	@Override
