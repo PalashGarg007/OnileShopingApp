@@ -201,6 +201,39 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void account() {
 		//1.seeDetails 2.cahngeDetails 3.changePassword 0.goBack
+
+		UserServiceImpl userServiceImpl = new UserServiceImpl();
+		Scanner scanner=new Scanner(System.in);
+		try {
+			do {
+				System.out.println("1. See your details"
+						+ "\n2. Change your details"
+						+ "\n3. Change Password: "
+						+ "\n4. Exit");
+				String operation=scanner.nextLine();
+				
+				switch(operation) {
+					case "1":
+				//		userServiceImpl.viewDetails();
+						break;
+					case "2":
+				//		userServiceImpl.modifyUser();
+						break;
+					case "3":
+				//		userServiceImpl.modifyPassword();
+						break;
+					default:
+						System.out.println("Please input an correct option...");
+						break;
+					case "4":
+						System.out.println("Bye :)");
+						System.exit(0);
+				}
+			}while(true);
+		} catch (Exception e) {
+				System.out.println(e);
+		}
+		scanner.close();
 	}
 
 	@Override
