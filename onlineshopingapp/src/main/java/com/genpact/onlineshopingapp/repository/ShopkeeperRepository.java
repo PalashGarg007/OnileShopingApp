@@ -85,6 +85,26 @@ public class ShopkeeperRepository {
         return shopkeepers.get(0);
     }
 	
+	//vendors should be able to view his/her details
+	public Shopkeeper viewDetails(Integer id ){
+		List<Shopkeeper> shopkeepers = jdbcTemplate.query("select * from shopkeeper where id="
+		+id+"", new RowMapper<Shopkeeper>(){
+				public Shopkeeper mapRow(ResultSet rs, int rowNum) throws SQLException {
+                	Shopkeeper shopkeeper=new Shopkeeper();  
+					shopkeeper.setId(rs.getInt(1));
+					shopkeeper.setName(rs.getString(2));
+					shopkeeper.setContact(rs.getString(3));
+					shopkeeper.setEmail(rs.getString(4));
+					shopkeeper.setUserName(rs.getString(5));
+					shopkeeper.setPassword(rs.getString(6));
+
+					return shopkeeper;
+            	}
+		});
+		
+        return shopkeepers.get(0);
+	}
+
 	public int checkVendorPassword(String password){
 
 		List<Shopkeeper> shopkeepers = jdbcTemplate.query("select * from shopkeeper where Id="+

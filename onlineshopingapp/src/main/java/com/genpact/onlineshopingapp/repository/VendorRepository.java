@@ -27,6 +27,9 @@ import com.genpact.onlineshopingapp.entity.Orders;
     /*Create new vendor account and add his details in the database.*/
     int createVendor(String fullName, String contact, String email, String userName, String password);
 
+    //vendors should be able to view his/her details
+	  public Shopkeeper viewDetails();
+
     /*check vendor password */
     public int checkVendorPassword(String password);
 	

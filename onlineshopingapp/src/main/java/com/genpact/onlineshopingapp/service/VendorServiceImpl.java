@@ -25,6 +25,21 @@ public class VendorServiceImpl implements VendorService{
 		return valid;
     }
 
+    //vendors should be able to view his/her details
+    @Override
+	public void viewDetails(){
+        Shopkeeper vendor=vendorRepositoryImpl.viewDetails();
+		if(vendor==null){
+			System.out.println("No Details found");
+		}else{
+			System.out.println("{\n" +
+            "\tName = " + getName() + "\n" +
+            "\tContact = " + getContact() + "\n" +
+            "\tEmail = " + getEmail() + "\n" +
+            "}")
+		}
+    }
+
     @Override
     public void confirmProductList() {
         List<Orders> pendingList = vendorRepositoryImpl.getPendingOrders();
