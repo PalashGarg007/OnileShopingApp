@@ -40,6 +40,7 @@ public class ProductRepository {
 		});
     }
 
+	/*add and remove products */
 	public int addProduct(Integer sid, String name, String category, Double cost, 
 		Integer warehouse){
 		int result=0;
@@ -197,6 +198,7 @@ public class ProductRepository {
 		return product;
 	}
 	
+	/*restock the amount of product. */
 	public int restock(Integer sid, String name, String category, Integer warehouse){
 		int result=0;
 		try{
@@ -232,6 +234,7 @@ public class ProductRepository {
 		    });
     }
 
+	//show all products
 	public List<Product> showAllProducts(){
 		String sql = "SELECT t1.* FROM product t1 "+
 			"JOIN ( " +
@@ -256,6 +259,7 @@ public class ProductRepository {
 		});
 	}
 
+	//show products by category
 	public List<Product> showProductsByCategory(String category){
 		return  jdbcTemplate.query("select * from product where category="+category+"", 
 			new RowMapper<Product>(){
@@ -275,6 +279,7 @@ public class ProductRepository {
 		});
 	}
 
+	//show products by Name
 	public List<Product> showProductsByName(String name){
 		return  jdbcTemplate.query("select * from product where category="+name+"", new RowMapper<Product>(){
 			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {

@@ -16,7 +16,7 @@ public interface UserService {
 	/*User will be able to add review to product*/
 	public void addReview();
 
-	//track products
+	//should be able to track order
 	void trackProducts();
 
 	//show all projects
@@ -25,7 +25,7 @@ public interface UserService {
 	//show products by category
 	void showProductsByCategory();
 
-	//show products by category
+	//show products by Name
 	void showProductsByName();
 	
 	//add to cart

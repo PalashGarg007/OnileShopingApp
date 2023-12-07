@@ -106,6 +106,7 @@ public class UserRepositoryImpl implements UserRepository {
 		return amount*(1 + payment.getDiscount()/100);
 	}
 
+	//should be able to track order
 	@Override
 	public String[][] trackProducts(){
 		List<Orders> listOrders =orderRepository.getOrderByCustomerId(customer.getId());
@@ -126,16 +127,19 @@ public class UserRepositoryImpl implements UserRepository {
 		return ans;
 	}
 
+	//show all products
 	@Override
 	public List<Product> showAllProducts(){
 		return productRepository.showAllProducts();
 	}
 	
+	//show products by category
 	@Override
 	public List<Product> showProductsByCategory(String category){
 		return productRepository.showProductsByCategory(category);
 	}
 
+	//show products by Name
 	@Override
 	public List<Product> showProductsByName(String name){
 		return productRepository.showProductsByName(name);

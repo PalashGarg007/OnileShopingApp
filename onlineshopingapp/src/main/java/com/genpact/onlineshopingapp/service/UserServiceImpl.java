@@ -49,6 +49,7 @@ public class UserServiceImpl implements UserService{
 			String.format("Order Placed With the total amount ₹%.2d", cost));
 	}
 
+	//should be able to track order
 	@Override
 	public void trackProducts(){
 		String[][] productList=userRepositoryImpl.trackProducts();
@@ -65,6 +66,7 @@ public class UserServiceImpl implements UserService{
 			System.out.println("No record found");
 	}
 
+	//show all products
 	@Override
 	public void showAllProducts(){
 		List<Product> productList = userRepositoryImpl.showAllProducts();
@@ -76,6 +78,7 @@ public class UserServiceImpl implements UserService{
 		}
 	}
 
+	//show products by category
 	@Override
 	public void showProductsByCategory(){
 		@SuppressWarnings("resource")
@@ -92,6 +95,7 @@ public class UserServiceImpl implements UserService{
 		}
 	}
 
+	//show products by Name
 	@Override
 	public void showProductsByName(){
 		@SuppressWarnings("resource")
