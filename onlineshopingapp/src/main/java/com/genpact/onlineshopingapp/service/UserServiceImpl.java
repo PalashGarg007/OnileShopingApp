@@ -34,9 +34,9 @@ public class UserServiceImpl implements UserService{
 			System.out.println(payment);
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
-		System.out.print("Please select a Payment Method :");
+		System.out.print("Please select a Payment Id :");
 		Integer payId = scanner.nextInt();
-		if(payId > 0 & payId<=paymentList.size()){
+		if(payId >= 0 & payId<=paymentList.size()){
 			System.out.print("Please Enter an valid input: ");
 			payId = scanner.nextInt();
 		}
@@ -382,7 +382,14 @@ public class UserServiceImpl implements UserService{
 		try {
 			int seeAtATime = 10;
 			int n = 1;
-			List<Product> productList = 
+			Map<Product, Integer> cartMap = userRepositoryImpl.viewCart();
+			if(cartMap==null){
+				System.out.println("Your cart is empty.\n"+
+					"please add something in it.")
+				return;
+			}
+
+				
 	}
 
 	@Override

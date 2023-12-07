@@ -89,6 +89,21 @@ public class UserRepositoryImpl implements UserRepository {
 		return paymentList;
 	}
 
+	//list of all the Products in the cart
+	@Override
+	public Map<Product, Integer> viewCart(){
+		List<Cart> cartList = cartRepository.getAllItemsByCustomerId(customer.getId());
+		if(cartList.size()==0)
+			return null;
+		Map<Product, Integer> cartMap = new Map<Product, Integer>();
+		for(Cart cart:cartList){
+			int quantity = cart.getQuantity();
+			Product product = productRepository.getProductById(cart.getPid());
+			cartMap.put(product, quantity);
+		}
+		return cartMap;
+	}
+
 	@Override
 	public Double placeOrderByCart(Payment payment) {
 		List<Cart> cartList = cartRepository.getAllItemsByCustomerId(customer.getId());

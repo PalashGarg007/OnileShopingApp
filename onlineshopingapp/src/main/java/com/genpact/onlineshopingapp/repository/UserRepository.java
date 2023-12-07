@@ -72,4 +72,7 @@ public interface UserRepository {
 	
 	//Update user password
 	public int updateUserPassword(String password);
+
+	//list of all the products in the cart
+	Map<Product, Integer> viewCart();
 }
