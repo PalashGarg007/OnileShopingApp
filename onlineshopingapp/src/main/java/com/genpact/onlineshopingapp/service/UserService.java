@@ -39,7 +39,7 @@ public interface UserService {
 
 	void account();
 
-	void shoping();
+	void shopping();
 
 	void cart();
 
