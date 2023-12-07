@@ -42,9 +42,9 @@ public class Payment {
     @Override
     public String toString() {
         return "{\n" +
-            "\tPayment ID = " + getId() + \n" +
+            "\tPayment ID = " + getId() + "\n" +
             "\tMethod = " + getMethod() + "\n" +
-            "\tDiscount = " + getDiscount() + \n" +
+            "\tDiscount = " + getDiscount() + "\n" +
             "}";
     }
 
