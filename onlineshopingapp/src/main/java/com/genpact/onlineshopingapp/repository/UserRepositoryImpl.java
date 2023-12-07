@@ -23,13 +23,14 @@ public class UserRepositoryImpl implements UserRepository {
 	ShopkeeperRepository shopkeeperRepository = (ShopkeeperRepository)context.getBean("shopkeeperRepository");
 	OrderRepository orderRepository = (OrderRepository)context.getBean("orderRepository");
 	PaymentRepository paymentRepository = (PaymentRepository)context.getBean("paymentRepository");
-
+	/* Init is for user to see his cart when the user login */
 	@Override
 	public String init(Customer customer) {
 		// TODO Auto-generated method stub
         return null;
 	}
 
+	/* For user to log in to his account */
 	@Override
 	public int userLogin(String username, String password) {
 		Customer c = customerRepository.userLogin(username, password);
@@ -42,6 +43,7 @@ public class UserRepositoryImpl implements UserRepository {
 		return valid;
 	}
 
+	/*For creating a new user account */
 	@Override
 	public int createUser(String fullName, String dob, String contact, 
 		String email, String address, String username, String password) {
@@ -141,6 +143,7 @@ public class UserRepositoryImpl implements UserRepository {
 		return productRepository.showProductsByName(name);
 	}
 	
+	/* To get all unrated products.*/
 	@Override
 	public List<Product> getAllUnratedProducts() {
 		int id=customer.getId();
@@ -148,6 +151,7 @@ public class UserRepositoryImpl implements UserRepository {
 		return productIds;
 	}
 
+	/*To add reviews to unrated products. */
 	@Override
 	public int addReview(Integer n, Double rating, String review) {
 		Product product = getAllUnratedProducts().get(n-1);

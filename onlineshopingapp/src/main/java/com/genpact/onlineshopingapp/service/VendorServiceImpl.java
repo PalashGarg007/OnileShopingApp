@@ -9,6 +9,7 @@ import com.genpact.onlineshopingapp.repository.VendorRepositoryImpl;
 public class VendorServiceImpl implements VendorService{
     static VendorRepositoryImpl vendorRepositoryImpl = new VendorRepositoryImpl();
 
+    /*For vendor login  */
     @Override
     public int vendorLogin() {
         @SuppressWarnings("resource")
@@ -45,7 +46,7 @@ public class VendorServiceImpl implements VendorService{
             if(conformation.equals("a")){
                 order.setConfirmation(true);
                 int availability = vendorRepositoryImpl.setConfirmation(order);
-                System.out.println((availability!=0) ? "Conformed" : 
+                System.out.println((availability!=0) ? "Confirmed" : 
                     "You don't have enough inventory to accept this order.");
             } else
                 System.out.println("Not Conformed");
@@ -108,6 +109,7 @@ public class VendorServiceImpl implements VendorService{
             "\t1. product does not exist" : "products got added.");
 	}
 
+    /*For vendor creation. */
     @Override
     public int createVendor() {
         @SuppressWarnings("resource")
@@ -155,6 +157,8 @@ public class VendorServiceImpl implements VendorService{
     @Override
     public void inventory() {
         //1.addNewProduct 2.add 3.remove 4.addByFile(Palash-TODo) 0.goBack
+        
+
     }
 
     @Override
