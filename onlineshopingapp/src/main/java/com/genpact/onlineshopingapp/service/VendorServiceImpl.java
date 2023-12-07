@@ -53,6 +53,7 @@ public class VendorServiceImpl implements VendorService{
         }
     }
 
+    /*add and remove products */
     @Override
 	public void addProduct() {
 		@SuppressWarnings("resource")
@@ -92,6 +93,7 @@ public class VendorServiceImpl implements VendorService{
             "\t1. quantity overflow" : "product got removed.");
 	}
 
+    /*restock the amount of product. */
     @Override
 	public void restock() {
 		@SuppressWarnings("resource")

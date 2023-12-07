@@ -50,6 +50,7 @@ public class UserServiceImpl implements UserService{
 			String.format("Order Placed With the total amount ₹%.2d", cost));
 	}
 
+	//should be able to track order
 	@Override
 	public void trackProducts(){
 		String[][] productList=userRepositoryImpl.trackProducts();
@@ -66,6 +67,7 @@ public class UserServiceImpl implements UserService{
 			System.out.println("No record found");
 	}
 
+	//show all products
 	@Override
 	public void showAllProducts(){
 		List<Product> productList = userRepositoryImpl.showAllProducts();
@@ -77,6 +79,7 @@ public class UserServiceImpl implements UserService{
 		}
 	}
 
+	//show products by category
 	@Override
 	public void showProductsByCategory(){
 		@SuppressWarnings("resource")
@@ -93,6 +96,7 @@ public class UserServiceImpl implements UserService{
 		}
 	}
 
+	//show products by Name
 	@Override
 	public void showProductsByName(){
 		@SuppressWarnings("resource")
@@ -222,37 +226,53 @@ public class UserServiceImpl implements UserService{
 
 	}
 
+	//customers should be able to view his/her details
+	@Override
+	public void viewDetails(){
+		Customer customer=userRepositoryImpl.viewDetails();
+		if(customer==null){
+			System.out.println("No Details found");
+		}else{
+			System.out.println("{\n" +
+            "\tName = " + getName() + "\n" +
+            "\tDOB = " + getDob() + "\n" +
+            "\tContact = " + getContact() + "\n" +
+            "\tEmail = " + getEmail() + "\n" +
+            "\tAddress = " + getAddress() + "\n" +
+            "}")
+		}
+	}
+
 	@Override
 	public void account() {
-		//1.seeDetails 2.cahngeDetails 3.changePassword 0.goBack
+		//1.seeDetails 2.changeDetails 3.changePassword 0.goBack
 
-		UserServiceImpl userServiceImpl = new UserServiceImpl();
 		Scanner scanner=new Scanner(System.in);
 		try {
 			do {
 				System.out.println("1. See your details"
 						+ "\n2. Change your details"
 						+ "\n3. Change Password: "
-						+ "\n4. Exit");
+						+ "\n0. Back");
 				String operation=scanner.nextLine();
 				
 				switch(operation) {
 					case "1":
-				//		seeDetails();
-						break;
+				//		viewDetails();
+						continue;
 					case "2":
-				//		userServiceImpl.modifyUser();
-						break;
+				//		modifyUser();
+						continue;
 					case "3":
-				//		userServiceImpl.modifyPassword();
-						break;
+				//		modifyPassword();
+						continue;
 					default:
 						System.out.println("Please input an correct option...");
-						break;
-					case "4":
-						System.out.println("Bye :)");
+						continue;
+					case "0":
 						System.exit(0);
 				}
+				break;
 			}while(true);
 		} catch (Exception e) {
 				System.out.println(e);
@@ -262,6 +282,37 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void shoping() {
 		//1.seeAll(10atATime) 2.searchByName,category 3.addToCart 0.goBack
+
+		Scanner scanner=new Scanner(System.in);
+		try {
+			do {
+				System.out.println("1. See your details"
+						+ "\n2. Change your details"
+						+ "\n3. Change Password: "
+						+ "\n0. Back");
+				String operation=scanner.nextLine();
+				
+				switch(operation) {
+					case "1":
+				//		viewDetails();
+						continue;
+					case "2":
+				//		modifyUser();
+						continue;
+					case "3":
+				//		modifyPassword();
+						continue;
+					default:
+						System.out.println("Please input an correct option...");
+						continue;
+					case "0":
+						System.exit(0);
+				}
+				break;
+			}while(true);
+		} catch (Exception e) {
+				System.out.println(e);
+		}
 	}
 
 	@Override

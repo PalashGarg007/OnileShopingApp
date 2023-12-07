@@ -52,6 +52,7 @@ public class VendorRepositoryImpl implements VendorRepository{
         return productName;
     }
 
+	/*add and remove products */
     @Override
 	public int addProduct(String name,String category,Double cost,Integer warehouse) {
 		int sid = shopkeeper.getId();
@@ -72,6 +73,7 @@ public class VendorRepositoryImpl implements VendorRepository{
 		return 0;
 	}
 
+	/*restock the amount of product. */
 	@Override
 	public int restock(String name, String category, Integer warehouse) {
 		int sid = shopkeeper.getId();
