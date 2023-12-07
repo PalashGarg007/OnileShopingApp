@@ -32,6 +32,12 @@ public class VendorRepositoryImpl implements VendorRepository{
 		return valid;	
 	}
 
+	//vendors should be able to view his/her details
+	@Override
+	public Shopkeeper viewDetails(){
+		return shopkeeperRepository.viewDetails(shopkeeper.getId());
+	}
+
     @Override
     public List<Orders> getPendingOrders() {
         List<Orders> pendingList = orderRepository.getPendingOrders(shopkeeper.getId());

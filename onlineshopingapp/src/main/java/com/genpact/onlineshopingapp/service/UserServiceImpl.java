@@ -234,11 +234,11 @@ public class UserServiceImpl implements UserService{
 			System.out.println("No Details found");
 		}else{
 			System.out.println("{\n" +
-            "\tName = " + getName() + "\n" +
-            "\tDOB = " + getDob() + "\n" +
-            "\tContact = " + getContact() + "\n" +
-            "\tEmail = " + getEmail() + "\n" +
-            "\tAddress = " + getAddress() + "\n" +
+            "\tName = " + customer.getName() + "\n" +
+            "\tDOB = " + customer.getDob() + "\n" +
+            "\tContact = " + customer.getContact() + "\n" +
+            "\tEmail = " + customer.getEmail() + "\n" +
+            "\tAddress = " + customer.getAddress() + "\n" +
             "}")
 		}
 	}
@@ -258,7 +258,7 @@ public class UserServiceImpl implements UserService{
 				
 				switch(operation) {
 					case "1":
-				//		viewDetails();
+						viewDetails();
 						continue;
 					case "2":
 				//		modifyUser();
