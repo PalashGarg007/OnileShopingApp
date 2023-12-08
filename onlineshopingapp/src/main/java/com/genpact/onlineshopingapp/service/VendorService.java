@@ -7,6 +7,10 @@ public interface VendorService {
 
     /*Vendor will be able to create new account */
     public int createVendor();
+
+    //vendors should be able to view his/her details
+	void viewDetails();
+
     /*Confirm the pending product approval list. */
     void confirmProductList();
 
@@ -20,4 +24,7 @@ public interface VendorService {
     void inventory();
 
     void acceptOrders();
+    //Update user password
+    public void checkAndUpdateVendor();
+
 }

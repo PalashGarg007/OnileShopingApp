@@ -1,5 +1,7 @@
 package com.genpact.onlineshopingapp.service;
 
+import java.util.List;
+
 import com.genpact.onlineshopingapp.entity.Product;
 
 public interface UserService {
@@ -16,27 +18,41 @@ public interface UserService {
 	/*User will be able to add review to product*/
 	public void addReview();
 
-	//track products
+	//should be able to track order
 	void trackProducts();
 
-	//show all projects
-	void showAllProducts();
+	//show the details of all the products from start to 
+	//stop in product list.
+	void showProduct(Integer start, Integer stop, 
+		List<Product> productList);
 
 	//show products by category
-	void showProductsByCategory();
+	void showProductsByCategory(String category);
 
-	//show products by category
-	void showProductsByName();
+	//show the last 3 reviews by customers.
+	public void showLastThreeReview();
+
+	//show products by Name
+	void showProductsByName(String name);
 	
+	// Take input between 1 to n
+	int checkInput(int n);
+
 	//add to cart
 	void addToCart(Product product);
 
 	//remove from cart
 	void removeFromCart(Product product);
 
+	//ckeck old password and then change password.
+	void checkAndUpdateUser();
+
+	//customers should be able to view his/her details
+	void viewDetails();
+
 	void account();
 
-	void shoping();
+	void shopping();
 
 	void cart();
 

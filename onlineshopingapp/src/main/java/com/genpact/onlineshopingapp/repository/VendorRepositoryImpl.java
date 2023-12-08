@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import com.genpact.onlineshopingapp.entity.Orders;
 import com.genpact.onlineshopingapp.entity.Shopkeeper;
 
@@ -19,6 +20,7 @@ public class VendorRepositoryImpl implements VendorRepository{
 	OrderRepository orderRepository = (OrderRepository)context.getBean("orderRepository");
 	PaymentRepository paymentRepository = (PaymentRepository)context.getBean("paymentRepository");
 
+	/*For vendor to login to his account */
 	@Override
 	public int vendorLogin(String username, String password) {
 		Shopkeeper s = shopkeeperRepository.vendorLogin(username, password);
@@ -28,6 +30,12 @@ public class VendorRepositoryImpl implements VendorRepository{
 			valid = 1;
 		}
 		return valid;	
+	}
+
+	//vendors should be able to view his/her details
+	@Override
+	public Shopkeeper viewDetails(){
+		return shopkeeperRepository.viewDetails(shopkeeper.getId());
 	}
 
     @Override
@@ -50,6 +58,7 @@ public class VendorRepositoryImpl implements VendorRepository{
         return productName;
     }
 
+	/*add and remove products */
     @Override
 	public int addProduct(String name,String category,Double cost,Integer warehouse) {
 		int sid = shopkeeper.getId();
@@ -70,6 +79,7 @@ public class VendorRepositoryImpl implements VendorRepository{
 		return 0;
 	}
 
+	/*restock the amount of product. */
 	@Override
 	public int restock(String name, String category, Integer warehouse) {
 		int sid = shopkeeper.getId();
@@ -80,6 +90,7 @@ public class VendorRepositoryImpl implements VendorRepository{
 		return 0;
 	}
 
+	/*To create a new vendor account */
 	@Override
 	public int createVendor(String fullName, String contact, String email,
 		String userName, String password) {
@@ -92,4 +103,42 @@ public class VendorRepositoryImpl implements VendorRepository{
 		return valid;
 	}
 
+	@Override
+	public int checkVendorPassword(String password) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'checkVendorPassword'");
+	}
+
+	@Override
+	public int updateVendorPassword(String password) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'updateVendorPassword'");
+	}
+
+	// @Override
+	// public int checkVendorPassword(String password){
+	// 	  int customers = jdbcTemplate.query("select * from shopkeeper where  _password='"+password+"', id="+shopkeeper.getId()+""){
+	// 		{
+	// 			if(customers==0){
+	// 				return 0;
+	// 			}
+	// 			else{
+	// 				return 1;
+	// 			}
+	// 		}
+	// 	    };
+    // }
+
+	// @Override
+	// public int updateVendorPassword(String password){
+	// 	 int update = jdbcTemplate.query("Update shopkeeper set _password='"+password+"' where id="+shopkeeper.getId()+""){
+	// 		if(update==0){
+	// 			return 0;
+	// 		}
+	// 		else{
+	// 			return 1;
+	// 		}
+
+	// 	}
+	// }
 }

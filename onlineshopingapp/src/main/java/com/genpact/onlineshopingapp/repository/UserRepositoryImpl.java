@@ -1,9 +1,13 @@
 package com.genpact.onlineshopingapp.repository;
 
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import com.genpact.onlineshopingapp.entity.Cart;
 import com.genpact.onlineshopingapp.entity.Customer;
 import com.genpact.onlineshopingapp.entity.Orders;
@@ -21,7 +25,7 @@ public class UserRepositoryImpl implements UserRepository {
 	ShopkeeperRepository shopkeeperRepository = (ShopkeeperRepository)context.getBean("shopkeeperRepository");
 	OrderRepository orderRepository = (OrderRepository)context.getBean("orderRepository");
 	PaymentRepository paymentRepository = (PaymentRepository)context.getBean("paymentRepository");
-
+	/* Init is for user to see his cart when the user login */
 	@Override
 	public void init() {
 		List<Cart> cartList = cartRepository.getAllItemsByCustomerId(customer.getId());
@@ -43,6 +47,7 @@ public class UserRepositoryImpl implements UserRepository {
 		}
 	}
 
+	/* For user to log in to his account */
 	@Override
 	public int userLogin(String username, String password) {
 		Customer c = customerRepository.userLogin(username, password);
@@ -55,6 +60,7 @@ public class UserRepositoryImpl implements UserRepository {
 		return valid;
 	}
 
+	/*For creating a new user account */
 	@Override
 	public int createUser(String fullName, String dob, String contact, 
 		String email, String address, String username, String password) {
@@ -100,6 +106,21 @@ public class UserRepositoryImpl implements UserRepository {
 		return paymentList;
 	}
 
+	//list of all the Products in the cart
+	@Override
+	public Map<Product, Integer> viewCart(){
+		List<Cart> cartList = cartRepository.getAllItemsByCustomerId(customer.getId());
+		if(cartList.size()==0)
+			return null;
+		Map<Product, Integer> cartMap = new HashMap<Product, Integer>();
+		for(Cart cart:cartList){
+			int quantity = cart.getQuantity();
+			Product product = productRepository.getProductById(cart.getPid());
+			cartMap.put(product, quantity);
+		}
+		return cartMap;
+	}
+
 	@Override
 	public Double placeOrderByCart(Payment payment) {
 		List<Cart> cartList = cartRepository.getAllItemsByCustomerId(customer.getId());
@@ -119,6 +140,7 @@ public class UserRepositoryImpl implements UserRepository {
 		return amount*(1 + payment.getDiscount()/100);
 	}
 
+	//should be able to track order
 	@Override
 	public String[][] trackProducts(){
 		List<Orders> listOrders =orderRepository.getOrderByCustomerId(customer.getId());
@@ -139,21 +161,31 @@ public class UserRepositoryImpl implements UserRepository {
 		return ans;
 	}
 
+	//show all products
 	@Override
 	public List<Product> showAllProducts(){
 		return productRepository.showAllProducts();
 	}
 	
+	//show products by category
 	@Override
 	public List<Product> showProductsByCategory(String category){
 		return productRepository.showProductsByCategory(category);
 	}
 
+	//show products by Name
 	@Override
 	public List<Product> showProductsByName(String name){
 		return productRepository.showProductsByName(name);
 	}
 	
+	//customers should be able to view his/her details
+	@Override
+	public Customer viewDetails(){
+		return customerRepository.viewDetails(customer.getId());
+	}
+
+	/* To get all unrated products.*/
 	@Override
 	public List<Product> getAllUnratedProducts() {
 		int id=customer.getId();
@@ -161,10 +193,54 @@ public class UserRepositoryImpl implements UserRepository {
 		return productIds;
 	}
 
+	/*To add reviews to unrated products. */
 	@Override
 	public int addReview(Integer n, Double rating, String review) {
 		Product product = getAllUnratedProducts().get(n-1);
 		return reviewRepository.addReview(product.getId(), rating, review);
 	}
+
+	@Override
+	public int checkPassword(String password) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'checkPassword'");
+	}
+
+	@Override
+	public int updateUserPassword(String password) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'updateUserPassword'");
+	}
+
+	@Override
+	public int checkUserPassword(String password) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'checkUserPassword'");
+	}
+	
+	// @Override
+	// public int checkPassword(String password){
+	// 	  int customers = jdbcTemplate.query("select * from customer where  _password='"+password+"', id="+customer.getId()+""){
+	// 		{
+	// 			if(customers==0){
+	// 				return 0;
+	// 			}
+	// 			else{
+	// 				return 1;
+	// 			}
+	// 		}
+	// 	    };
+    // }
+
+	// public int updateUserPassword(String password){
+	// 	 int update = jdbcTemplate.query("Update customer set _password='"+password+"' where id="+customer.getId()+""){
+	// 		if(update==0){
+	// 			return 0;
+	// 		}
+	// 		else{
+	// 			return 1;
+	// 		}
+
+	// }
 
 }

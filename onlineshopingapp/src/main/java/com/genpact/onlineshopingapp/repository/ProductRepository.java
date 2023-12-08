@@ -3,6 +3,7 @@ package com.genpact.onlineshopingapp.repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -39,6 +40,7 @@ public class ProductRepository {
 		});
     }
 
+	/*add and remove products */
 	public int addProduct(Integer sid, String name, String category, Double cost, 
 		Integer warehouse){
 		int result=0;
@@ -66,7 +68,7 @@ public class ProductRepository {
 				List<Product> products2 = jdbcTemplate.query("select * from product where sid!="+sid+
 					" and name='"+name+"' and category='"+category+"'", new RowMapper<Product>(){
 					public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
-						Product product=new Product();  
+						Product product=new Product();
 						product.setId(rs.getInt(1));
 						product.setSid(rs.getInt(2));
 						product.setName(rs.getString(3));
@@ -77,7 +79,7 @@ public class ProductRepository {
 						product.setPurchased(rs.getInt(8));
 
 						return product;
-					} 
+					}
 				});
 				if(!products2.isEmpty()){
 					Double rating = products2.get(0).getRating();
@@ -121,7 +123,7 @@ public class ProductRepository {
 			pid, new RowMapper<String>(){
 			public String mapRow(ResultSet rs, int rowNum) throws SQLException {
 				return rs.getString(1);
-			}  		    
+			}
 		    });
 		return productNamelist.get(0);
     }
@@ -130,7 +132,7 @@ public class ProductRepository {
 		List<Product> productList = jdbcTemplate.query("select * from product where id="+pid, 
 			new RowMapper<Product>(){
 			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
-				Product product=new Product();  
+				Product product=new Product();
 		        product.setId(rs.getInt(1));
 				product.setSid(rs.getInt(2));
 				product.setName(rs.getString(3));
@@ -156,7 +158,7 @@ public class ProductRepository {
         List<Product> productList = jdbcTemplate.query("select * from product where id=" + 
 			cart.getPid(), new RowMapper<Product>(){
 			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
-				Product product=new Product();  
+				Product product=new Product();
 		        product.setId(rs.getInt(1));
 				product.setSid(rs.getInt(2));
 				product.setName(rs.getString(3));
@@ -167,7 +169,7 @@ public class ProductRepository {
 				product.setPurchased(rs.getInt(8));
 
 				return product;
-			}  		    
+			}
 		    });
 		Product product = productList.get(0);
 		
@@ -196,6 +198,7 @@ public class ProductRepository {
 		return product;
 	}
 	
+	/*restock the amount of product. */
 	public int restock(Integer sid, String name, String category, Integer warehouse){
 		int result=0;
 		try{
@@ -207,6 +210,7 @@ public class ProductRepository {
 		return result;
 	}
 
+	/*To get all unrated products by customer id */
     public List<Product> getAllUnratedProductsByCid(int cid) {
 		String sql = "select p.* from product p "+
 			"left join "+
@@ -216,7 +220,7 @@ public class ProductRepository {
 			"where r.review='null' o.cid="+cid;
         return  jdbcTemplate.query(sql, new RowMapper<Product>(){
 			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
-					Product product=new Product();  
+					Product product=new Product();
 					product.setId(rs.getInt(1));
 					product.setSid(rs.getInt(2));
 					product.setName(rs.getString(3));
@@ -227,10 +231,11 @@ public class ProductRepository {
 					product.setPurchased(rs.getInt(8));
 
 					return product;
-				}  		    
+				}
 		    });
     }
 
+	//show all products
 	public List<Product> showAllProducts(){
 		String sql = "SELECT t1.* FROM product t1 "+
 			"JOIN ( " +
@@ -240,7 +245,7 @@ public class ProductRepository {
 			") t2 ON t1.category = t2.category AND t1.name = t2.name AND t1.cost = t2.min_cost;";
 		return  jdbcTemplate.query(sql, new RowMapper<Product>(){
 			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
-				Product product=new Product();  
+				Product product=new Product();
 		        product.setId(rs.getInt(1));
 				product.setSid(rs.getInt(2));
 				product.setName(rs.getString(3));
@@ -255,6 +260,7 @@ public class ProductRepository {
 		});
 	}
 
+	//show products by category
 	public List<Product> showProductsByCategory(String category){
 		return  jdbcTemplate.query("select * from product where category='"+category
 			+"' and warehouse>0 order by name asc", new RowMapper<Product>(){
@@ -274,6 +280,7 @@ public class ProductRepository {
 		});
 	}
 
+	//show products by Name
 	public List<Product> showProductsByName(String name){
 		return  jdbcTemplate.query("select * from product where name='"+name+
 			"' and warehouse>0 order by cost asc", new RowMapper<Product>(){

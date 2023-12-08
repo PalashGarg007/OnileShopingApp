@@ -72,13 +72,13 @@ public class Shopkeeper {
 
     @Override
     public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", name='" + getName() + "'" +
-            ", contact='" + getContact() + "'" +
-            ", email='" + getEmail() + "'" +
-            ", userName='" + getUserName() + "'" +
-            ", password='" + getPassword() + "'" +
+        return "{\n" +
+            "\tShopkeeper ID = " + getId() + "\n" +
+            "\tName = " + getName() + "\n" +
+            "\tContact = " + getContact() + "\n" +
+            "\tEmail = " + getEmail() + "\n" +
+            "\tUser Name = " + getUserName() + "\n" +
+            "\tPassword = " + getPassword() + "\n" +
             "}";
     }
 

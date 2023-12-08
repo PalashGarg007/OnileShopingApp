@@ -1,7 +1,9 @@
 package com.genpact.onlineshopingapp.repository;
 
 import java.util.List;
+
 import com.genpact.onlineshopingapp.entity.Orders;
+import com.genpact.onlineshopingapp.entity.Shopkeeper;
 
   // Persistence layer implementation
   public interface VendorRepository {
@@ -25,6 +27,13 @@ import com.genpact.onlineshopingapp.entity.Orders;
 
     /*Create new vendor account and add his details in the database.*/
     int createVendor(String fullName, String contact, String email, String userName, String password);
-  
-  
+
+    //vendors should be able to view his/her details
+	  public Shopkeeper viewDetails();
+
+    /*check vendor password */
+    public int checkVendorPassword(String password);
+	
+	  //Update user password
+    public int updateVendorPassword(String password);
 }

@@ -94,15 +94,15 @@ public class Customer {
 
     @Override
     public String toString() {
-        return "{" +
-            " id='" + getId() + "'" +
-            ", name='" + getName() + "'" +
-            ", dob='" + getDob() + "'" +
-            ", contact='" + getContact() + "'" +
-            ", email='" + getEmail() + "'" +
-            ", address='" + getAddress() + "'" +
-            ", userName='" + getUserName() + "'" +
-            ", password='" + getPassword() + "'" +
+        return "{\n" +
+            "\tCustomer ID = " + getId() + "\n" +
+            "\tName = " + getName() + "\n" +
+            "\tDOB = " + getDob() + "\n" +
+            "\tContact = " + getContact() + "\n" +
+            "\tEmail = " + getEmail() + "\n" +
+            "\tAddress = " + getAddress() + "\n" +
+            "\tUser Name = " + getUserName() + "\n" +
+            "\tPassword = " + getPassword() + "\n" +
             "}";
     }
 

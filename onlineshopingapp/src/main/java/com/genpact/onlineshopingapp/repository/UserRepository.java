@@ -1,7 +1,11 @@
 package com.genpact.onlineshopingapp.repository;
 
 import java.util.List;
-import com.genpact.onlineshopingapp.entity.*;
+import java.util.Map;
+
+import com.genpact.onlineshopingapp.entity.Customer;
+import com.genpact.onlineshopingapp.entity.Payment;
+import com.genpact.onlineshopingapp.entity.Product;
 
 public interface UserRepository {
 	/* verify user by the given user-name and password. if successful 
@@ -35,6 +39,12 @@ public interface UserRepository {
 	return total amount. */
 	public Double placeOrderByCart(Payment payment);
 
+	/* Get user password as input */
+	
+	public int checkPassword(String password );
+	
+	/*Change user password */
+	public int updateUserPassword(String password);
 	 
 	/*To get list of all unrated products */
 	public List<Product> getAllUnratedProducts();
@@ -52,7 +62,15 @@ public interface UserRepository {
 	//show products by category
 	public List<Product> showProductsByCategory(String category);
 
-	//show products by category
+	//show products by Name
 	public List<Product> showProductsByName(String name);
-	
+    
+	//customers should be able to view his/her details
+	public Customer viewDetails();
+
+	//Check user password
+	public int checkUserPassword(String password);
+
+	//list of all the products in the cart
+	public Map<Product, Integer> viewCart();
 }

@@ -95,4 +95,49 @@ public class CustomerRepository {
 		
 	}
 	
+	//customers should be able to view his/her details
+	public Customer viewDetails(int id){
+		List<Customer> customers = jdbcTemplate.query("select * from customer where id="
+		+id+"", new RowMapper<Customer>(){
+			public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Customer customer=new Customer();  
+		        customer.setId(rs.getInt(1));
+				customer.setName(rs.getString(2));
+				customer.setDob(rs.getDate(3).toLocalDate());
+				customer.setContact(rs.getString(4));
+				customer.setEmail(rs.getString(5));
+				customer.setAddress(rs.getString(6));
+				customer.setUserName(rs.getString(7));
+				customer.setPassword(rs.getString(8));
+
+				return customer;
+			}  		    
+		    });
+		Customer customer = null;
+		if(customers.size()>0){
+			customer = customers.get(0);
+		}
+		return customer;
+	}
+
+	public int checkUserPassword(String password){
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'checkUserPassword'");
+// 		List<Customer> customers = jdbcTemplate.query("select * from customer where id='"+
+// 				customer.getId()+"'and _password="+password+"'", new RowMapper<Customer>(){
+// 				public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
+// 					Customer customer=new Customer();
+// 					customer.setId(rs.getInt(1));
+// 					customer.setPassword(rs.getString(2));
+// 					return customer;
+// 				}
+
+// 				if(customers.size()>0){
+// 					return 1;
+// 				}
+// 				else{
+// 					return 0;
+// 				}
+//     }
+	}
 }

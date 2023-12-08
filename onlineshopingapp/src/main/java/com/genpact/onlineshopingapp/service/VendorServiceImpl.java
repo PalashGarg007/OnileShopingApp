@@ -2,12 +2,15 @@ package com.genpact.onlineshopingapp.service;
 
 import java.util.List;
 import java.util.Scanner;
+
 import com.genpact.onlineshopingapp.entity.Orders;
+import com.genpact.onlineshopingapp.entity.Shopkeeper;
 import com.genpact.onlineshopingapp.repository.VendorRepositoryImpl;
 
 public class VendorServiceImpl implements VendorService{
     static VendorRepositoryImpl vendorRepositoryImpl = new VendorRepositoryImpl();
 
+    /*For vendor login  */
     @Override
     public int vendorLogin() {
         @SuppressWarnings("resource")
@@ -22,6 +25,21 @@ public class VendorServiceImpl implements VendorService{
         else
             System.out.println("Login Failed");
 		return valid;
+    }
+
+    //vendors should be able to view his/her details
+    @Override
+	public void viewDetails(){
+        Shopkeeper vendor=vendorRepositoryImpl.viewDetails();
+		if(vendor==null){
+			System.out.println("No Details found");
+		}else{
+			System.out.println("{\n" +
+            "\tName = " + vendor.getName() + "\n" +
+            "\tContact = " + vendor.getContact() + "\n" +
+            "\tEmail = " + vendor.getEmail() + "\n" +
+            "}");
+		}
     }
 
     @Override
@@ -44,13 +62,14 @@ public class VendorServiceImpl implements VendorService{
             if(conformation.equals("a")){
                 order.setConfirmation(true);
                 int availability = vendorRepositoryImpl.setConfirmation(order);
-                System.out.println((availability!=0) ? "Conformed" : 
+                System.out.println((availability!=0) ? "Confirmed" : 
                     "You don't have enough inventory to accept this order.");
             } else
                 System.out.println("Not Conformed");
         }
     }
 
+    /*add and remove products */
     @Override
 	public void addProduct() {
 		@SuppressWarnings("resource")
@@ -90,6 +109,7 @@ public class VendorServiceImpl implements VendorService{
             "\t1. quantity overflow" : "product got removed.");
 	}
 
+    /*restock the amount of product. */
     @Override
 	public void restock() {
 		@SuppressWarnings("resource")
@@ -107,6 +127,7 @@ public class VendorServiceImpl implements VendorService{
             "\t1. product does not exist" : "products got added.");
 	}
 
+    /*For vendor creation. */
     @Override
     public int createVendor() {
         @SuppressWarnings("resource")
@@ -132,8 +153,67 @@ public class VendorServiceImpl implements VendorService{
     }
 
     @Override
+    public void checkAndUpdateVendor(){
+        @SuppressWarnings("resource")
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter Your Old Password:");
+		String password=sc.nextLine();
+		int finals=0;
+		int res=vendorRepositoryImpl.checkVendorPassword(password);
+		if(res==1){
+			System.out.println("Enter New Password");
+			String pass=sc.nextLine();
+			finals=vendorRepositoryImpl.updateVendorPassword(pass);
+			if(finals==0){
+				System.out.println("No Password Change");
+			}
+			else{
+				System.out.println("Password Changed Successfully");
+			}
+		}
+    }
+
+
+    @Override
     public void inventory() {
         //1.addNewProduct 2.add 3.remove 4.addByFile(Palash-TODo) 0.goBack
+        @SuppressWarnings("resource")
+        Scanner scanner=new Scanner(System.in);
+		try {
+			do {
+				System.out.println("1. Add new product: "
+						+ "\n2. To refill the inventory: "
+						+ "\n3. Remove products from inventory: "
+                        + "\n4. Add products from file: "
+						+ "\n0. Back");
+				String operation=scanner.nextLine();
+				
+				switch(operation) {
+					case "1":
+                        addProduct();
+                        continue;
+					case "2":
+						restock();
+						continue;
+					case "3":
+						removeProduct();
+						continue;
+                    case "4":
+                    //    addByFile();
+                    //    continue;
+					default:
+						System.out.println("Please input an correct option...");
+						continue;
+					case "0":
+						System.exit(0);
+				}
+				break;
+			}while(true);
+		} catch (Exception e) {
+				System.out.println(e);
+		}
+        
+
     }
 
     @Override
