@@ -193,7 +193,7 @@ public class UserServiceImpl implements UserService{
 		Scanner scanner=new Scanner(System.in);
 		System.out.print("Enter Serial Number: ");
 		int result = scanner.nextInt();
-		while(result<1 && result>n){
+		while(result<1 || result>n){
 			System.out.print("Please enter a valid Serial Number: ");
 			result = scanner.nextInt();
 		}
@@ -207,7 +207,7 @@ public class UserServiceImpl implements UserService{
 		Scanner scanner = new Scanner(System.in);
 		System.out.print("Amount to be added: ");
 		int quantity = scanner.nextInt();
-		while(quantity > 0){
+		while(quantity < 1){
 			System.out.print("Please input an valid input: ");
 			quantity = scanner.nextInt();
 		}

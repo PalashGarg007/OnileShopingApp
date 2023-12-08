@@ -38,7 +38,7 @@ public class ShopkeeperRepository {
 
     public Shopkeeper vendorLogin(String username, String password) {
         List<Shopkeeper> shopkeepers = jdbcTemplate.query("select * from shopkeeper where username='"+
-			username+"' _password='"+password+"'", new RowMapper<Shopkeeper>(){
+			username+"' and _password='"+password+"'", new RowMapper<Shopkeeper>(){
 				public Shopkeeper mapRow(ResultSet rs, int rowNum) throws SQLException {
                 	Shopkeeper shopkeeper=new Shopkeeper();  
 					shopkeeper.setId(rs.getInt(1));
@@ -68,7 +68,7 @@ public class ShopkeeperRepository {
 		if(result==0)
 			return shopkeeper;
 		List<Shopkeeper> shopkeepers = jdbcTemplate.query("select * from shopkeeper where username='"+
-			userName+"' _password='"+password+"'", new RowMapper<Shopkeeper>(){
+			userName+"' and _password='"+password+"'", new RowMapper<Shopkeeper>(){
 				public Shopkeeper mapRow(ResultSet rs, int rowNum) throws SQLException {
                 	Shopkeeper shopkeeper=new Shopkeeper();  
 					shopkeeper.setId(rs.getInt(1));
@@ -88,7 +88,7 @@ public class ShopkeeperRepository {
 	//vendors should be able to view his/her details
 	public Shopkeeper viewDetails(Integer id ){
 		List<Shopkeeper> shopkeepers = jdbcTemplate.query("select * from shopkeeper where id="
-		+ id, new RowMapper<Shopkeeper>(){
+		+id, new RowMapper<Shopkeeper>(){
 				public Shopkeeper mapRow(ResultSet rs, int rowNum) throws SQLException {
                 	Shopkeeper shopkeeper=new Shopkeeper();  
 					shopkeeper.setId(rs.getInt(1));

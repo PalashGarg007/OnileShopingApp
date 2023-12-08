@@ -38,7 +38,7 @@ public class CartRepository {
 		int result;
 		try{
 			result = jdbcTemplate.update("alter table cart delete where cid=?"+
-			", pid=?, quantity=?", cart.getCid(), cart.getPid(), cart.getQuantity());
+			" and pid=? and quantity=?", cart.getCid(), cart.getPid(), cart.getQuantity());
 		} catch(OSAException e){
 			result = 0;
 		}
@@ -81,8 +81,5 @@ public class CartRepository {
 		}
 		return result;
     }
-	
-
-	
-	
+		
 }

@@ -41,7 +41,7 @@ public class CustomerRepository {
 
     public Customer userLogin(String username, String password) {
         List<Customer> customers = jdbcTemplate.query("select * from customer where username='"+
-			username+"'and _password="+password+"'", new RowMapper<Customer>(){
+			username+"'and _password='"+password+"'", new RowMapper<Customer>(){
 			public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Customer customer=new Customer();  
 		        customer.setId(rs.getInt(1));
@@ -67,14 +67,14 @@ public class CustomerRepository {
 			String username, String password) {
 		int result = 0;
 		try{
-			result = jdbcTemplate.update("insert into customers (name, dob, contact, email, address, userName, _password)"
+			result = jdbcTemplate.update("insert into customer (name, dob, contact, email, address, userName, _password)"
 				+"values('"+name+"', '"+dob+"', '"+contact+"', '"+email+"', '"+address+"', '"+username+"', '"+password+"')");
 		} catch(OSAException e){
 			result = 0;
 		}
 		if(result>0){
 			List<Customer> customers = jdbcTemplate.query("select * from customer where username='"+
-				username+"'and _password="+password+"'", new RowMapper<Customer>(){
+				username+"'and _password='"+password+"'", new RowMapper<Customer>(){
 				public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
 					Customer customer=new Customer();  
 					customer.setId(rs.getInt(1));
@@ -103,7 +103,7 @@ public class CustomerRepository {
 	//customers should be able to view his/her details
 	public Customer viewDetails(int id){
 		List<Customer> customers = jdbcTemplate.query("select * from customer where id="
-		+id+"", new RowMapper<Customer>(){
+		+id, new RowMapper<Customer>(){
 			public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Customer customer=new Customer();  
 		        customer.setId(rs.getInt(1));

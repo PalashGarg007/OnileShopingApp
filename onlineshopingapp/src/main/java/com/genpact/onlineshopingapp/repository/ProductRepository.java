@@ -64,8 +64,8 @@ public class ProductRepository {
 		if(products.isEmpty()){
 			try{
 				result = jdbcTemplate.update("insert into product(sid, name, category,"+
-					" cost, warehouse, rating, purchased) values("+ sid+",'"+name+
-					"','"+category+"',"+ cost+","+warehouse+", 0.0, 0)");
+					" cost, warehouse, rating, purchased) values("+sid+",'"+name+
+					"', '"+category+"', "+cost+", "+warehouse+", 0.0, 0)");
 				List<Product> products2 = jdbcTemplate.query("select * from product where sid!="+sid+
 					" and name='"+name+"' and category='"+category+"'", new RowMapper<Product>(){
 					public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -100,7 +100,7 @@ public class ProductRepository {
 		int result=0;
 		try{
 			result = jdbcTemplate.update("update product set warehouse=warehouse-"+
-				warehouse+" where name='"+name+"' and category='"+category+"' sid="+sid);
+				warehouse+" where name='"+name+"' and category='"+category+"' and sid="+sid);
 		} catch(OSAException e){
 			result = 0;
 		}
@@ -175,8 +175,8 @@ public class ProductRepository {
 		Product product = productList.get(0);
 		
 		List<Product> productList2 = jdbcTemplate.query("select * from product where name='"+
-			product.getName() + "' and category='" + product.getCategory() +
-			"' and warehouse>" + cart.getQuantity() + " order by cost asc", 
+			product.getName()+"' and category='"+product.getCategory()+
+			"' and warehouse>="+cart.getQuantity()+" order by cost asc", 
 			new RowMapper<Product>(){
 			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Product product=new Product();  
@@ -215,9 +215,9 @@ public class ProductRepository {
     public List<Product> getAllUnratedProductsByCid(int cid) {
 		String sql = "select p.* from product p "+
 			"left join "+
-			"orders o by o.pid = p.id "+
+			"orders o by o.pid=p.id "+
 			"left join "+
-			"review r on r.id = o.id "+
+			"review r on r.id=o.id "+
 			"where r.review='null' o.cid="+cid;
         return  jdbcTemplate.query(sql, new RowMapper<Product>(){
 			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -239,10 +239,10 @@ public class ProductRepository {
 	//show all products
 	public List<Product> showAllProducts(){
 		String sql = "SELECT t1.* FROM product t1 "+
-			"JOIN ( " +
+			"	JOIN ( " +
 			"	SELECT category, name, MIN(cost) AS min_cost "+
 			"	FROM product "+
-			"	GROUP BY category, name\r\n"+
+			"	GROUP BY category, name"+
 			") t2 ON t1.category = t2.category AND t1.name = t2.name AND t1.cost = t2.min_cost;";
 		return  jdbcTemplate.query(sql, new RowMapper<Product>(){
 			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -302,7 +302,7 @@ public class ProductRepository {
 	}
 
     public List<Product> getProductFromFavorite(Integer customerId) {
-        String sql = "select * from product p "+
+        String sql = "select p.* from product p "+
 			"right join "+
 			"favorite f on f.pid = p.id "+
 			"where f.cid="+customerId +
