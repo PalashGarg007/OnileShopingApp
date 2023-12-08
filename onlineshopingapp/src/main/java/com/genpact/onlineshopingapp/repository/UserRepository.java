@@ -9,7 +9,7 @@ public interface UserRepository {
 	public int userLogin(String username, String password);
 	
 	/* checking inventory of cart automatically. */
-	public String init(Customer customer);
+	public void init();
 
 	/* create a new user and add his details in the database. */
 	public int createUser(String fullName, String dob, String contact, 

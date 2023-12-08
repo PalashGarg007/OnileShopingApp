@@ -34,8 +34,8 @@ public class CartRepository {
     public int remove(Cart cart) {
 		int result;
 		try{
-			result = jdbcTemplate.update("alter table cart delete where cid="+
-				cart.getCid()+", pid="+cart.getPid()+", quantity="+cart.getQuantity());
+			result = jdbcTemplate.update("alter table cart delete where cid=?"+
+			", pid=?, quantity=?", cart.getCid(), cart.getPid(), cart.getQuantity());
 		} catch(Exception e){
 			result = 0;
 		}

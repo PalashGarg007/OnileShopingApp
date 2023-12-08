@@ -23,9 +23,24 @@ public class UserRepositoryImpl implements UserRepository {
 	PaymentRepository paymentRepository = (PaymentRepository)context.getBean("paymentRepository");
 
 	@Override
-	public String init(Customer customer) {
-		// TODO Auto-generated method stub
-        return null;
+	public void init() {
+		List<Cart> cartList = cartRepository.getAllItemsByCustomerId(customer.getId());
+		if(cartList.size()==0)
+			return;
+		for(Cart cart:cartList){
+			Product product = productRepository.getProductByCart(cart);
+			if(product!=null){
+				if(product.getId()!=cart.getPid()){
+					cartRepository.remove(cart);
+					cartRepository.addToCart(cart.getCid(), product.getId(), cart.getQuantity());
+					System.out.println("price of " + product.getName() + " in your cart has changed.");
+				}
+			}
+			else{
+				String productName = productRepository.getProductName(cart.getPid());
+				System.out.println(productName + " from your cart is out of stock.");
+			}
+		}
 	}
 
 	@Override
@@ -34,7 +49,7 @@ public class UserRepositoryImpl implements UserRepository {
 		int valid = 0;
 		if(c!=null){
 			customer = c;
-			init(customer);
+			init();
 			valid = 1;
 		}
 		return valid;
@@ -151,4 +166,5 @@ public class UserRepositoryImpl implements UserRepository {
 		Product product = getAllUnratedProducts().get(n-1);
 		return reviewRepository.addReview(product.getId(), rating, review);
 	}
+
 }

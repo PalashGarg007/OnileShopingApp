@@ -153,8 +153,8 @@ public class ProductRepository {
 	}
 
     public Product getProductByCart(Cart cart) {
-        List<Product> productList = jdbcTemplate.query("select * from product where id="+cart.getPid(), 
-			new RowMapper<Product>(){
+        List<Product> productList = jdbcTemplate.query("select * from product where id=" + 
+			cart.getPid(), new RowMapper<Product>(){
 			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Product product=new Product();  
 		        product.setId(rs.getInt(1));
@@ -171,12 +171,13 @@ public class ProductRepository {
 		    });
 		Product product = productList.get(0);
 		
-		if(product.getWarehouse()<cart.getQuantity()){
-			List<Product> productList2 = jdbcTemplate.query("select * from product where name='"+product.getName()
-				+"' and category='"+product.getCategory()+"' and warehouse>"+cart.getQuantity()+" order by cost asc", new RowMapper<Product>(){
+		List<Product> productList2 = jdbcTemplate.query("select * from product where name='"+
+			product.getName() + "' and category='" + product.getCategory() +
+			"' and warehouse>" + cart.getQuantity() + " order by cost asc", 
+			new RowMapper<Product>(){
 			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Product product=new Product();  
-		        product.setId(rs.getInt(1));
+				product.setId(rs.getInt(1));
 				product.setSid(rs.getInt(2));
 				product.setName(rs.getString(3));
 				product.setCategory(rs.getString(4));
@@ -187,12 +188,11 @@ public class ProductRepository {
 
 				return product;
 			}  		    
-		    });
-			if(productList2.size()>0)
-				product = productList2.get(0);
-			else
-				product = null;
-		}
+		});
+		if(productList2.size()>0)
+			product = productList2.get(0);
+		else
+			product = null;
 		return product;
 	}
 	
@@ -256,8 +256,8 @@ public class ProductRepository {
 	}
 
 	public List<Product> showProductsByCategory(String category){
-		return  jdbcTemplate.query("select * from product where category="+category+"", 
-			new RowMapper<Product>(){
+		return  jdbcTemplate.query("select * from product where category='"+category
+			+"' and warehouse>0 order by name asc", new RowMapper<Product>(){
 			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Product product=new Product();  
 				product.setId(rs.getInt(1));
@@ -275,7 +275,8 @@ public class ProductRepository {
 	}
 
 	public List<Product> showProductsByName(String name){
-		return  jdbcTemplate.query("select * from product where category="+name+"", new RowMapper<Product>(){
+		return  jdbcTemplate.query("select * from product where name='"+name+
+			"' and warehouse>0 order by cost asc", new RowMapper<Product>(){
 			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Product product=new Product();  
 				product.setId(rs.getInt(1));
