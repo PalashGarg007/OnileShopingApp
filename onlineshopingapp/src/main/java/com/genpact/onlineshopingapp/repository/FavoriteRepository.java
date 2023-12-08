@@ -24,7 +24,7 @@ public class FavoriteRepository {
     public int removeFromFavorite(Integer customerId, Integer productId) {
         int result = 0;
 		try{
-			String sql = "alter table favorite delete where cid=? and pid=?";
+			String sql = "delete from favorite where cid=? and pid=?";
 			result = jdbcTemplate.update(sql, customerId, productId);
 		} catch(OSAException e){
 			System.out.println(e);
@@ -47,8 +47,8 @@ public class FavoriteRepository {
 		if(!favoriteList.isEmpty())
 			return result;
 		try{
-			String sql = "alter table favorite delete where cid=? and pid=?";
-			result = jdbcTemplate.update(sql, customerId, productId);
+			String sql = "insert into favorite values("+customerId+", "+productId+")";
+			result = jdbcTemplate.update(sql);
 		} catch(OSAException e){
 			System.out.println(e);
 		}

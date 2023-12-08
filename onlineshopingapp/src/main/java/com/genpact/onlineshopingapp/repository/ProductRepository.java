@@ -283,8 +283,8 @@ public class ProductRepository {
 
 	//show products by Name
 	public List<Product> showProductsByName(String name){
-		return  jdbcTemplate.query("select * from product where name='"+name+
-			"' and warehouse>0 order by cost asc", new RowMapper<Product>(){
+		return  jdbcTemplate.query("select * from product where name='"+name+"'"+
+		" and warehouse>0 order by cost asc", new RowMapper<Product>(){
 			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Product product=new Product();  
 				product.setId(rs.getInt(1));
@@ -306,7 +306,7 @@ public class ProductRepository {
 			"right join "+
 			"favorite f on f.pid = p.id "+
 			"where f.cid="+customerId +
-			"order by p.name asc";
+			" order by p.name asc";
 		return  jdbcTemplate.query(sql, new RowMapper<Product>(){
 			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
 				Product product=new Product();  

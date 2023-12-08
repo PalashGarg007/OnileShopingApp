@@ -58,7 +58,7 @@ public interface UserService {
 
 	void shopping();
 
-	void cart();
+	void openCart();
 
 	void favorite();
 }

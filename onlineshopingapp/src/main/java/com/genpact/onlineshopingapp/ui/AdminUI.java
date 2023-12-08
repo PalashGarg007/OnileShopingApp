@@ -15,13 +15,13 @@ public class AdminUI {
 			try{
 				System.out.println("-------------------------------------------");
 				System.out.println("Choose an operation:\n"+
-						"1. See the details of all users.\n"+
-						"2. See the details of all vendors.\n"+
-						"3. See the history of a user.\n"+
-						"4. See the product repository of a vendor.\n"+
-						"5. Add a new Payment method.\n"+
-						"6. Change the discount on the existing payment method.\n"+
-						"0. Exit.\n");
+						"\t1. See the details of all users.\n"+
+						"\t2. See the details of all vendors.\n"+
+						"\t3. See the history of a user.\n"+
+						"\t4. See the product repository of a vendor.\n"+
+						"\t5. Add a new Payment method.\n"+
+						"\t6. Change the discount on the existing payment method.\n"+
+						"\t0. Exit.\n");
 				
 				String operation = scanner.next();
 				System.out.println("___________________________________________");

@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService{
 
 	/*User will be able to buy produduct from cart.*/
 	@Override
-	public void buyProductsFromCart() {
+	public void buyProductsFromCart() throws OSAException {
 		System.out.println("------------------------------------------");
 		List<Payment> paymentList = userRepositoryImpl.getAllPayment();
 		for(Payment payment: paymentList)
@@ -39,19 +39,21 @@ public class UserServiceImpl implements UserService{
 		Scanner scanner = new Scanner(System.in);
 		System.out.print("Please select a Payment Id :");
 		Integer payId = scanner.nextInt();
-		if(payId >= 0 & payId<=paymentList.size()){
+		if(payId < 1 || payId>paymentList.size()){
 			System.out.print("Please Enter an valid input: ");
 			payId = scanner.nextInt();
 		}
-		Double cost = 0.0d;
+		Double cost = 0.0;
 		for(Payment payment: paymentList){
 			if(payId==payment.getId()){
 				cost = userRepositoryImpl.placeOrderByCart(payment);
 				break;
 			}
 		}
+		System.out.println("------------------------------------------");
 		System.out.println((cost==0.0d)?"Please add some products to the cart" :
-			String.format("Order Placed With the total amount ₹%.2d", cost));
+			String.format("Order Placed With the total amount ₹%.2f", cost));
+		System.out.println("------------------------------------------");
 	}
 
 	//should be able to track order
@@ -76,12 +78,13 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void showProduct(Integer start, Integer stop, 
 		List<Product> productList){
+		System.out.println("_______________________________________________");
 		for(int i = start-1; i<stop && i<productList.size(); i++){
 			Product product = productList.get(i);
 			System.out.printf("%-5d %-20s\n     %-25s %10.2f %5.1f\n", 
 				i+1, product.getName(), product.getCategory(), 
 				product.getCost(), product.getRating());
-			System.out.println("________________________________");
+			System.out.println("_______________________________________________");
 			showLastThreeReview();
 		}
 	}
@@ -116,7 +119,7 @@ public class UserServiceImpl implements UserService{
 		// System.out.print("Enter the name of product: ");
 		// String name = sc.nextLine();
 		List<Product> productList = userRepositoryImpl.showProductsByCategory(name);
-		if(productList.size()==0)
+		if(productList.isEmpty())
 			System.out.println("No product found.");
 		else
 			showProduct(1, productList.size(), productList);
@@ -128,19 +131,19 @@ public class UserServiceImpl implements UserService{
 		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(System.in);
 		System.out.print("Please enter your full name: ");
-		String fullName = scanner.next();
+		String fullName = scanner.nextLine();
 		System.out.print("Please enter your date of birth: ");
-		String dob = scanner.next();
+		String dob = scanner.nextLine();
 		System.out.print("Please enter your contact number: ");
-		String contact = scanner.next();
+		String contact = scanner.nextLine();
 		System.out.print("Please enter your email: ");	
-		String email = scanner.next();
+		String email = scanner.nextLine();
 		System.out.print("Please enter your address: ");
-		String address = scanner.next();
+		String address = scanner.nextLine();
 		System.out.print("Please enter your username: ");
-		String username = scanner.next();
+		String username = scanner.nextLine();
 		System.out.print("Please enter your password: ");
-		String password = scanner.next();
+		String password = scanner.nextLine();
 		int valid = userRepositoryImpl.createUser(fullName, dob, contact, email, address, username, password);
 		
 		if(valid == 1)
@@ -212,8 +215,10 @@ public class UserServiceImpl implements UserService{
 			quantity = scanner.nextInt();
 		}
 		int result = userRepositoryImpl.addToCart(product, quantity);
+		System.out.println("------------------------------------------");
 		System.out.println((result>0)?"Successfully added to cart.":
 			"Something went wrong.");
+		System.out.println("------------------------------------------");
 	}
 
 	//remove from cart, product
@@ -259,6 +264,7 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void viewDetails(){
 		Customer customer=userRepositoryImpl.viewDetails();
+		System.out.println("------------------------------------------");
 		if(customer==null){
 			System.out.println("No Details found");
 		}else{
@@ -270,6 +276,7 @@ public class UserServiceImpl implements UserService{
             "\tAddress = " + customer.getAddress() + "\n" +
             "}");
 		}
+		System.out.println("------------------------------------------");
 	}
 
 	@Override
@@ -277,7 +284,9 @@ public class UserServiceImpl implements UserService{
 		int result = userRepositoryImpl.removeFromFavorite(productId);
 		String wrongResult = "Product can't be removed can be because of:"+
 			"\n\t1) This product does not exist.";
+		System.out.println("-----------------------------------------------");
 		System.out.println((result==0)? wrongResult : "Product removed successefully :)");
+		System.out.println("-----------------------------------------------");
 	}
 
 	@Override
@@ -316,10 +325,12 @@ public class UserServiceImpl implements UserService{
 				//		modifyPassword();
 						continue;
 					case "4":
-						addReview();
+				//		addReview();
+						System.out.println("Comming soon...");
 						continue;
 					case "5":
-						trackProducts();
+						System.out.println("Comming soon...");
+				//		trackProducts();
 						continue;
 					default:
 						System.out.println("Please input an correct option:");
@@ -369,7 +380,7 @@ public class UserServiceImpl implements UserService{
 					case "1": //Add to Cart
 						int sno1 = checkInput(n-1);
 						addToCart(productList.get(sno1-1));
-						continue;
+						break;
 					case "2": //Search Product by Name
 						System.out.print("Enter the name of product: ");
 						String name = scanner.nextLine();
@@ -386,7 +397,7 @@ public class UserServiceImpl implements UserService{
 						n = productList.size();
 						showProductsByCategory(category);
 						continue;
-					case "4":
+					case "4": // add favorite
 						int sno2 = checkInput(n-1);
 						addToFavorite(productList.get(sno2-1));
 						continue;
@@ -404,7 +415,7 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
-	public void cart() {
+	public void openCart() {
 		//default.seeAll 1.remove 2.buy 0.goBack
 		@SuppressWarnings("resource")
 		Scanner scanner=new Scanner(System.in);
@@ -416,28 +427,29 @@ public class UserServiceImpl implements UserService{
 						"please add something in it.");
 					return;
 				}
-				Double totalAmount = 0d;
+				Double totalAmount = 0.0;
 				Integer totalQuantity = 0;
 				
 				int i=1;
 				for(Map.Entry<Product, Integer> entry: cartMap.entrySet()){
+					System.out.println("_______________________________________________");
 					Product product = entry.getKey();
 					int quantity = entry.getValue();
-					System.out.printf("%d) %-25s %10d %6.2d",
+					System.out.printf("%-5d %-25s %-6d %-6.2f\n",
 						i, product.getName(), quantity,
 						product.getCost()*quantity);
 					totalAmount += product.getCost()*quantity;
 					totalQuantity += quantity;
 					i++;
 				}
-				System.out.printf("--------------------------------------------\n"+
-					"%39d 6.2d\n--------------------------------------------\n",
+				System.out.printf("-----------------------------------------------\n"+
+					"%33d %12.2f \n-----------------------------------------------\n",
 					totalQuantity, totalAmount);
 
 				System.out.println("Please choose an option:\n"+
-					"1. Remove something from cart.\n"+
-					"2. Buy\n"+
-					"0. Back");
+					"\t1. Remove something from cart.\n"+
+					"\t2. Buy\n"+
+					"\t0. Back");
 				String operation=scanner.nextLine();
 
 				switch(operation){
@@ -497,7 +509,7 @@ public class UserServiceImpl implements UserService{
 					showProduct(n, n+seeAtATime-1, productList);
 					n = (n+seeAtATime-1>=productList.size()) ? productList.size() : n+seeAtATime;
 				}
-				System.out.println("Please choose an option:" +
+				System.out.println("Please choose an option:\n" +
 					"\tn. Next\n" + 
 					"\t1. Remove something from favorite.\n"+
 					"\t0. Back.");
@@ -513,6 +525,7 @@ public class UserServiceImpl implements UserService{
 					case "1"://Remove from Favorite.
 						int serialNo = checkInput(n-1);
 						removeFromFavorite(productList.get(serialNo-1).getId());
+						n=1;
 						continue;
 					default:
 						System.out.println("Please input an correct option...");

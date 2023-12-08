@@ -13,10 +13,10 @@ public class VendorUI {
 		System.out.println("Please choose an option:\n"+
 			"\t1. Log in.\n"+
 			"\t2. Create an account.\n");
-		int first = scanner.nextInt();
+		String first = scanner.nextLine();
 
 		int result = 0;
-		if(first==1){
+		if(first.equals("1")){
 			result = vendorServiceImpl.vendorLogin();
 		} else{
 			result = vendorServiceImpl.createVendor();

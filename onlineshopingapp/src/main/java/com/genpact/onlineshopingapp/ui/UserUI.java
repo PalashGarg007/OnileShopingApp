@@ -12,19 +12,19 @@ public class UserUI {
 		System.out.println("Please choose an option:\n"+
 			"\t1. Log in.\n"+
 			"\t2. Create an account.\n");
-		int first = scanner.nextInt();
+		String first = scanner.nextLine();
 
 		int result = 0;
-		if(first==1){
-			result = userServiceImpl.userLogin();
+		if(first.equals("1")){
+			result = userServiceImpl.userLogin(); //john_doe123 password123
 		} else{
 			result = userServiceImpl.createUser(); //take user details and create a customer object.
 		}
 
 		while(result>0){
-			System.out.println("-----------------------------------");
+			System.out.println("------------------------------------------");
 			System.out.println("Please choose an option:\n"+
-				"\t 1. Account."+ //1.seeDetails 2.cahngeDetails 3.changePassword 4.giveReview 0.goBack
+				"\t 1. Account."+ //1.seeDetails 2.cahngeDetails 3.changePassword 4.giveReview 5.trackOrder 0.goBack
 				"\t 2. Shopping."+ //1.seeAll(10atATime) 2.searchByName,category 3.addToCart 0.goBack
 				"\t 3. Cart."+//default.seeAll(10AtATime) 1.remove 2.buy 0.goBack
 				"\t 4. Favorite."+//default.seeAll(10AtATime) 1.remove 0.goBack
@@ -39,7 +39,7 @@ public class UserUI {
 					userServiceImpl.shopping();
 					continue;
 				case "3":
-					userServiceImpl.cart();
+					userServiceImpl.openCart();
 					continue;
 				case "4":
 					userServiceImpl.favorite();
@@ -51,6 +51,7 @@ public class UserUI {
 					System.out.println("Thank you shopping with us :)");
 					break;
 			}
+			break;
 		}
 	}
 	

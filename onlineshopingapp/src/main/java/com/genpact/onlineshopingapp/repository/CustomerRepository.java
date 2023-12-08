@@ -64,7 +64,7 @@ public class CustomerRepository {
     }
 
 	public Customer createCustomer(String name, String dob, String contact, String email, String address,
-			String username, String password) {
+			String username, String password) throws OSAException {
 		int result = 0;
 		try{
 			result = jdbcTemplate.update("insert into customer (name, dob, contact, email, address, userName, _password)"
