@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.genpact.onlineshopingapp.entity.Orders;
 import com.genpact.onlineshopingapp.entity.Product;
+import com.genpact.onlineshopingapp.exception.OSAException;
 
 public class OrderRepository {
 	
@@ -72,7 +73,7 @@ public class OrderRepository {
 				order.getConfirmation()+"' where id="+order.getId());
 			jdbcTemplate.update("update orders set shippingDate='"+
 				LocalDate.now().plusDays(6)+"' where id="+order.getId());
-		} catch(Exception e){
+		} catch(OSAException e){
 			result = 0;
 		}
         return result;
@@ -85,7 +86,7 @@ public class OrderRepository {
 				", quantity, order_date, pay_id) values("+cid+", "+product.getSid()+
 				", "+product.getId()+", "+product.getCost()+", "+quantity+", '"+
 				LocalDate.now()+"', "+pay_id+")");
-		} catch(Exception e){
+		} catch(OSAException e){
 			result = 0;
 		}
 		return result;

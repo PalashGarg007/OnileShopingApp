@@ -398,7 +398,7 @@ public class UserServiceImpl implements UserService{
 				}
 				break;
 			}while(true);
-		} catch (Exception e) {
+		} catch (OSAException e) {
 				System.out.println(e);
 		}
 	}
@@ -474,7 +474,7 @@ public class UserServiceImpl implements UserService{
 				}
 				break;
 			}while(true);
-		} catch (Exception e) {
+		} catch (OSAException e) {
 			System.out.println(e);
 			System.out.println("Something went wrong\n\tplease try again later...");
 		}
@@ -522,7 +522,7 @@ public class UserServiceImpl implements UserService{
 				}
 				break;
 			} while(true);
-		} catch(Exception e){
+		} catch(OSAException e){
 			System.out.println(e);
 			System.out.println("Something went wrong\n\tplease try again later...");
 		}

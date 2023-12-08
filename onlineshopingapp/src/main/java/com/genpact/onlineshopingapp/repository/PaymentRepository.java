@@ -7,6 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.genpact.onlineshopingapp.entity.Payment;
+import com.genpact.onlineshopingapp.exception.OSAException;
 
 public class PaymentRepository {
     
@@ -25,7 +26,7 @@ public class PaymentRepository {
 		try{
 			result = jdbcTemplate.update("insert into payment(method, discount) values('"
 				+paymentMethod+"', "+discount+")");
-		} catch(Exception e){
+		} catch(OSAException e){
 			result = 0;
 		}
         return result;
@@ -36,7 +37,7 @@ public class PaymentRepository {
 		try{
 			result = jdbcTemplate.update("update payment set discount="+
 				discount+" where method='"+paymentMethod+"'");
-		} catch(Exception e){
+		} catch(OSAException e){
 			result = 0;
 		}
         return result;

@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.genpact.onlineshopingapp.entity.Cart;
+import com.genpact.onlineshopingapp.exception.OSAException;
 
 public class CartRepository {
 	private JdbcTemplate jdbcTemplate;
@@ -38,7 +39,7 @@ public class CartRepository {
 		try{
 			result = jdbcTemplate.update("alter table cart delete where cid=?"+
 			", pid=?, quantity=?", cart.getCid(), cart.getPid(), cart.getQuantity());
-		} catch(Exception e){
+		} catch(OSAException e){
 			result = 0;
 		}
 		return result;
@@ -63,7 +64,7 @@ public class CartRepository {
 		try{
 			result = jdbcTemplate.update("insert into cart values(?, ?, ?)", 
 			cid, pid, quantity);
-		} catch(Exception e){
+		} catch(OSAException e){
 			result = 0;
 		}
 		return result;
@@ -74,7 +75,7 @@ public class CartRepository {
 		try{
 			result = jdbcTemplate.update("update cart set quantity=quantity-?"+
 			" where cid=? and pid=?", quantity, cid, pid);
-		} catch(Exception e){
+		} catch(OSAException e){
 			result = jdbcTemplate.update("alter table cart delete"+
 			" where cid=? and pid=?", cid, pid);
 		}

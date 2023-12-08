@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import com.genpact.onlineshopingapp.entity.Cart;
 import com.genpact.onlineshopingapp.entity.Product;
+import com.genpact.onlineshopingapp.exception.OSAException;
 
 public class ProductRepository {
 	private JdbcTemplate jdbcTemplate;
@@ -87,7 +88,7 @@ public class ProductRepository {
 					jdbcTemplate.update("update products set rating="+rating+", purchased="+purchased
 						+" where sid="+sid+" and name='"+name+"' and category='"+category+"'");
 				}
-			} catch(Exception e){
+			} catch(OSAException e){
 				result = 0;
 			}
 		}
@@ -100,7 +101,7 @@ public class ProductRepository {
 		try{
 			result = jdbcTemplate.update("update product set warehouse=warehouse-"+
 				warehouse+" where name='"+name+"' and category='"+category+"' sid="+sid);
-		} catch(Exception e){
+		} catch(OSAException e){
 			result = 0;
 		}
 		return result;
@@ -112,7 +113,7 @@ public class ProductRepository {
 			result = jdbcTemplate.update("update product set wharehouse=warehouse-"+
 				quantity+" where id="+pid);
 			jdbcTemplate.update("update product set purchased=purchased+1 where id="+pid);
-		} catch(Exception e){
+		} catch(OSAException e){
 			result = 0;
 		}
         return result;
@@ -204,7 +205,7 @@ public class ProductRepository {
 		try{
 			result = jdbcTemplate.update("update product set warehouse=warehouse+"+
 				warehouse+" where name='"+name+"' and category='"+category+"' and sid="+sid);
-		} catch(Exception e){
+		} catch(OSAException e){
 			result = 0;
 		}
 		return result;

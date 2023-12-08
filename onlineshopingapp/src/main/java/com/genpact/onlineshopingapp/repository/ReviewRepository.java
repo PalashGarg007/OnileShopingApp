@@ -2,6 +2,8 @@ package com.genpact.onlineshopingapp.repository;
 
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import com.genpact.onlineshopingapp.exception.OSAException;
+
 public class ReviewRepository {
 	private JdbcTemplate jdbcTemplate;
 	
@@ -19,7 +21,7 @@ public class ReviewRepository {
 		int result = 0;
 		try{
         	result = jdbcTemplate.update(sql, rating, review, oid);
-		}catch(Exception e){
+		}catch(OSAException e){
             result = 0;
         }
         return result;

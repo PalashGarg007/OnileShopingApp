@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
 import com.genpact.onlineshopingapp.entity.Customer;
+import com.genpact.onlineshopingapp.exception.OSAException;
 
 public class CustomerRepository {
 	private JdbcTemplate jdbcTemplate;
@@ -68,7 +69,7 @@ public class CustomerRepository {
 		try{
 			result = jdbcTemplate.update("insert into customers (name, dob, contact, email, address, userName, _password)"
 				+"values('"+name+"', '"+dob+"', '"+contact+"', '"+email+"', '"+address+"', '"+username+"', '"+password+"')");
-		} catch(Exception e){
+		} catch(OSAException e){
 			result = 0;
 		}
 		if(result>0){

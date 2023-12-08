@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import com.genpact.onlineshopingapp.entity.Orders;
 import com.genpact.onlineshopingapp.entity.Shopkeeper;
+import com.genpact.onlineshopingapp.exception.OSAException;
 import com.genpact.onlineshopingapp.repository.VendorRepositoryImpl;
 
 public class VendorServiceImpl implements VendorService{
@@ -209,7 +210,7 @@ public class VendorServiceImpl implements VendorService{
 				}
 				break;
 			}while(true);
-		} catch (Exception e) {
+		} catch (OSAException e) {
 				System.out.println(e);
 		}
         
