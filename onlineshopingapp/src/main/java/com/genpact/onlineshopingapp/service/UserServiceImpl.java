@@ -7,6 +7,7 @@ import java.util.Scanner;
 import com.genpact.onlineshopingapp.entity.Customer;
 import com.genpact.onlineshopingapp.entity.Payment;
 import com.genpact.onlineshopingapp.entity.Product;
+import com.genpact.onlineshopingapp.exception.OSAException;
 import com.genpact.onlineshopingapp.repository.UserRepositoryImpl;
 
 public class UserServiceImpl implements UserService{
@@ -272,18 +273,34 @@ public class UserServiceImpl implements UserService{
 	}
 
 	@Override
+	public void removeFromFavorite(Integer productId) {
+		int result = userRepositoryImpl.removeFromFavorite(productId);
+		String wrongResult = "Product can't be removed can be because of:"+
+			"\n\t1) This product does not exist.";
+		System.out.println((result==0)? wrongResult : "Product removed successefully :)");
+	}
+
+	@Override
+	public void addToFavorite(Product product) {
+		int result = userRepositoryImpl.addToFavorite(product.getId());
+		System.out.println((result>0)?"Successfully added to favorite.":
+			"Product alrady exist in the favorite.");
+	}
+
+	@Override
 	public void account() {
 		//1.seeDetails 2.changeDetails 3.changePassword 4.giveReview 0.goBack
 		@SuppressWarnings("resource")
 		Scanner scanner=new Scanner(System.in);
 		try {
 			do {
-				System.out.println("1. See your details" + 
-						"\n2. Change your details" + 
-						"\n3. Change Password: " +
-						"\n4. Give Review" +
-						"\n5. Track Product" +
-						"\n0. Back");
+				System.out.println("Please select an option:\n" +
+					"\t1. See your details\n" + 
+					"\t2. Change your details\n" + 
+					"\t3. Change Password:\n" +
+					"\t4. Give Review\n" +
+					"\t5. Track Product\n" +
+					"\t0. Back\n");
 				String operation=scanner.nextLine();
 				
 				switch(operation) {
@@ -291,9 +308,11 @@ public class UserServiceImpl implements UserService{
 						viewDetails();
 						continue;
 					case "2":
+						System.out.println("Coming soon...");
 				//		modifyUser();
 						continue;
 					case "3":
+						System.out.println("Coming soon...");
 				//		modifyPassword();
 						continue;
 					case "4":
@@ -303,14 +322,14 @@ public class UserServiceImpl implements UserService{
 						trackProducts();
 						continue;
 					default:
-						System.out.println("Please input an correct option...");
+						System.out.println("Please input an correct option:");
 						continue;
 					case "0":
 						break;
 				}
 				break;
 			}while(true);
-		} catch (Exception e) {
+		} catch (OSAException e) {
 				System.out.println(e);
 				System.out.println("Something went wrong\n\tplease try again later...");
 		}
@@ -318,7 +337,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public void shopping() {
-		//1.seeAll(10atATime) 2.searchByName,category 3.addToCart 0.goBack
+		//1.seeAll(10atATime) 2.searchByName,category 3.addToCart 4.addToFavorite 0.goBack
 		@SuppressWarnings("resource")
 		Scanner scanner=new Scanner(System.in);
 		try {
@@ -329,13 +348,15 @@ public class UserServiceImpl implements UserService{
 			do {
 				if(next){
 					showProduct(n, n+seeAtATime-1, productList);
-					n = (n+seeAtATime-1>=productList.size()) ? productList.size() : n+seeAtATime;
+					n = (n+seeAtATime-1>=productList.size()) ? productList.size()+1 : n+seeAtATime;
 				}
-				System.out.println("n. Next"
-						+ "\n1. Add to Cart."
-						+ "\n2. Search Product by Name: "
-						+ "\n3. Search Product by Category: "
-						+ "\n0. Back");
+				System.out.println("" +
+					"\tn. Next" +
+					"\t1. Add to Cart." +
+					"\t2. Search Product by Name:" +
+					"\t3. Search Product by Category:" +
+					"\t4. Add to Favorite." +
+					"\t0. Back");
 				String operation=scanner.nextLine();
 				
 				switch(operation) {
@@ -346,8 +367,8 @@ public class UserServiceImpl implements UserService{
 						}
 						continue;
 					case "1": //Add to Cart
-						int sno = checkInput(n);
-						addToCart(productList.get(sno-1));
+						int sno1 = checkInput(n-1);
+						addToCart(productList.get(sno1-1));
 						continue;
 					case "2": //Search Product by Name
 						System.out.print("Enter the name of product: ");
@@ -364,6 +385,10 @@ public class UserServiceImpl implements UserService{
 						productList = userRepositoryImpl.showProductsByCategory(category);
 						n = productList.size();
 						showProductsByCategory(category);
+						continue;
+					case "4":
+						int sno2 = checkInput(n-1);
+						addToFavorite(productList.get(sno2-1));
 						continue;
 					default:
 						System.out.println("Please input an correct option...");
@@ -459,17 +484,50 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public void favorite() {
 		//default.seeAll(10AtATime) 1.remove 0.goBack
+		
 		@SuppressWarnings("resource")
 		Scanner scanner=new Scanner(System.in);
 		try {
+			int seeAtATime = 10;
+			int n = 1;
+			boolean next = true;
 			do {
+				List<Product> productList = userRepositoryImpl.getProductFromFavorite();
+				if(next){
+					showProduct(n, n+seeAtATime-1, productList);
+					n = (n+seeAtATime-1>=productList.size()) ? productList.size() : n+seeAtATime;
+				}
+				System.out.println("Please choose an option:" +
+					"\tn. Next\n" + 
+					"\t1. Remove something from favorite.\n"+
+					"\t0. Back.");
+				String operation=scanner.nextLine();
 				
+				switch(operation){
+					case "n":
+						if(n>=productList.size()){
+							System.out.println("No more products available.");
+							next = false;
+						}
+						continue;
+					case "1"://Remove from Favorite.
+						int serialNo = checkInput(n-1);
+						removeFromFavorite(productList.get(serialNo-1).getId());
+						continue;
+					default:
+						System.out.println("Please input an correct option...");
+						continue;
+					case "0":
+						break;
+				}
+				break;
 			} while(true);
 		} catch(Exception e){
 			System.out.println(e);
 			System.out.println("Something went wrong\n\tplease try again later...");
 		}
+		
 	}
 
-
+	
 }

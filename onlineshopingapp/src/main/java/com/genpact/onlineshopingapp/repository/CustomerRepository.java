@@ -64,9 +64,13 @@ public class CustomerRepository {
 
 	public Customer createCustomer(String name, String dob, String contact, String email, String address,
 			String username, String password) {
-		int result = jdbcTemplate.update("insert into customers (name, dob, contact, email, address, userName, _password)"
-		+"values('"+name+"', '"+dob+"', '"+contact+"', '"+email+"', '"+address+"', '"+username+"', '"+password+"')");
-		
+		int result = 0;
+		try{
+			result = jdbcTemplate.update("insert into customers (name, dob, contact, email, address, userName, _password)"
+				+"values('"+name+"', '"+dob+"', '"+contact+"', '"+email+"', '"+address+"', '"+username+"', '"+password+"')");
+		} catch(Exception e){
+			result = 0;
+		}
 		if(result>0){
 			List<Customer> customers = jdbcTemplate.query("select * from customer where username='"+
 				username+"'and _password="+password+"'", new RowMapper<Customer>(){

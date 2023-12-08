@@ -217,6 +217,22 @@ public class UserRepositoryImpl implements UserRepository {
 		// TODO Auto-generated method stub
 		throw new UnsupportedOperationException("Unimplemented method 'checkUserPassword'");
 	}
+
+    public List<Product> getProductFromFavorite() {
+        List<Product> productList = productRepository.getProductFromFavorite(customer.getId());
+		return productList;
+    }
+
+    public int removeFromFavorite(Integer productId) {
+        int result;
+		result = favoriteRepository.removeFromFavorite(customer.getId(), productId);
+		return result;
+    }
+
+    public int addToFavorite(Integer productId) {
+        int result = favoriteRepository.addToFavorite(customer.getId(), productId);
+		return result;
+    }
 	
 	// @Override
 	// public int checkPassword(String password){

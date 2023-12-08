@@ -7,16 +7,16 @@ import com.genpact.onlineshopingapp.entity.Product;
 public interface UserService {
 	
 	/*User will be able to login */
-	public int userLogin();
+	int userLogin();
 
 	/*User will be able to create new account */
-	public int createUser();
+	int createUser();
 	
 	/*User will be able to buy produduct from cart.*/
 	void buyProductsFromCart();
 
 	/*User will be able to add review to product*/
-	public void addReview();
+	void addReview();
 
 	//should be able to track order
 	void trackProducts();
@@ -30,7 +30,7 @@ public interface UserService {
 	void showProductsByCategory(String category);
 
 	//show the last 3 reviews by customers.
-	public void showLastThreeReview();
+	void showLastThreeReview();
 
 	//show products by Name
 	void showProductsByName(String name);
@@ -46,6 +46,10 @@ public interface UserService {
 
 	//ckeck old password and then change password.
 	void checkAndUpdateUser();
+
+	void removeFromFavorite(Integer productId);
+
+	void addToFavorite(Product product);
 
 	//customers should be able to view his/her details
 	void viewDetails();

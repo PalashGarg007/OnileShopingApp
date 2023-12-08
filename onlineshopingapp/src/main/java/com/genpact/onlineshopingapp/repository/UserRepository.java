@@ -7,70 +7,76 @@ import com.genpact.onlineshopingapp.entity.Customer;
 import com.genpact.onlineshopingapp.entity.Payment;
 import com.genpact.onlineshopingapp.entity.Product;
 
-public interface UserRepository {
+ public interface UserRepository {
 	/* verify user by the given user-name and password. if successful 
 	 * load user's cart. */
-	public int userLogin(String username, String password);
+	int userLogin(String username, String password);
 	
 	/* checking inventory of cart automatically. */
-	public void init();
+	void init();
 
 	/* create a new user and add his details in the database. */
-	public int createUser(String fullName, String dob, String contact, 
+	int createUser(String fullName, String dob, String contact, 
 			String email, String address, String username, String password);
 	
 	/* modify user details with switch cases, and update database */
-	public int modifyUser(String feature, String modify);
+	int modifyUser(String feature, String modify);
 	
 	/* modify password by re-checking the current password. */
-	public int modifyPassword(String currentPassword, String newPassword);
+	int modifyPassword(String currentPassword, String newPassword);
 	
 	/* Add selected product to the list of cart and add it to the database. */
-	public int addToCart(Product product, int quantity);
+	int addToCart(Product product, int quantity);
 	
 	/* Remove selected product from the list of cart and remove it from 
 	 * the database. */
-	public int removeFromCart(Product product, int quantity);
+	int removeFromCart(Product product, int quantity);
 	
 	/*Display all the available payment method. */
-	public List<Payment> getAllPayment();
+	List<Payment> getAllPayment();
 
 	/*Should be able to place order from the cart on a selected payment method and 
 	return total amount. */
-	public Double placeOrderByCart(Payment payment);
+	Double placeOrderByCart(Payment payment);
 
 	/* Get user password as input */
 	
-	public int checkPassword(String password );
+	int checkPassword(String password );
 	
 	/*Change user password */
-	public int updateUserPassword(String password);
+	int updateUserPassword(String password);
 	 
 	/*To get list of all unrated products */
-	public List<Product> getAllUnratedProducts();
+	List<Product> getAllUnratedProducts();
 
 	/*To add reviews */
-	public int addReview(Integer n, Double rating, String review);
+	int addReview(Integer n, Double rating, String review);
 	
 
 	//should be able to track order
-	public String[][] trackProducts();
+	String[][] trackProducts();
 
 	//show all products
-	public List<Product> showAllProducts();
+	List<Product> showAllProducts();
 
 	//show products by category
-	public List<Product> showProductsByCategory(String category);
+	List<Product> showProductsByCategory(String category);
 
 	//show products by Name
-	public List<Product> showProductsByName(String name);
+	List<Product> showProductsByName(String name);
     
 	//customers should be able to view his/her details
-	public Customer viewDetails();
+	Customer viewDetails();
 
 	//Check user password
-	public int checkUserPassword(String password);
+	int checkUserPassword(String password);
 
 	//list of all the products in the cart
-	public Map<Product, Integer> viewCart();
+	Map<Product, Integer> viewCart();
+
+	//Remove product from the favorite
+	int removeFromFavorite(Integer productId);
+
+	//Add product to favorite
+	int addToFavorite(Integer productId);
 }

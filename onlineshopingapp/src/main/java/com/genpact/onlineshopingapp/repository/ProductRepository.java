@@ -300,4 +300,27 @@ public class ProductRepository {
 		});
 	}
 
+    public List<Product> getProductFromFavorite(Integer customerId) {
+        String sql = "select * from product p "+
+			"right join "+
+			"favorite f on f.pid = p.id "+
+			"where f.cid="+customerId +
+			"order by p.name asc";
+		return  jdbcTemplate.query(sql, new RowMapper<Product>(){
+			public Product mapRow(ResultSet rs, int rowNum) throws SQLException {
+				Product product=new Product();  
+				product.setId(rs.getInt(1));
+				product.setSid(rs.getInt(2));
+				product.setName(rs.getString(3));
+				product.setCategory(rs.getString(4));
+				product.setCost(rs.getDouble(5));
+				product.setWarehouse(rs.getInt(6));
+				product.setRating(rs.getDouble(7));
+				product.setPurchased(rs.getInt(8));
+
+				return product;
+			}
+		});
+    }
+
 }
