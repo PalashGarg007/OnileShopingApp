@@ -29,6 +29,7 @@ public class AdminRepositoryImpl implements AdminRepository {
 	@Override
 	public List<Shopkeeper> getAllShopkeeper() {
 		List<Shopkeeper> shopkeepers = shopkeeperRepository.getAll();
+
 		return shopkeepers;
 	}
 

@@ -2,6 +2,7 @@ package com.genpact.onlineshopingapp.service;
 
 import java.util.List;
 import java.util.Scanner;
+
 import com.genpact.onlineshopingapp.entity.Customer;
 import com.genpact.onlineshopingapp.entity.Orders;
 import com.genpact.onlineshopingapp.entity.Product;
@@ -21,10 +22,11 @@ public class AdminServiceImpl implements AdminService{
 		else
 			System.out.println("Total "+customerList.size()+" recourds found.");
 		
-		System.out.println("-------------------------------------------");
+		System.out.println("___________________________________________");
 		for(Customer customer:customerList){
 			System.out.println(customer);
 		}
+		System.out.println("___________________________________________");
 	}
 
 	@Override
@@ -37,10 +39,11 @@ public class AdminServiceImpl implements AdminService{
 			System.out.println("Total "+shopkeeperList.size()+" recourds found.");
 
 		
-		System.out.println("-------------------------------------------");
+		System.out.println("___________________________________________");
 		for(Shopkeeper shopkeeper:shopkeeperList){
 			System.out.println(shopkeeper);
 		}
+		System.out.println("___________________________________________");
 		
 	}
 
